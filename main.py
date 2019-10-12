@@ -65,10 +65,13 @@ callbacks_con = [EarlyStopping(patience=3), ModelCheckpoint(filepath=con_model_n
 if os.path.exists(con_model_name):
     context_model.load_weights(con_model_name)
 
-train = True
+train = False
 if train == False:
-    evaluation = model.evaluate(X_Test, target_category_test, verbose=2)
-    print(evaluation)
+    loss1, new_acc1  = model.evaluate(X_Test, target_category_test, verbose=2)
+    print('Non-Context Score results:', new_acc1)
+    loss2, new_acc2 = context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
+    print('Context Score results:', new_acc2)
+
 else:
     old_acc = 0
     for iteration in range(10):
@@ -87,6 +90,7 @@ else:
             X_Train_con, Y_train_con = preparedata(X_Train, target_category_train, seq_length)
             print(X_Train_con.shape, Y_train_con.shape)
 
+            # context_model.train_on_batch(X_Train_con, Y_train_con)
             context_model.fit(X_Train_con, Y_train_con, epochs=1, batch_size=32, verbose=2,
                               callbacks=callbacks_con)  # , validation_split=0.13)
             # con_model_name.load_weights(model_name)
