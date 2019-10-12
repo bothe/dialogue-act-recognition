@@ -7,6 +7,8 @@ from models import model_attention_applied_after_bilstm, \
     model_attention_applied_after_bisrnn, context_model
 from utils import *
 
+max_seq_len = 20
+
 trainFile = 'data/swda-actags_train_speaker.csv'
 testFile = 'data/swda-actags_test_speaker.csv'
 SidTr, Xtrain, Ytrain, Ztrain = read_files(trainFile)
@@ -21,23 +23,12 @@ print(len(Xtest), len(Xtrain))
 x_test = pickle.load(open("features/x_test_tokens.p", "rb"))
 x_train = pickle.load(open("features/x_train_tokens.p", "rb"))
 
-# toPadding = X_Train[27229][0]
 toPadding = np.load('features/pad_a_token.npy')
 X_Test = np.load('features/X_test_elmo_features.npy')
-X_Test = padSequences(X_Test, toPadding)
+X_Test = padSequencesKeras(X_Test, max_seq_len, toPadding)
 
-tag, num = [], []
-for i, j in enumerate((Counter(Ztrain)).keys()):
-    tag.append(j)
-    num.append(i)
-Y_train = []
-for i in Ztrain:
-    Y_train.append(tag.index(i))
-Y_test = []
-for i in Ztest:
-    Y_test.append(tag.index(i))
-
-target_category_test = to_categorical(Y_test, 42)
+tags, num, Y_train, Y_test = categorize_raw_data(Ztrain, Ztest)
+target_category_test = to_categorical(Y_test, len(tags))
 
 SINGLE_ATTENTION_VECTOR = False
 model = model_attention_applied_after_bilstm(20, 1024, 42, SINGLE_ATTENTION_VECTOR)
@@ -81,7 +72,7 @@ else:
             print('X_train_elmo_features_{}.npy'.format(i))
             # X_Train.extend(np.load('X_train_elmo_features_{}.npy'.format(i)))
             X_Train = np.load('features/X_train_elmo_features_{}.npy'.format(i))
-            X_Train = padSequences(np.array(X_Train), toPadding)
+            X_Train = padSequencesKeras(np.array(X_Train), max_seq_len, toPadding)
             target = Y_train[(i - 1) * len(X_Train):(i - 1) * len(X_Train) + len(X_Train)]
             Xtarget_in = Xtrain[(i - 1) * len(X_Train):(i - 1) * len(X_Train) + len(X_Train)]
             Ytarget_out = Ytrain[(i - 1) * len(X_Train):(i - 1) * len(X_Train) + len(X_Train)]

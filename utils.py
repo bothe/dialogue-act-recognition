@@ -1,5 +1,22 @@
 import csv
+from collections import Counter
 import numpy as np
+from keras_preprocessing import sequence
+
+
+def categorize_raw_data(Ztrain, Ztest):
+    # global i, Y_train, Y_test
+    tag, num = [], []
+    for i, j in enumerate((Counter(Ztrain)).keys()):
+        tag.append(j)
+        num.append(i)
+    Y_train = []
+    for i in Ztrain:
+        Y_train.append(tag.index(i))
+    Y_test = []
+    for i in Ztest:
+        Y_test.append(tag.index(i))
+    return tag, num, Y_train, Y_test
 
 
 def read_files(filePath):
@@ -63,3 +80,21 @@ def padSequences(x, toPadding):
             new_x.append(item[0:20])
 
     return np.array(new_x)
+
+
+def padSequencesKeras(x, maxlen, toPadding):
+    return sequence.pad_sequences(x, maxlen, 'float32',value=toPadding, padding='post', truncating='post')
+
+"""
+# Benchmarking looping Keras vs for loop operations
+from time import time
+t = time()
+padSequences(X_Test, toPadding)
+print("time = %f[s]" % (time() - t))
+# ==> time = 10.102432[s]
+
+t = time()
+sequence.pad_sequences(X_Test, 20, 'float32',value=toPadding, padding='post', truncating='post')
+print("time = %f[s]" % (time() - t))
+# ==> time = 0.304045[s]
+"""

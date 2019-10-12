@@ -50,6 +50,36 @@ def context_model(seq_len, max_seq_length, emb_dim, classes, nodes=128, dropout=
     return model
 
 
+def context_model_att(seq_len, max_seq_length, emb_dim, classes, nodes=128, dropout=0.2,
+                  single_attention_vector=False):
+    # Encode each time step  # dummyModel(3, 20, 1024, 42)
+    in_sentence = Input(shape=(max_seq_length, emb_dim,))  # , dtype='int64')
+    # embedded_sentence = Embedding(len(word_index) + 1, emb_dim, trainable=True)(in_sentence)
+    lstm_sentence = LSTM(nodes, return_sequences=True)(in_sentence)
+    # Apply attention layer
+    attention_mul = attention_3d_block(lstm_sentence, max_seq_length, single_attention_vector)
+    attention_mul = Flatten()(attention_mul)
+    encoded_model = Model(in_sentence, attention_mul)
+    encoded_model.summary()
+
+    # Model contextual time steps
+    sequence_input = Input(shape=(seq_len, max_seq_length, emb_dim))
+    seq_encoded = TimeDistributed(encoded_model)(sequence_input)
+    seq_encoded = Dropout(dropout)(seq_encoded)
+    # Encode entire sentence
+    seq_encoded = LSTM(nodes, return_sequences=True)(seq_encoded)
+    # Apply attention layer
+    attention_mul = attention_3d_block(seq_encoded, seq_len, single_attention_vector)
+    attention_mul = Flatten()(attention_mul)
+    # Prediction
+    prediction = Dense(classes, activation='softmax')(attention_mul)
+
+    model = Model(sequence_input, prediction)
+    model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+    print(model.summary())
+    return model
+
+
 # context_model(3, 20, 1024, 42)
 
 def model_attention_applied_after_lstm(seq_length, max_seq_length, num_classes, single_attention_vector):
