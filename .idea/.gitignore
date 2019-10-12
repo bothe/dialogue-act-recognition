@@ -1,2 +1,8 @@
 # Default ignored files
 /workspace.xml
+
+# exclude everything
+features/*
+
+# exception to the rule
+!features/.gitkeep
