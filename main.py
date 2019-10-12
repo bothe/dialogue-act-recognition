@@ -1,10 +1,10 @@
 from collections import Counter
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.utils import to_categorical
-import pickle
+import pickle, os
 
 from models import model_attention_applied_after_bilstm, \
-    model_attention_applied_after_bisrnn, dummyModel
+    model_attention_applied_after_bisrnn, context_model
 from utils import *
 
 trainFile = 'data/swda-actags_train_speaker.csv'
@@ -58,15 +58,14 @@ NUM_CLASSES = Y_test_con.shape[1]
 # if True, the attention vector is shared across the input_dimensions where the attention is applied.
 SINGLE_ATTENTION_VECTOR = False
 
-m = model_attention_applied_after_bisrnn(TIME_STEPS, INPUT_DIM, NUM_CLASSES, SINGLE_ATTENTION_VECTOR)
-m.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-# print(m.summary())
-# model_name = 'SLSTMSwDA'+str(seq_length)
-model_name = 'params/BiSRNNSwDAPhonemes' + str(seq_length)
-callbacks_con = [EarlyStopping(patience=3), ModelCheckpoint(filepath=model_name, save_best_only=True)]
+context_model = context_model(seq_length, INPUT_DIM, EMBEDDING_DIM, NUM_CLASSES)
+
+con_model_name = 'params/context_model_{}'.format(seq_length)
+callbacks_con = [EarlyStopping(patience=3), ModelCheckpoint(filepath=con_model_name, save_best_only=True)]
+if os.path.exists(con_model_name):
+    context_model.load_weights(con_model_name)
 
 train = True
-
 if train == False:
     evaluation = model.evaluate(X_Test, target_category_test, verbose=2)
     print(evaluation)
@@ -88,20 +87,20 @@ else:
             X_Train_con, Y_train_con = preparedata(X_Train, target_category_train, seq_length)
             print(X_Train_con.shape, Y_train_con.shape)
 
-            m.fit(X_Train_con, Y_train_con, epochs=1, batch_size=32, verbose=2,
-                  callbacks=callbacks_con)  # , validation_split=0.13)
-            m.load_weights(model_name)
-            loss, new_acc = m.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
+            context_model.fit(X_Train_con, Y_train_con, epochs=1, batch_size=32, verbose=2,
+                              callbacks=callbacks_con)  # , validation_split=0.13)
+            # con_model_name.load_weights(model_name)
+            loss, new_acc = context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
             print('Context Score results:', new_acc)
             if old_acc < new_acc:
-                model.save_weights('params/weight_parameters')
-                print('Weights are saved with {}'.format(new_acc))
+                context_model.save_weights(con_model_name)
+                print('Weights are saved with {} % acc while old acc was {}'.format(new_acc, old_acc))
                 old_acc = new_acc
 
             # model.fit(X_Train, target_category_train, verbose=2, callbacks=callbacks)
             # model.load_weights('weight_parameters')
-            evaluation = model.evaluate(X_Test, target_category_test, verbose=2)
-            print(evaluation, 'for i = {}'.format(str(i)))
+            # evaluation = model.evaluate(X_Test, target_category_test, verbose=2)
+            # print(evaluation, 'for i = {}'.format(str(i)))
             # new_acc = evaluation[1]
             # if old_acc < new_acc:
             #     model.save_weights('weight_parameters')
