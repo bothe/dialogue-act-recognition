@@ -7,8 +7,6 @@ from models import model_attention_applied_after_bilstm, \
     model_attention_applied_after_bisrnn, dummyModel
 from utils import *
 
-path_to_features = "/data/swdaproj/"
-
 trainFile = 'data/swda-actags_train_speaker.csv'
 testFile = 'data/swda-actags_test_speaker.csv'
 SidTr, Xtrain, Ytrain, Ztrain = read_files(trainFile)
@@ -20,12 +18,12 @@ print(len(Xtest), len(Xtrain))
 # pickle.dump( x_test, open( "x_test_tokens.p", "wb" ) )
 # pickle.dump( x_train, open( "x_train_tokens.p", "wb" ) )
 
-x_test = pickle.load(open("x_test_tokens.p", "rb"))
-x_train = pickle.load(open("x_train_tokens.p", "rb"))
+x_test = pickle.load(open("features/x_test_tokens.p", "rb"))
+x_train = pickle.load(open("features/x_train_tokens.p", "rb"))
 
 # toPadding = X_Train[27229][0]
-toPadding = np.load('pad_a_token.npy')
-X_Test = np.load('X_test_elmo_features.npy')
+toPadding = np.load('features/pad_a_token.npy')
+X_Test = np.load('features/X_test_elmo_features.npy')
 X_Test = padSequences(X_Test, toPadding)
 
 tag, num = [], []
@@ -45,8 +43,11 @@ SINGLE_ATTENTION_VECTOR = False
 model = model_attention_applied_after_bilstm(20, 1024, 42, SINGLE_ATTENTION_VECTOR)
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 callbacks = [ModelCheckpoint(filepath='weight_parameters', save_best_only=True)]  # EarlyStopping(patience=5),
-model.load_weights('weight_parameters')
+model.load_weights('params/weight_parameters')
+evaluation = model.evaluate(X_Test, target_category_test, verbose=2)
+print("Test results for non-context model - accuracy: {}".format(evaluation[1]))
 
+# Preparing for contextual training
 seq_length = 3
 X_test_con, Y_test_con = preparedata(X_Test, target_category_test, seq_length)
 
@@ -77,7 +78,7 @@ else:
             i += 1
             print('X_train_elmo_features_{}.npy'.format(i))
             # X_Train.extend(np.load('X_train_elmo_features_{}.npy'.format(i)))
-            X_Train = np.load('X_train_elmo_features_{}.npy'.format(i))
+            X_Train = np.load('features/X_train_elmo_features_{}.npy'.format(i))
             X_Train = padSequences(np.array(X_Train), toPadding)
             target = Y_train[(i - 1) * len(X_Train):(i - 1) * len(X_Train) + len(X_Train)]
             Xtarget_in = Xtrain[(i - 1) * len(X_Train):(i - 1) * len(X_Train) + len(X_Train)]
@@ -87,17 +88,13 @@ else:
             X_Train_con, Y_train_con = preparedata(X_Train, target_category_train, seq_length)
             print(X_Train_con.shape, Y_train_con.shape)
 
-            context_model = dummyModel(seq_length, EMBEDDING_DIM, Y_test.shape[1], MAX_SEQUENCE_LENGTH,
-                                       nodes=128, dropout=0.2, W_reg=0.01)
-            context_model.summary()
-
             m.fit(X_Train_con, Y_train_con, epochs=1, batch_size=32, verbose=2,
                   callbacks=callbacks_con)  # , validation_split=0.13)
             m.load_weights(model_name)
             loss, new_acc = m.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
             print('Context Score results:', new_acc)
             if old_acc < new_acc:
-                model.save_weights('weight_parameters')
+                model.save_weights('params/weight_parameters')
                 print('Weights are saved with {}'.format(new_acc))
                 old_acc = new_acc
 
