@@ -1,8 +1,7 @@
-from collections import Counter
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.utils import to_categorical
 import pickle, os
-
+from data_generator import DataGenerator
 from models import model_attention_applied_after_bilstm, \
     model_attention_applied_after_bisrnn, context_model
 from utils import *
@@ -14,11 +13,6 @@ testFile = 'data/swda-actags_test_speaker.csv'
 SidTr, Xtrain, Ytrain, Ztrain = read_files(trainFile)
 SidTest, Xtest, Ytest, Ztest = read_files(testFile)
 print(len(Xtest), len(Xtrain))
-# from elmo_utils import get_elmo_tokens
-# x_train = get_elmo_tokens(Xtrain)
-# x_test = get_elmo_tokens(Xtest)
-# pickle.dump( x_test, open( "x_test_tokens.p", "wb" ) )
-# pickle.dump( x_train, open( "x_train_tokens.p", "wb" ) )
 
 x_test = pickle.load(open("features/x_test_tokens.p", "rb"))
 x_train = pickle.load(open("features/x_train_tokens.p", "rb"))
@@ -29,6 +23,11 @@ X_Test = padSequencesKeras(X_Test, max_seq_len, toPadding)
 
 tags, num, Y_train, Y_test = categorize_raw_data(Ztrain, Ztest)
 target_category_test = to_categorical(Y_test, len(tags))
+
+partition = {'train': ['1', '2', '3', '4', '5', '6', '7', '8']}
+# Parameters
+params = {'dim': (32,32,32), 'batch_size': 64, 'n_classes': len(tags), 'n_channels': 1, 'shuffle': False}
+training_generator = DataGenerator(partition['train'], Y_train, **params)
 
 SINGLE_ATTENTION_VECTOR = False
 model = model_attention_applied_after_bilstm(20, 1024, 42, SINGLE_ATTENTION_VECTOR)
@@ -53,6 +52,9 @@ context_model = context_model(seq_length, INPUT_DIM, EMBEDDING_DIM, NUM_CLASSES)
 
 con_model_name = 'params/context_model_{}'.format(seq_length)
 callbacks_con = [EarlyStopping(patience=3), ModelCheckpoint(filepath=con_model_name, save_best_only=True)]
+
+# context_model.fit_generator(generator=training_generator, use_multiprocessing=True, workers=6)
+
 if os.path.exists(con_model_name):
     context_model.load_weights(con_model_name)
 

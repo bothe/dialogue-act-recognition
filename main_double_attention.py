@@ -47,7 +47,7 @@ callbacks_con = [EarlyStopping(patience=3), ModelCheckpoint(filepath=con_model_n
 if os.path.exists(con_model_name):
     context_model.load_weights(con_model_name)
 
-train = True
+train = False
 if train == False:
     loss1, new_acc1  = model.evaluate(X_Test, target_category_test, verbose=2)
     print('Non-Context Score results:', new_acc1)
