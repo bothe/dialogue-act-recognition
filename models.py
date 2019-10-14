@@ -92,13 +92,14 @@ def model_attention_applied_after_lstm(seq_length, max_seq_length, num_classes, 
     # inter_rep     = Dense(100)(attention_mul)
     output = Dense(num_classes, activation='softmax')(attention_mul)
     model = Model(inputs=[inputs], outputs=output)
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     print(model.summary())
     return model
 
 
 # model_attention_applied_after_lstm(3, 1024, 42, True)
 
-def model_attention_applied_after_bilstm(seq_length, max_seq_length, num_classes, single_attention_vector):
+def model_attention_applied_after_bilstm(seq_length, max_seq_length, num_classes, single_attention_vector = False):
     inputs = Input(shape=(seq_length, max_seq_length,))
     lstm_units = 64
     # lstm_out      = (SimpleRNN(lstm_units, return_sequences=True))(inputs)
@@ -108,6 +109,7 @@ def model_attention_applied_after_bilstm(seq_length, max_seq_length, num_classes
     # inter_rep     = Dense(100)(attention_mul)
     output = Dense(num_classes, activation='softmax')(attention_mul)
     model = Model(inputs=[inputs], outputs=output)
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     print(model.summary())
     return model
 
@@ -122,5 +124,6 @@ def model_attention_applied_after_bisrnn(seq_length, max_seq_length, num_classes
     # inter_rep     = Dense(100)(attention_mul)
     output = Dense(num_classes, activation='softmax')(attention_mul)
     model = Model(inputs=[inputs], outputs=output)
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     print(model.summary())
     return model
