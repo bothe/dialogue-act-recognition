@@ -51,7 +51,7 @@ def context_model(seq_len, max_seq_length, emb_dim, classes, nodes=128, dropout=
 
 
 def context_model_att(seq_len, max_seq_length, emb_dim, classes, nodes=128, dropout=0.2,
-                  single_attention_vector=False):
+                      single_attention_vector=False):
     # Encode each time step  # dummyModel(3, 20, 1024, 42)
     in_sentence = Input(shape=(max_seq_length, emb_dim,))  # , dtype='int64')
     # embedded_sentence = Embedding(len(word_index) + 1, emb_dim, trainable=True)(in_sentence)
@@ -82,8 +82,8 @@ def context_model_att(seq_len, max_seq_length, emb_dim, classes, nodes=128, drop
 
 # context_model(3, 20, 1024, 42)
 
-def model_attention_applied_after_lstm(seq_length, max_seq_length, num_classes, single_attention_vector):
-    inputs = Input(shape=(seq_length, max_seq_length,))
+def model_attention_applied_after_lstm(seq_length, emb_dim, num_classes, single_attention_vector=False):
+    inputs = Input(shape=(seq_length, emb_dim,))
     lstm_units = 64
     # lstm_out      = (SimpleRNN(lstm_units, return_sequences=True))(inputs)
     lstm_out = LSTM(lstm_units, return_sequences=True)(inputs)
@@ -99,8 +99,8 @@ def model_attention_applied_after_lstm(seq_length, max_seq_length, num_classes, 
 
 # model_attention_applied_after_lstm(3, 1024, 42, True)
 
-def model_attention_applied_after_bilstm(seq_length, max_seq_length, num_classes, single_attention_vector = False):
-    inputs = Input(shape=(seq_length, max_seq_length,))
+def model_attention_applied_after_bilstm(seq_length, emb_dim, num_classes, single_attention_vector=False):
+    inputs = Input(shape=(seq_length, emb_dim,))
     lstm_units = 64
     # lstm_out      = (SimpleRNN(lstm_units, return_sequences=True))(inputs)
     lstm_out = Bidirectional(LSTM(lstm_units, return_sequences=True))(inputs)
@@ -114,8 +114,8 @@ def model_attention_applied_after_bilstm(seq_length, max_seq_length, num_classes
     return model
 
 
-def model_attention_applied_after_bisrnn(seq_length, max_seq_length, num_classes, single_attention_vector):
-    inputs = Input(shape=(seq_length, max_seq_length,))
+def model_attention_applied_after_bisrnn(seq_length, emb_dim, num_classes, single_attention_vector=False):
+    inputs = Input(shape=(seq_length, emb_dim,))
     lstm_units = 64
     # lstm_out      = (SimpleRNN(lstm_units, return_sequences=True))(inputs)
     lstm_out = Bidirectional(SimpleRNN(lstm_units, return_sequences=True))(inputs)
