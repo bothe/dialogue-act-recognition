@@ -1,5 +1,7 @@
 from keras.utils import to_categorical
 import pickle, os
+
+from elmo_features import *
 from models import model_attention_applied_after_bilstm, context_model_att
 from utils import *
 
@@ -14,7 +16,10 @@ def main():
     x_test = pickle.load(open("features/x_test_tokens.p", "rb"))
     x_train = pickle.load(open("features/x_train_tokens.p", "rb"))
     toPadding = np.load('features/pad_a_token.npy')
-    X_Test = np.load('features/X_test_elmo_features.npy')
+
+    X_Test = get_elmo_fea(Xtest)
+    # X_Test = np.load('features/X_test_elmo_features.npy')
+
     X_Test = padSequencesKeras(X_Test, max_seq_len, toPadding)
     tags, num, Y_train, Y_test = categorize_raw_data(Ztrain, Ztest)
     target_category_test = to_categorical(Y_test, len(tags))
