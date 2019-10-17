@@ -34,15 +34,19 @@ def read_files(filePath):
     return S, X, Y, Z
 
 
-def preparedata(x, y, seq_length):
+def preparedata(x, y, seq_length, with_y=True):
     dataX = []
     dataY = []
     for i in range(0, len(x) - seq_length, 1):
         seq_in = x[i:i + seq_length]
-        seq_out = y[i + seq_length - 1]
         dataX.append([seq_in])
-        dataY.append(seq_out)
-    return (np.array(dataX).squeeze(axis=1)), np.array(dataY)
+        if with_y:
+            seq_out = y[i + seq_length - 1]
+            dataY.append(seq_out)
+    if with_y:
+        return (np.array(dataX).squeeze(axis=1)), np.array(dataY)
+    else:
+        return (np.array(dataX).squeeze(axis=1))
 
 
 def cat_3classes(y_avg):
@@ -83,7 +87,8 @@ def padSequences(x, toPadding):
 
 
 def padSequencesKeras(x, maxlen, toPadding):
-    return sequence.pad_sequences(x, maxlen, 'float32',value=toPadding, padding='post', truncating='post')
+    return sequence.pad_sequences(x, maxlen, 'float32', value=toPadding, padding='post', truncating='post')
+
 
 """
 # Benchmarking looping Keras vs for loop operations

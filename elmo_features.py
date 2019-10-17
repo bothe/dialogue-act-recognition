@@ -4,10 +4,11 @@ import numpy as np
 import time, sys
 import pyprind
 
+elmo = ElmoEmbedder()
 
-def get_elmo_fea(data, mean=True):
+
+def get_elmo_fea(data, mean=True, print_length=False):
     n = len(data)
-    elmo = ElmoEmbedder()
     tk = word_tokenizer.WordTokenizer()
     tokens = tk.batch_tokenize(data)
     idx = []
@@ -19,18 +20,20 @@ def get_elmo_fea(data, mean=True):
     bar = pyprind.ProgBar(n, stream=sys.stdout)
     vectors = []
     for seq in tokens:
-        vector = elmo.embed_sentence(seq[0:40])
+        vector = elmo.embed_sentence(seq[0:20])
         if mean:
             vectors.append(np.mean(vector[2], axis=0))
         else:
             vectors.append(vector[2])
-        #time.sleep(0.1)
+        if print_length:
+            print('Length of a sequence: {} with final emb vector shape: {}'.format(len(seq), vector.shape))
         bar.update()
     return vectors
 
+
 def get_elmo_tokens(data):
     n = len(data)
-    #elmo = ElmoEmbedder()
+    # elmo = ElmoEmbedder()
     tk = word_tokenizer.WordTokenizer()
     tokens = tk.batch_tokenize(data)
     idx = []
@@ -41,13 +44,12 @@ def get_elmo_tokens(data):
         bar.update()
     return tokens
 
+
 def get_elmo_features(data):
     def get_nearest(slot, target):
         for i in range(target, -1, -1):
             if i in slot:
                 return i
-
-    elmo = ElmoEmbedder()
 
     tk = word_tokenizer.WordTokenizer()
     tokens = tk.batch_tokenize(data)

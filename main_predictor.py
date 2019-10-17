@@ -1,7 +1,9 @@
 from keras.utils import to_categorical
 import pickle, os
+import requests
+# requests.post('http://0:4004/elmo_embed_words', json={"text":'is it?'}).json()
+# requests.post('https://55898a32.eu.ngrok.io/elmo_embed_words', json={"text":'is it?\r\nokay got it.'}).json()
 
-from elmo_features import *
 from models import model_attention_applied_after_bilstm, context_model_att
 from utils import *
 
@@ -17,9 +19,7 @@ def main():
     x_train = pickle.load(open("features/x_train_tokens.p", "rb"))
     toPadding = np.load('features/pad_a_token.npy')
 
-    X_Test = get_elmo_fea(Xtest)
-    # X_Test = np.load('features/X_test_elmo_features.npy')
-
+    X_Test = np.load('features/X_test_elmo_features.npy')
     X_Test = padSequencesKeras(X_Test, max_seq_len, toPadding)
     tags, num, Y_train, Y_test = categorize_raw_data(Ztrain, Ztest)
     target_category_test = to_categorical(Y_test, len(tags))
@@ -39,7 +39,6 @@ def main():
     context_model.load_weights(con_model_name)
     loss, old_acc = context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
     print('Context Score results:', old_acc)
-
 
 
 if __name__ == "__main__":
