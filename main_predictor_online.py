@@ -58,8 +58,9 @@ def predict_classes(text_input):
             con_out.append(tags[np.argmax(item)])
 
     else:
-        con_predictions = []
+        con_out = []
+
+    return non_con_out, con_out
 
 
-
-predict_classes('is it true? \r\n yes it is. \r\n why it is.')
+print(predict_classes('is it true? \r\n yes it is. \r\n why it is.'))
