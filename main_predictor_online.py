@@ -50,7 +50,7 @@ def predict_classes(text_input):
     for item in non_con_predictions:
         non_con_out.append(tags[np.argmax(item)])
 
-    if len(x) >= seq_length:
+    if len(x) > seq_length:
         x = preparedata(x, [], seq_length, with_y=False)
         con_predictions = context_model.predict(x)
         con_out = []
@@ -63,4 +63,4 @@ def predict_classes(text_input):
     return non_con_out, con_out
 
 
-print(predict_classes('is it true? \r\n yes it is. \r\n why it is.'))
+print(predict_classes("I don't know,  \r\n Where did you go? \r\n  What? \r\n  Where did you go? \r\n I went to University. \r\n Uh-huh."))
