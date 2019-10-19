@@ -2,8 +2,8 @@ from keras.utils import to_categorical
 import pickle, os
 import requests
 # requests.post('http://0:4004/elmo_embed_words', json={"text":'is it?'}).json()
-# requests.post('https://55898a32.eu.ngrok.io/elmo_embed_words', json={"text":'is it?\r\nokay got it.'}).json()
-from elmo_features import get_elmo_fea
+# requests.post('https://136c22af.eu.ngrok.io/elmo_embed_words', json={"text":'is it?\r\nokay got it.'}).json()
+# from elmo_features import get_elmo_fea
 from models import model_attention_applied_after_bilstm, context_model_att
 from utils import *
 from utils_float_string import *
@@ -19,7 +19,14 @@ x_train = pickle.load(open("features/x_train_tokens.p", "rb"))
 toPadding = np.load('features/pad_a_token.npy')
 
 #X_Test = np.load('features/X_test_elmo_features.npy')
-X_Test = get_elmo_fea(Xtest)
+#X_Test = get_elmo_fea(Xtest)
+
+Xtest_joined = '\r\n'.join(Xtest)
+
+X_Test = string_to_floats(
+        requests.post('http://0.0.0.0:4004/elmo_embed_words',
+                      json={"text": Xtest_joined}).json()['result'])
+
 X_Test = padSequencesKeras(X_Test, max_seq_len, toPadding)
 tags, num, Y_train, Y_test = categorize_raw_data(Ztrain, Ztest)
 target_category_test = to_categorical(Y_test, len(tags))
