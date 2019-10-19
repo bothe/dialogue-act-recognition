@@ -1,9 +1,0 @@
-# Default ignored files
-/workspace.xml
-.idea/misc.xml
-.idea/context-dialogue-act.iml
-# exclude everything
-features/*
-
-# exception to the rule
-!features/.gitkeep
