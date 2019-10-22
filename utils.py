@@ -10,13 +10,13 @@ def categorize_raw_data(Ztrain, Ztest):
     for i, j in enumerate((Counter(Ztrain)).keys()):
         tag.append(j)
         num.append(i)
-    Y_train = []
+    y_train = []
     for i in Ztrain:
-        Y_train.append(tag.index(i))
-    Y_test = []
+        y_train.append(tag.index(i))
+    y_test = []
     for i in Ztest:
-        Y_test.append(tag.index(i))
-    return tag, num, Y_train, Y_test
+        y_test.append(tag.index(i))
+    return tag, num, y_train, y_test
 
 
 def read_files(filePath):
@@ -34,19 +34,19 @@ def read_files(filePath):
     return S, X, Y, Z
 
 
-def preparedata(x, y, seq_length, with_y=True):
+def prepare_data(x, y, seq_length, with_y=True):
     dataX = []
     dataY = []
-    for i in range(0, len(x) - seq_length, 1):
+    for i in range(0, len(x) - seq_length + 1, 1):
         seq_in = x[i:i + seq_length]
         dataX.append([seq_in])
         if with_y:
             seq_out = y[i + seq_length - 1]
             dataY.append(seq_out)
     if with_y:
-        return (np.array(dataX).squeeze(axis=1)), np.array(dataY)
+        return np.array(dataX).squeeze(axis=1), np.array(dataY)
     else:
-        return (np.array(dataX).squeeze(axis=1))
+        return np.array(dataX).squeeze(axis=1)
 
 
 def cat_3classes(y_avg):
@@ -86,9 +86,15 @@ def padSequences(x, toPadding):
     return np.array(new_x)
 
 
-def padSequencesKeras(x, maxlen, toPadding):
-    return sequence.pad_sequences(x, maxlen, 'float32', value=toPadding, padding='post', truncating='post')
+def padSequencesKeras(x, max_len, toPadding):
+    return sequence.pad_sequences(x, max_len, 'float32', value=toPadding, padding='post', truncating='post')
 
+
+x = [1, 2, 3, 4, 5, 6]
+y = [11, 22, 33, 44, 55, 66]
+
+xx, yy = prepare_data(x, y, 3)
+print('debug')
 
 """
 # Benchmarking looping Keras vs for loop operations

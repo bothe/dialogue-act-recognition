@@ -30,7 +30,7 @@ evaluation = model.evaluate(X_Test, target_category_test, verbose=2)
 print("Test results for non-context model - accuracy: {}".format(evaluation[1]))
 
 seq_length = 3  # Preparing data for contextual training with Seq_length
-X_test_con, Y_test_con = preparedata(X_Test, target_category_test, seq_length)
+X_test_con, Y_test_con = prepare_data(X_Test, target_category_test, seq_length)
 
 # CONTEXT MODEL
 context_model = context_model_att(seq_length, max_seq_len, X_test_con.shape[3], len(tags))
@@ -42,7 +42,7 @@ print('Context Score results:', old_acc)
 
 def predict_classes(text_input):
     x = string_to_floats(
-        requests.post('https://55898a32.eu.ngrok.io/elmo_embed_words',
+        requests.post('https://136c22af.eu.ngrok.io/elmo_embed_words',
                       json={"text": text_input}).json()['result'])
     x = padSequencesKeras(x, max_seq_len, toPadding)
     non_con_predictions = model.predict(x)
@@ -51,7 +51,7 @@ def predict_classes(text_input):
         non_con_out.append(tags[np.argmax(item)])
 
     if len(x) > seq_length:
-        x = preparedata(x, [], seq_length, with_y=False)
+        x = prepare_data(x, [], seq_length, with_y=False)
         con_predictions = context_model.predict(x)
         con_out = []
         for item in con_predictions:
@@ -66,3 +66,5 @@ def predict_classes(text_input):
 print(predict_classes(
     "I don't know,  \r\n Where did you go? \r\n  What? \r\n  "
     "Where did you go? \r\n I went to University. \r\n Uh-huh."))
+print(predict_classes("\r\n".join(Xtest[0:100])))
+print(Ytest[0:100])

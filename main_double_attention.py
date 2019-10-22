@@ -31,7 +31,7 @@ print("Test results for non-context model - accuracy: {}".format(evaluation[1]))
 
 # Preparing for contextual training
 seq_length = 3
-X_test_con, Y_test_con = preparedata(X_Test, target_category_test, seq_length)
+X_test_con, Y_test_con = prepare_data(X_Test, target_category_test, seq_length)
 
 EMBEDDING_DIM = X_test_con.shape[3]
 INPUT_DIM = X_test_con.shape[2]
@@ -72,7 +72,7 @@ else:
             Ytarget_out = Ytrain[(i - 1) * len(X_Train):(i - 1) * len(X_Train) + len(X_Train)]
             target_category_train = to_categorical(target, 42)
             print(X_Train.shape, target_category_train.shape)
-            X_Train, Y_train_con = preparedata(X_Train, target_category_train, seq_length)
+            X_Train, Y_train_con = prepare_data(X_Train, target_category_train, seq_length)
             print(X_Train.shape, Y_train_con.shape)
             context_model.load_weights(con_model_name)
             # context_model.train_on_batch(X_Train_con, Y_train_con)

@@ -38,7 +38,7 @@ evaluation = model.evaluate(X_Test, target_category_test, verbose=2)
 print("Test results for non-context model - accuracy: {}".format(evaluation[1]))
 
 seq_length = 3  # Preparing data for contextual training with Seq_length
-X_test_con, Y_test_con = preparedata(X_Test, target_category_test, seq_length)
+X_test_con, Y_test_con = prepare_data(X_Test, target_category_test, seq_length)
 
 # CONTEXT MODEL
 context_model = context_model_att(seq_length, max_seq_len, X_test_con.shape[3], len(tags))
