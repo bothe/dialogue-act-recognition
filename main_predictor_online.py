@@ -63,4 +63,6 @@ def predict_classes(text_input):
     return non_con_out, con_out
 
 
-print(predict_classes("I don't know,  \r\n Where did you go? \r\n  What? \r\n  Where did you go? \r\n I went to University. \r\n Uh-huh."))
+print(predict_classes(
+    "I don't know,  \r\n Where did you go? \r\n  What? \r\n  "
+    "Where did you go? \r\n I went to University. \r\n Uh-huh."))

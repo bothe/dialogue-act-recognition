@@ -26,7 +26,7 @@ target_category_test = to_categorical(Y_test, len(tags))
 
 partition = {'train': ['1', '2', '3', '4', '5', '6', '7', '8']}
 # Parameters
-params = {'dim': (32,32,32), 'batch_size': 64, 'n_classes': len(tags), 'n_channels': 1, 'shuffle': False}
+params = {'dim': (32, 32, 32), 'batch_size': 64, 'n_classes': len(tags), 'n_channels': 1, 'shuffle': False}
 training_generator = DataGenerator(partition['train'], Y_train, **params)
 
 SINGLE_ATTENTION_VECTOR = False
@@ -60,7 +60,7 @@ if os.path.exists(con_model_name):
 
 train = False
 if train == False:
-    loss1, new_acc1  = model.evaluate(X_Test, target_category_test, verbose=2)
+    loss1, new_acc1 = model.evaluate(X_Test, target_category_test, verbose=2)
     print('Non-Context Score results:', new_acc1)
     loss2, new_acc2 = context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
     print('Context Score results:', new_acc2)

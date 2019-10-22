@@ -22,7 +22,7 @@ target_category_test = to_categorical(Y_test, len(tags))
 
 # NON-CONTEXT MODEL
 SINGLE_ATTENTION_VECTOR = False
-model = model_attention_applied_after_bilstm(max_seq_len,  X_Test.shape[2], len(tags), SINGLE_ATTENTION_VECTOR)
+model = model_attention_applied_after_bilstm(max_seq_len, X_Test.shape[2], len(tags), SINGLE_ATTENTION_VECTOR)
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 callbacks = [ModelCheckpoint(filepath='weight_parameters', save_best_only=True)]  # EarlyStopping(patience=5),
 model.load_weights('params/weight_parameters')
@@ -51,7 +51,7 @@ if os.path.exists(con_model_name):
 
 train = True
 if train == False:
-    loss1, new_acc1  = model.evaluate(X_Test, target_category_test, verbose=2)
+    loss1, new_acc1 = model.evaluate(X_Test, target_category_test, verbose=2)
     print('Non-Context Score results:', new_acc1)
     loss2, new_acc2 = context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
     print('Context Score results:', new_acc2)
