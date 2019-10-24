@@ -40,9 +40,9 @@ loss, old_acc = context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_
 print('Context Score results:', old_acc)
 
 
-def predict_classes(text_input, link_online=False):
+def predict_classes(text_input, link_online=True):
     if link_online:
-        link = "https://136c22af.eu.ngrok.io/"
+        link = "https://d55da20d.eu.ngrok.io/"
     else:
         link = "http://0.0.0.0:4004/"
     x = string_to_floats(
@@ -57,7 +57,7 @@ def predict_classes(text_input, link_online=False):
     if len(x) > seq_length:
         x = prepare_data(x, [], seq_length, with_y=False)
         con_predictions = context_model.predict(x)
-        con_out = []
+        con_out = ['None', 'None']
         for item in con_predictions:
             con_out.append(tags[np.argmax(item)])
 
@@ -70,5 +70,5 @@ def predict_classes(text_input, link_online=False):
 print(predict_classes(
     "I don't know,  \r\n Where did you go? \r\n  What? \r\n  "
     "Where did you go? \r\n I went to University. \r\n Uh-huh."))
-print(predict_classes("\r\n".join(Xtest[0:100])))
-print(Ytest[0:100])
+# print(predict_classes("\r\n".join(Xtest[0:100])))
+# print(Ytest[0:100])
