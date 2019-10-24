@@ -2,6 +2,7 @@ import numpy as np
 from functools import reduce
 import os
 
+
 def get_transcriptions(filename):
     f = open(filename, 'r').read()
     f = np.array(f.split('\n'))
@@ -22,8 +23,10 @@ def get_emotions(filename):
     idx = f == ''
     idx_n = np.arange(len(f))[idx]
     emotion = []
+    emotion_dict = {}
     for i in range(len(idx_n) - 2):
         g = f[idx_n[i] + 1:idx_n[i + 1]]
+        speaker_id = g[0].split('\t')[1]
         head = g[0]
         i0 = head.find(' - ')
         start_time = float(head[head.find('[') + 1:head.find(' - ')])
@@ -59,7 +62,15 @@ def get_emotions(filename):
                         'd': d,
                         'emotion': emo,
                         'emo_evo': emos})
-    return emotion
+        emotion_dict[speaker_id] = {'start': start_time,
+                                    'end': end_time,
+                                    'id': filename[:-4] + '_' + actor_id,
+                                    'v': v,
+                                    'a': a,
+                                    'd': d,
+                                    'emotion': emo,
+                                    'emo_evo': emos}
+    return emotion_dict
 
 
 def get_directory_structure(rootdir):

@@ -9,9 +9,9 @@ app = Flask(__name__)
 @app.route("/elmo_embed_words", methods=['GET', 'POST'])
 def index():
     value = request.json['text']
-    print(value)
+    # print(value)
     value = value.split('\r\n')
-    print(value)
+    # print(value)
     res = get_elmo_fea(value, mean=False)
 
     vectors = float_to_string(res)

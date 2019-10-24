@@ -18,7 +18,7 @@ x_test = pickle.load(open("features/x_test_tokens.p", "rb"))
 x_train = pickle.load(open("features/x_train_tokens.p", "rb"))
 toPadding = np.load('features/pad_a_token.npy')
 
-X_Test = np.load('features/X_test_elmo_features.npy')
+X_Test = np.load('features/X_test_elmo_features.npy', allow_pickle=True)
 X_Test = padSequencesKeras(X_Test, max_seq_len, toPadding)
 tags, num, Y_train, Y_test = categorize_raw_data(Ztrain, Ztest)
 target_category_test = to_categorical(Y_test, len(tags))
@@ -40,9 +40,13 @@ loss, old_acc = context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_
 print('Context Score results:', old_acc)
 
 
-def predict_classes(text_input):
+def predict_classes(text_input, link_online=False):
+    if link_online:
+        link = "https://136c22af.eu.ngrok.io/"
+    else:
+        link = "http://0.0.0.0:4004/"
     x = string_to_floats(
-        requests.post('https://136c22af.eu.ngrok.io/elmo_embed_words',
+        requests.post(link + 'elmo_embed_words',
                       json={"text": text_input}).json()['result'])
     x = padSequencesKeras(x, max_seq_len, toPadding)
     non_con_predictions = model.predict(x)
