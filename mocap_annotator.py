@@ -35,7 +35,7 @@ def get_mocap_data():
                     d.append(emots[key]['d'])
                     utterances.append(utts[key])
                     writer.writerow(
-                        {'speaker_id': key, 'utterance': str(utts[key]), 'emotion': emots[key]['emotion'], 'v': emots[key]['v'],
+                        {'speaker_id': key, 'utterance': utts[key], 'emotion': emots[key]['emotion'], 'v': emots[key]['v'],
                          'a': emots[key]['a'], 'd': emots[key]['d'], 'emo_evo': emots[key]['emo_evo'],
                          'start': emots[key]['start'], 'end': emots[key]['end']})
                 except:
@@ -43,3 +43,5 @@ def get_mocap_data():
 
             file_paths.append(file_path_utt)
     return utterances, emo_dialogues, emo_evo, v, a, d
+
+# Counter([x[0][0] for x in emo_evo])
