@@ -26,4 +26,10 @@ print(classification.classification_report(con_out_nums, non_con_out_nums))
 print('Spearman Correlation between context- and non-context-based prediction: {}'.format(
     stats.spearmanr(con_out_nums, non_con_out_nums)))
 
+
+np.save("results/con_out", con_out)
+np.save("results/con_out_nums", con_out_nums)
+np.save("results/non_con_out", non_con_out)
+np.save("results/non_con_out_nums", non_con_out_nums)
+
 print('debug')
