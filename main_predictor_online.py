@@ -1,6 +1,7 @@
 from keras.utils import to_categorical
 import pickle, os
 import requests
+import numpy as np
 # requests.post('http://0:4004/elmo_embed_words', json={"text":'is it?'}).json()
 # requests.post('https://55898a32.eu.ngrok.io/elmo_embed_words', json={"text":'is it?\r\nokay got it.'}).json()
 
@@ -48,6 +49,26 @@ def predict_classes(text_input, link_online=True):
     x = string_to_floats(
         requests.post(link + 'elmo_embed_words',
                       json={"text": text_input}).json()['result'])
+    x = padSequencesKeras(x, max_seq_len, toPadding)
+    non_con_predictions = model.predict(x)
+    non_con_out = []
+    for item in non_con_predictions:
+        non_con_out.append(tags[np.argmax(item)])
+
+    if len(x) > seq_length:
+        x = prepare_data(x, [], seq_length, with_y=False)
+        con_predictions = context_model.predict(x)
+        con_out = ['None', 'None']
+        for item in con_predictions:
+            con_out.append(tags[np.argmax(item)])
+
+    else:
+        con_out = []
+
+    return non_con_out, con_out
+
+
+def predict_classes_from_features(x):
     x = padSequencesKeras(x, max_seq_len, toPadding)
     non_con_predictions = model.predict(x)
     non_con_out = []
