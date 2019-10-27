@@ -20,7 +20,7 @@ def get_elmo_fea(data, mean=True, print_length=False):
     bar = pyprind.ProgBar(n, stream=sys.stdout)
     vectors = []
     for seq in tokens:
-        vector = elmo.embed_sentence(seq[0:20])
+        vector = elmo.embed_sentence(seq[0:21])
         if mean:
             vectors.append(np.mean(vector[2], axis=0))
         else:

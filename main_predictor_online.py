@@ -72,20 +72,25 @@ def predict_classes_from_features(x):
     x = padSequencesKeras(x, max_seq_len, toPadding)
     non_con_predictions = model.predict(x)
     non_con_out = []
+    non_con_out_nums = []
     for item in non_con_predictions:
         non_con_out.append(tags[np.argmax(item)])
+        non_con_out_nums.append(np.argmax(item))
 
     if len(x) > seq_length:
         x = prepare_data(x, [], seq_length, with_y=False)
         con_predictions = context_model.predict(x)
         con_out = ['None', 'None']
+        con_out_nums = [0, 0]
         for item in con_predictions:
             con_out.append(tags[np.argmax(item)])
+            con_out_nums.append(np.argmax(item))
 
     else:
-        con_out = []
+        con_out = [0, 0]
 
-    return non_con_out, con_out
+    return non_con_out, con_out, non_con_out_nums, con_out_nums
+
 
 # print(predict_classes(
 #     "I don't know,  \r\n Where did you go? \r\n  What? \r\n  "
