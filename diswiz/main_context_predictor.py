@@ -26,7 +26,7 @@ print('Shape of input tensor:', X_test.shape)
 print('Shape of label tensor:', Y_test.shape)
 
 # Model without context
-param_file_nc = 'params/params_non_context'
+param_file_nc = 'diswiz/params/params_non_context'
 non_con_model = utt_model(word_index, EMBEDDING_DIM, Y_test.shape[1], MAX_SEQUENCE_LENGTH, nodes=128, dropout=0.2,
                           W_reg=0.01)
 non_con_model.summary()
@@ -41,7 +41,7 @@ X_test, Y_test = preparedata(X_test, Y_test, seq_len)
 context_model = dummyModel(seq_len, word_index, EMBEDDING_DIM, Y_test.shape[1], MAX_SEQUENCE_LENGTH, nodes=128,
                            dropout=0.2, W_reg=0.01)
 context_model.summary()
-param_file_con = 'params/params_context'
+param_file_con = 'diswiz/params/params_context'
 context_model.load_weights(param_file_con)
 con_model_acc = context_model.evaluate(X_test, Y_test, verbose=2)
 print('Non-con-model accuracy', con_model_acc)
