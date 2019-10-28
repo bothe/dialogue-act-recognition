@@ -1,4 +1,3 @@
-from flask import jsonify
 import os
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
@@ -10,12 +9,14 @@ from diswiz.utils import prepare_input_data
 def predict_das_diswiz(value):
     # value = value.split('\r\n')
     utts_s, DAname_s, confs_s, higher_DA_class_s = [], [], [], []
+    non_con_das, non_con_da_nums, con_das, con_da_nums = [], [], [], []
     for it_value in value:
         x_seq = pad_sequences(tokenizer.texts_to_sequences([it_value]), maxlen=MAX_SEQUENCE_LENGTH)
         predictions = non_con_model.predict(x_seq, verbose=2)
         it_value, classes, DAnames, confs = prepare_output(predictions, tag, it_value)
-        print('Text:=>', it_value)
-        print('DAs: =>', classes, DAnames, confs)
+        # print('Text:=>', it_value)
+        # print('DAs: =>', classes, DAnames, confs)
+        non_con_das.append(tag[predictions[0].argmax()])
         utts_s.append(it_value)
         DAname_s.append(DAnames[0:3])
         confs_s.append(confs[0:3])
@@ -28,7 +29,7 @@ def predict_das_diswiz(value):
         for iterr in x_con_seq:
             predictions = context_model.predict(np.array([iterr]), verbose=2)
             it_value, ConClasses, ConDAnames, ConConfs = prepare_output(predictions, tag, iterr)
-            print('Context DAs: =>', ConClasses, ConDAnames, ConConfs)
+            # print('Context DAs: =>', ConClasses, ConDAnames, ConConfs)
             Con_DANames.append(ConDAnames[0:3])
             Con_confs_s.append(ConConfs[0:3])
             Con_higher_DA_class_s.append(ConClasses)
@@ -40,4 +41,4 @@ def predict_das_diswiz(value):
            'higher_DA_class': higher_DA_class_s, 'utts': utts_s,
            'Con_DANames': Con_DANames, 'Con_confs_s': Con_confs_s, 'Con_higher_DA_class_s': Con_higher_DA_class_s}
 
-    return jsonify(res)
+    return res

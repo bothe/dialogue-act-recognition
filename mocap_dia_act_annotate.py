@@ -1,7 +1,6 @@
 from main_predictor_online import predict_classes_from_features
 from mocap_annotator import get_mocap_data
 from collections import Counter
-from elmo_features import get_elmo_fea
 import numpy as np
 from sklearn.metrics import classification
 from scipy.stats import stats
