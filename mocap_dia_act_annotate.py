@@ -6,9 +6,11 @@ import numpy as np
 from sklearn.metrics import classification
 from scipy.stats import stats
 from statsmodels.stats.inter_rater import fleiss_kappa
-
+from diswiz.main import predict_das_diswiz
 
 utterances, emotion, emo_evo, v, a, d = get_mocap_data()
+
+xxx = predict_das_diswiz(utterances)
 
 # iemocap_elmo_features = get_elmo_fea(utterances, mean=False)
 iemocap_elmo_features = np.load('features/iemocap_elmo_features.npy', allow_pickle=True)
