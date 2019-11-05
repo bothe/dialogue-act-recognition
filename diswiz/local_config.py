@@ -11,4 +11,4 @@ param_file_con_new = '../diswiz/params/params_context_new'
 diswiz_model_functions(train_data, test_data,
                        param_file_nc, param_file_con,
                        param_file_nc_new, param_file_con_new,
-                       train=True, epochs=5)
+                       train=True, epochs=30)

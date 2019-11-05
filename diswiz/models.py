@@ -40,9 +40,11 @@ def utt_model(word_index, EMBEDDING_DIM, classes, MAX_SEQUENCE_LENGTH, nodes=128
     model = Sequential()
     model.add(Embedding(len(word_index) + 1, EMBEDDING_DIM, input_length=MAX_SEQUENCE_LENGTH))
     if lstm:
-        model.add(LSTM(nodes, dropout=dropout, recurrent_dropout=dropout))
+        model.add(LSTM(nodes, dropout=dropout, recurrent_dropout=dropout, return_sequences=True))
+        model.add(Flatten())
+        model.add(Dense(nodes))
     else:
-        model.add(GRU(nodes, dropout=dropout, recurrent_dropout=dropout))
+        model.add(GRU(nodes, dropout=dropout, recurrent_dropout=dropout, return_sequences=True))
     model.add(Dense(classes, activation='softmax'))
     # try using different optimizers and different optimizer configs
     model.compile(loss='categorical_crossentropy',
