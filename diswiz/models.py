@@ -35,10 +35,14 @@ def get_activations(model, model_inputs, print_shape_only=False, layer_name=None
     return activations
 
 
-def utt_model(word_index, EMBEDDING_DIM, classes, MAX_SEQUENCE_LENGTH, nodes=128, dropout=0.2, W_reg=0.01):
+def utt_model(word_index, EMBEDDING_DIM, classes, MAX_SEQUENCE_LENGTH, nodes=128,
+              dropout=0.2, W_reg=0.01, lstm=False):
     model = Sequential()
     model.add(Embedding(len(word_index) + 1, EMBEDDING_DIM, input_length=MAX_SEQUENCE_LENGTH))
-    model.add(GRU(nodes, dropout=0.2, recurrent_dropout=0.2, name='internal_rnn'))
+    if lstm:
+        model.add(LSTM(nodes, dropout=dropout, recurrent_dropout=dropout))
+    else:
+        model.add(GRU(nodes, dropout=dropout, recurrent_dropout=dropout))
     model.add(Dense(classes, activation='softmax'))
     # try using different optimizers and different optimizer configs
     model.compile(loss='categorical_crossentropy',
@@ -47,10 +51,15 @@ def utt_model(word_index, EMBEDDING_DIM, classes, MAX_SEQUENCE_LENGTH, nodes=128
     return model
 
 
-def utt_context_model(word_index, EMBEDDING_DIM, classes, MAX_SEQUENCE_LENGTH, nodes=128, dropout=0.2, W_reg=0.01):
+def utt_context_model(word_index, EMBEDDING_DIM, classes, MAX_SEQUENCE_LENGTH,
+                      nodes=128, dropout=0.2, W_reg=0.01,
+                      lstm=False):
     model = Sequential()
     model.add(Embedding(len(word_index) + 1, EMBEDDING_DIM, input_length=MAX_SEQUENCE_LENGTH))
-    model.add(GRU(nodes, dropout=dropout, recurrent_dropout=dropout))
+    if lstm:
+        model.add(LSTM(nodes, dropout=dropout, recurrent_dropout=dropout))
+    else:
+        model.add(GRU(nodes, dropout=dropout, recurrent_dropout=dropout))
     model.add(Dense(classes, activation='softmax'))
     # try using different optimizers and different optimizer configs
     model.compile(loss='categorical_crossentropy',
@@ -165,7 +174,6 @@ def contex_guru(encoded_model, seq_len, word_index, EMBEDDING_DIM, classes, MAX_
                   metrics=['accuracy'])
     # print(model.summary())
     return model
-
 
 # dummyModel(20000, 50)
 # att_model(np.random.randint(0,100, size=100), 50, 10, 20, nodes=128, dropout = 0.2, W_reg = 0.01)
