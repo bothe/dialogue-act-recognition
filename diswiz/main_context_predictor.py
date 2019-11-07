@@ -34,7 +34,7 @@ def diswiz_model_functions(train_data, test_data,
 
     # Non-context model with params
     non_con_model = utt_model(word_index, EMBEDDING_DIM, y_test.shape[1], MAX_SEQUENCE_LENGTH,
-                              nodes=128, dropout=0.2, W_reg=0.01)
+                              nodes=128, dropout=0.2, W_reg=0.01, lstm=True)
     non_con_model.summary()
     non_con_model.load_weights(param_file_nc)
 
