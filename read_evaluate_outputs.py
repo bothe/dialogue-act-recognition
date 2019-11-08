@@ -4,7 +4,7 @@ from mocap_annotator import get_mocap_data
 from results.read_predictions_utils import labels_to_indices, read_all_predictions
 import matplotlib.pyplot as plt
 import numpy as np
-
+from diswiz.utils_server import highDAClass, DAs
 
 utterances, emotion, emo_evo, v, a, d = get_mocap_data()
 con_elmo_embs, con_diswiz, non_con_elmo_embs, non_con_diswiz = read_all_predictions()
@@ -34,10 +34,8 @@ for item in classes:
     plt.xlim(.5, 5.5)
     plt.xlabel('valence')
     plt.ylabel('arousal')
-    plt.show()
-    # for key, value in Counter(a_temp):
-    #    pass  # TODO plot the different cases
-
+    plt.savefig('figures/fig_'+item)
+    plt.close()
 
 con_elmo_embs = labels_to_indices(con_elmo_embs, classes)
 con_diswiz = labels_to_indices(con_diswiz, classes)
