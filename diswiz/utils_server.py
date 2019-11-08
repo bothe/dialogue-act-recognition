@@ -53,7 +53,7 @@ NonSpeechVerbal  = ['x']					                            	    #1
 DAs = {
     'Statement': ['sd', 'sv'],
     'Questions': ['qw', 'qy^d', 'qy', 'qh', 'qo', 'qrr', '^q', 'qw^d', '^g'],
-    'Answers': ['nn', 'na', 'ny', 'no'],
+    'Answers': ['nn', 'na', 'ny', 'no', 'ng'],
     'Agreement': ['aa', 'ar', 'ad', '^h', 'aap_am', 'arp_nd'],
     'BackwardFunction': ['b', 'bk', 'bh', 'ba', 'bf', 'br', 'bd', '^2'],
     'ForwardFunction': ['fo_o_fw_"_by_bc', 'fc', 'ft', 'fp', 'fa', 'oo_co_cc', 'fo_o', 'fw'],

@@ -8,7 +8,8 @@ from diswiz.utils_server import highDAClass, DAs
 
 utterances, emotion, emo_evo, v, a, d = get_mocap_data()
 con_elmo_embs, con_diswiz, non_con_elmo_embs, non_con_diswiz = read_all_predictions()
-all_classes = Counter(list(con_diswiz) + list(con_elmo_embs) + list(non_con_diswiz) + list(non_con_elmo_embs))
+all_classes = Counter(list(con_elmo_embs) + list(non_con_elmo_embs))
+# all_classes = Counter(list(con_diswiz) + list(con_elmo_embs) + list(non_con_diswiz) + list(non_con_elmo_embs))
 classes = list(all_classes.keys())
 #  classes = list(Counter(con_elmo_embs).keys())
 dict_of_all_info = {}
@@ -29,7 +30,8 @@ for item in classes:
         z.append(v_a_temp_count[items])
 
     plt.scatter(x, y, np.array(z) * 10, alpha=0.5)
-    plt.title("DA: "+item)
+    # plt.title("DA: " + item.split('"')[0] + " - " + highDAClass(item, DAs))
+    plt.title("DA: " + item)
     plt.ylim(.5, 5.5)
     plt.xlim(.5, 5.5)
     plt.xlabel('valence')
