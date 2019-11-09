@@ -15,5 +15,7 @@ def read_all_predictions():
     non_con_diswiz = np.load('results/non_con_out_diswiz.npy')
     con_elmo_embs[0] = non_con_elmo_embs[0]
     con_elmo_embs[1] = non_con_elmo_embs[1]
+    con_diswiz[0] = non_con_diswiz[0]
+    con_diswiz[1] = non_con_diswiz[1]
     return con_elmo_embs, con_diswiz, non_con_elmo_embs, non_con_diswiz
 

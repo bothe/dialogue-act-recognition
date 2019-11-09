@@ -29,9 +29,13 @@ for item in classes:
         y.append(items[1])
         z.append(v_a_temp_count[items])
 
+    try:
+        title = "DA: " + item.split('"')[0] + " - " + highDAClass(item, DAs)
+    except:
+        title = "DA: " + item
+
     plt.scatter(x, y, np.array(z) * 10, alpha=0.5)
-    # plt.title("DA: " + item.split('"')[0] + " - " + highDAClass(item, DAs))
-    plt.title("DA: " + item)
+    plt.title(title)
     plt.ylim(.5, 5.5)
     plt.xlim(.5, 5.5)
     plt.xlabel('valence')

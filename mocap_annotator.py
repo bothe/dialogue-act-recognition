@@ -2,7 +2,7 @@ from mocap_utils import *
 import csv
 
 
-def get_mocap_data():
+def get_mocap_data(wirte=False):
     path_tree = get_directory_structure("IEMOCAP")
     sessions = ['S1', 'S2', 'S3', 'S4', 'S5']
 
@@ -14,10 +14,11 @@ def get_mocap_data():
     file_paths = []
     transcriptions = {}
     emotions = {}
-    store_mocap_in_csv = open('mocap_dataset.csv', mode='w')
     fieldnames = ['speaker_id', 'utterance', 'emotion', 'v', 'a', 'd', 'emo_evo', 'start', 'end']
-    writer = csv.DictWriter(store_mocap_in_csv, fieldnames=fieldnames)
-    writer.writeheader()
+    if wirte:
+        store_mocap_in_csv = open('mocap_dataset.csv', mode='w')
+        writer = csv.DictWriter(store_mocap_in_csv, fieldnames=fieldnames)
+        writer.writeheader()
     for session in sessions:
         for text in path_tree['IEMOCAP'][session]["transcriptions"]:
             file_path_utt = "IEMOCAP/" + session + "/transcriptions/" + text
@@ -34,11 +35,13 @@ def get_mocap_data():
                     a.append(emots[key]['a'])
                     d.append(emots[key]['d'])
                     utterances.append(utts[key])
-                    writer.writerow(
-                        {'speaker_id': key, 'utterance': str(utts[key]), 'emotion': emots[key]['emotion'], 'v': emots[key]['v'],
-                         'a': emots[key]['a'], 'd': emots[key]['d'], 'emo_evo': emots[key]['emo_evo'],
-                         'start': emots[key]['start'], 'end': emots[key]['end']})
-                except:
+                    if wirte:
+                        writer.writerow(
+                            {'speaker_id': key, 'utterance': str(utts[key]), 'emotion': emots[key]['emotion'],
+                             'v': emots[key]['v'], 'a': emots[key]['a'], 'd': emots[key]['d'],
+                             'emo_evo': emots[key]['emo_evo'], 'start': emots[key]['start'], 'end': emots[key]['end']})
+
+                except KeyError:
                     pass
 
             file_paths.append(file_path_utt)
