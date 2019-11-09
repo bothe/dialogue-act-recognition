@@ -1,5 +1,3 @@
-# from main_predictor_online import predict_classes_from_features
-from elmo_features import get_elmo_fea
 from main_predictor_online import predict_classes_from_features
 from collections import Counter
 import numpy as np
@@ -7,10 +5,12 @@ from sklearn.metrics import classification
 from scipy.stats import stats
 from MELD.utils.read_meld import *
 
-elmo_feature_retrieval = True
+elmo_feature_retrieval = False
 if elmo_feature_retrieval:
-    # meld_elmo_features_test = get_elmo_fea(utt_test_data, mean=False)
-    # np.save('features/meld_elmo_features_test', meld_elmo_features_test)
+    from elmo_features import get_elmo_fea
+
+    meld_elmo_features_test = get_elmo_fea(utt_test_data, mean=False)
+    np.save('features/meld_elmo_features_test', meld_elmo_features_test)
 
     meld_elmo_features_dev = get_elmo_fea(utt_dev_data, mean=False)
     np.save('features/meld_elmo_features_dev', meld_elmo_features_dev)
