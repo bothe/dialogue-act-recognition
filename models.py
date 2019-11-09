@@ -1,4 +1,5 @@
-from keras.layers import Dense, SimpleRNN, LSTM, Input, Flatten, Bidirectional, GRU, TimeDistributed, Embedding
+from keras.layers import Dense, SimpleRNN, LSTM, Input, Flatten, Bidirectional, GRU, \
+    TimeDistributed, Embedding, Conv2D, ConvLSTM2D
 from keras.layers.merge import multiply, concatenate
 from keras.layers.core import *
 from keras.optimizers import Adam
@@ -115,6 +116,21 @@ def model_attention_applied_after_bilstm(seq_length, emb_dim, num_classes, singl
 
 
 def model_attention_applied_after_bisrnn(seq_length, emb_dim, num_classes, single_attention_vector=False):
+    inputs = Input(shape=(seq_length, emb_dim,))
+    lstm_units = 64
+    # lstm_out      = (SimpleRNN(lstm_units, return_sequences=True))(inputs)
+    lstm_out = Bidirectional(SimpleRNN(lstm_units, return_sequences=True))(inputs)
+    attention_mul = attention_3d_block(lstm_out, seq_length, single_attention_vector)
+    attention_mul = Flatten()(attention_mul)
+    # inter_rep     = Dense(100)(attention_mul)
+    output = Dense(num_classes, activation='softmax')(attention_mul)
+    model = Model(inputs=[inputs], outputs=output)
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    print(model.summary())
+    return model
+
+
+def model_for_utterance_level(seq_length, emb_dim, num_classes, single_attention_vector=False):
     inputs = Input(shape=(seq_length, emb_dim,))
     lstm_units = 64
     # lstm_out      = (SimpleRNN(lstm_units, return_sequences=True))(inputs)
