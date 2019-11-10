@@ -16,7 +16,7 @@ def get_mocap_data(wirte=False):
     emotions = {}
     fieldnames = ['speaker_id', 'utterance', 'emotion', 'v', 'a', 'd', 'emo_evo', 'start', 'end']
     if wirte:
-        store_mocap_in_csv = open('mocap_dataset.csv', mode='w')
+        store_mocap_in_csv = open('mocap_dataset.csv', mode='w', newline='')
         writer = csv.DictWriter(store_mocap_in_csv, fieldnames=fieldnames)
         writer.writeheader()
     for session in sessions:

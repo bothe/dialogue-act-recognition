@@ -12,15 +12,16 @@ def read_data_file(data):
     utt_id = df_train['Utterance_ID'].tolist()  # load the list of utterance id's
     utt_Emotion = df_train['Emotion'].tolist()
     utt_Sentiment = df_train['Sentiment'].tolist()
-    return utt, dia_id, utt_id, utt_Emotion, utt_Sentiment
+    utt_Speaker = df_train['Speaker'].tolist()
+    return utt, dia_id, utt_id, utt_Emotion, utt_Sentiment, utt_Speaker
 
 
 utt_train_data, dia_id_train_data, utt_id_train_data, \
-utt_Emotion_train_data, utt_Sentiment_train_data = read_data_file(train_data)
+utt_Emotion_train_data, utt_Sentiment_train_data, utt_Speaker_train = read_data_file(train_data)
 utt_dev_data, dia_id_dev_data, utt_id_dev_data, \
-utt_Emotion_dev_data, utt_Sentiment_dev_data = read_data_file(dev_data)
+utt_Emotion_dev_data, utt_Sentiment_dev_data, utt_Speaker_dev = read_data_file(dev_data)
 utt_test_data, dia_id_test_data, utt_id_test_data, \
-utt_Emotion_test_data, utt_Sentiment_test_data = read_data_file(test_data)
+utt_Emotion_test_data, utt_Sentiment_test_data, utt_Speaker_test = read_data_file(test_data)
 
 # for i in range(len(utt)):
 #     print ('Utterance: ' + utt[i]) # display utterance
