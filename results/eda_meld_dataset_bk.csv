@@ -5651,57 +5651,57 @@ b'All',5,"b'Yeah, drop it! Drop the towel! Please drop the\xc2\x97\xc2\x97wowww.
 b'Monica',0,"b""I've gotta tell you, Bob is terrific.""",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Angela',1,"b""Yeah, isn't he?""",joy,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Monica',2,"b'It is so great to meet a guy who is smart and funny, and has an emotional age beyond, like eight.'",joy,sd,sv,sv,Match,ConMatch,sv,NotMatch
-b'Angela',3,b"You know what else? He's unbelievable in bed.",joy,sd,sv,qy^d,NotMatch,NotConMatch,,NotMatch
-b'Monica',4,b'Wow. My brother never even told me when he lost his virginity.',surprise,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Angela',3,b"You know what else? He's unbelievable in bed.",joy,sd,sv,qy^d,NotMatch,NotConMatch,qy^d,NotMatch
+b'Monica',4,b'Wow. My brother never even told me when he lost his virginity.',surprise,sd,sd,sd,Match,ConMatch,ba,AllMatch
 b'Angela',5,b"Huh. That's nice.",neutral,ba,ba,ba,Match,ConMatch,ba,AllMatch
 b'Ross',0,"b'and the miracle was that that little bit of oil that should\xc2\x92ve just lasted just one day, burned for'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ben',1,b'Eight whole days.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',2,"b'That\xc2\x92s right, and that\xc2\x92s why we celebrate Hanukkah today. The end.'",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ben',3,b'Awesome!',joy,ba,ba,ba,Match,ConMatch,ba,AllMatch
-b'Ross',4,b'Yeah?',surprise,bh,qy,qy,Match,ConMatch,qy,NotMatch
+b'Ross',4,b'Yeah?',surprise,bh,qy,qy,Match,ConMatch,bh,NotMatch
 b'Chandler',5,b'My favorite part was when',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',6,b'The Armadillo was actually not so',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Rachel',7,b'Hey!',joy,ba,ba,ba,Match,ConMatch,ba,AllMatch
 b'Phoebe',8,b'Oh.',neutral,b,b,b,Match,ConMatch,b,AllMatch
-b'Rachel',9,b'Wow! It looks like the Easter Bunny\xc2\x92s funeral in here.',surprise,sd,sv,sd,Match,NotConMatch,sd,NotMatch
-b'Ross',10,"b'Come on, come on, we\xc2\x92re-we\xc2\x92re-we\xc2\x92re lighting the candles!'",joy,sd,ad,qy^d,NotMatch,NotConMatch,,NotMatch
+b'Rachel',9,b'Wow! It looks like the Easter Bunny\xc2\x92s funeral in here.',surprise,sd,sv,sd,Match,NotConMatch,sv,NotMatch
+b'Ross',10,"b'Come on, come on, we\xc2\x92re-we\xc2\x92re-we\xc2\x92re lighting the candles!'",joy,sd,ad,qy^d,NotMatch,NotConMatch,ad,NotMatch
 b'Rachel',11,b'Oh.',neutral,b,b,b,Match,ConMatch,b,AllMatch
 b'Phoebe',12,b'Oh.',neutral,b,b,b,Match,ConMatch,b,AllMatch
 b'Phoebe',13,"b'Okay, I understand why'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Pete',0,"b'Yeah, sure. Good luck!'",joy,fc,ba,fc,Match,NotConMatch,fc,NotMatch
-b'Monica',1,b'I\xc2\x92m quitting!! Woo-hoo!  I\xc2\x92m okay!! I\xc2\x92m all right!!',joy,qy^d,fc,fc,Match,ConMatch,fc,NotMatch
-b'Phoebe',2,"b'Wow! That\xc2\x92s exciting, you went to Japan, made up a woman.'",surprise,sv,sd,fc,NotMatch,NotConMatch,,NotMatch
+b'Monica',1,b'I\xc2\x92m quitting!! Woo-hoo!  I\xc2\x92m okay!! I\xc2\x92m all right!!',joy,qy^d,fc,fc,Match,ConMatch,ad,NotMatch
+b'Phoebe',2,"b'Wow! That\xc2\x92s exciting, you went to Japan, made up a woman.'",surprise,sv,sd,fc,NotMatch,NotConMatch,sv,NotMatch
 b'Pete',3,b'What?',neutral,br,br,qw,Match,NotConMatch,br,NotMatch
-b'Phoebe',4,"b'I\xc2\x92m just saying, this woman, I mean she\xc2\x92s fictitious. No?'",surprise,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Phoebe',4,"b'I\xc2\x92m just saying, this woman, I mean she\xc2\x92s fictitious. No?'",surprise,sd,sd,sd,Match,ConMatch,qy^d,AllMatch
 b'Pete',5,b'Why would you say that?',neutral,qw,qw,qh,Match,NotConMatch,qw,NotMatch
 b'Phoebe',6,b'\xc2\x91Cause you\xc2\x92re still into Monica.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Phoebe',7,"b'So you told her there was somebody else so she would agree to work with you, so \xc2\x91cause you figure oh if you spent a lot of time together, maybe something might happen, and...'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Pete',8,b'You\xc2\x92re good. You\xc2\x92re good!',joy,sv,bf,sv,Match,NotConMatch,sv,NotMatch
 b'Phoebe',9,"b'Yeah, no, I\xc2\x92m fairly intuitive and psychic. It\xc2\x92s a substantial gift.'",neutral,sv,sv,sv,Match,ConMatch,sv,AllMatch
 b'Pete',10,"b'Listen, can you promise me that you won\xc2\x92t tell her though?'",fear,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Phoebe',11,"b'Absolutely, oh I promise. Tell her what?'",neutral,sd,^q,^h,NotMatch,NotConMatch,,NotMatch
-b'Pete',12,b'Thanks a lot.',neutral,fc,^q,ft,NotMatch,NotConMatch,,NotMatch
+b'Phoebe',11,"b'Absolutely, oh I promise. Tell her what?'",neutral,sd,^q,^h,NotMatch,NotConMatch,ny,NotMatch
+b'Pete',12,b'Thanks a lot.',neutral,fc,^q,ft,NotMatch,NotConMatch,ft,NotMatch
 b'Phoebe',13,"b'No I\xc2\x92m serious. I mean I\xc2\x92m intuitive, but my memory sucks.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Rachel',0,"b'Excuse me, pardon me, excuse me, excuse me, sorry. Hi.'",neutral,ba,fc,fa,NotMatch,NotConMatch,,NotMatch
+b'Rachel',0,"b'Excuse me, pardon me, excuse me, excuse me, sorry. Hi.'",neutral,ba,fc,fa,NotMatch,NotConMatch,fa,NotMatch
 b'Man',1,"b""For God's sake, will you let it go? There's no Rachel!""",anger,qy,^q,^q,Match,ConMatch,^q,NotMatch
-b'Ross',2,"b'Oh, hey, hey, I got that.'",neutral,sd,fc,^h,NotMatch,NotConMatch,,NotMatch
-b'Julie',3,"b'Oh, thanks, sweetie.'",joy,fc,^q,ft,NotMatch,NotConMatch,,NotMatch
+b'Ross',2,"b'Oh, hey, hey, I got that.'",neutral,sd,fc,^h,NotMatch,NotConMatch,^h,NotMatch
+b'Julie',3,"b'Oh, thanks, sweetie.'",joy,fc,^q,ft,NotMatch,NotConMatch,ft,NotMatch
 b'Ross',4,b'No problem. I cannot wait for you to meet my friends.',joy,sd,sd,fc,Match,NotConMatch,sd,NotMatch
 b'Julie',5,b'Really?',surprise,bh,bh,qy,Match,NotConMatch,bh,NotMatch
 b'Julie',6,b"You don't think they'll judge and ridicule me?",fear,qy^d,qy^d,qy,Match,NotConMatch,qy^d,NotMatch
-b'Ross',7,"b'No, no, they will. I just... uh...'",neutral,aa,^q,ng,NotMatch,NotConMatch,,NotMatch
-b'Julie',8,b"Can't wait.",neutral,sd,ad,sv,NotMatch,NotConMatch,,NotMatch
+b'Ross',7,"b'No, no, they will. I just... uh...'",neutral,aa,^q,ng,NotMatch,NotConMatch,ng,NotMatch
+b'Julie',8,b"Can't wait.",neutral,sd,ad,sv,NotMatch,NotConMatch,ad,NotMatch
 b'Monica',0,b'Do I know you?',surprise,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Monica',1,"b""Oh my god, little Stevie Fisher? How've you been?""",surprise,qy,qw,qw,Match,ConMatch,qw,NotMatch
 b'Steve',2,"b""Good, good, I'm a lawyer now.""",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Monica',3,b"You can't be a lawyer. You're eight.",surprise,sv,sv,sd,Match,NotConMatch,sv,NotMatch
-b'Steve',4,"b'Listen, it was nice to see you. I gotta run backstage.'",joy,sd,sd,fc,Match,NotConMatch,sd,NotMatch
-b'Monica',5,"b'Uh, wait, backstage?'",surprise,qy,ad,fc,NotMatch,NotConMatch,,NotMatch
-b'Steve',6,"b'Oh, yeah, my firm represents the band.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Steve',4,"b'Listen, it was nice to see you. I gotta run backstage.'",joy,sd,sd,fc,Match,NotConMatch,fc,NotMatch
+b'Monica',5,"b'Uh, wait, backstage?'",surprise,qy,ad,fc,NotMatch,NotConMatch,qy,NotMatch
+b'Steve',6,"b'Oh, yeah, my firm represents the band.'",neutral,sd,sd,sd,Match,ConMatch,na,AllMatch
 b'Ross',7,b'Ross.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Chandler',8,b'Chandler.',neutral,sd,sd,sv,Match,NotConMatch,sd,NotMatch
 b'Steve',9,"b'Look, you guys wanna meet the group?'",neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Steve',10,b'Come on.',neutral,fo,ad,sv,NotMatch,NotConMatch,,NotMatch
+b'Steve',10,b'Come on.',neutral,fo,ad,sv,NotMatch,NotConMatch,ad,NotMatch
 b'Steve',11,"b'So, are you one of the ones who fooled around with my dad?'",surprise,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Joey',0,b'Do you have any respect for your body?',disgust,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Ross',1,b"Don't you realise what you're-you're doing to yourself?",disgust,qy,qy,qy,Match,ConMatch,qy,AllMatch
@@ -5710,16 +5710,16 @@ b'Chandler',3,"b'The bottom line is, smoking is cool, and you know it.'",neutral
 b'Rachel',4,"b""Chandler? It's Alan, he wants to speak to you.""",neutral,sd,sd,sv,Match,NotConMatch,sd,NotMatch
 b'Chandler',5,b'Really?',surprise,bh,bh,qy,Match,NotConMatch,bh,NotMatch
 b'Chandler',6,b'He does?',surprise,qy,qy^d,qy,Match,NotConMatch,qy,NotMatch
-b'Chandler',7,"b""Hey, buddy, what's up!""",joy,fc,qw,^q,NotMatch,NotConMatch,,NotMatch
+b'Chandler',7,"b""Hey, buddy, what's up!""",joy,fc,qw,^q,NotMatch,NotConMatch,fp,NotMatch
 b'Chandler',8,"b'Oh, she told you about that, huh.'",surprise,sd,qy,sd,Match,NotConMatch,sd,NotMatch
 b'Chandler',9,"b'Well, yeah, I have one now and then.'",neutral,sd,ad,sd,Match,NotConMatch,sd,NotMatch
-b'Chandler',10,"b'Well, yeah, now.'",neutral,aa,^q,fc,NotMatch,NotConMatch,,NotMatch
+b'Chandler',10,"b'Well, yeah, now.'",neutral,aa,^q,fc,NotMatch,NotConMatch,aa,NotMatch
 b'Chandler',11,"b""Well, it's not that big- ..well, that's true,.. Gee, y'know, no-one- no-one's ever put it like that before.""",neutral,sv,sv,fc,Match,NotConMatch,sv,NotMatch
-b'Chandler',12,"b'Well, okay, thanks!'",joy,fc,^q,fc,Match,NotConMatch,fc,NotMatch
+b'Chandler',12,"b'Well, okay, thanks!'",joy,fc,^q,fc,Match,NotConMatch,ft,NotMatch
 b'Rachel',13,"b""God, he's good.""",joy,sv,sv,fc,Match,NotConMatch,sv,NotMatch
 b'Ross',14,b'If only he were a woman.',neutral,sv,sd,sv,Match,NotConMatch,sv,NotMatch
 b'Rachel',15,b'Yeah.',neutral,b,b,b,Match,ConMatch,b,AllMatch
-b'Phoebe',0,"b'Oh, look look look.'",surprise,b,ba,ad,NotMatch,NotConMatch,,NotMatch
+b'Phoebe',0,"b'Oh, look look look.'",surprise,b,ba,ad,NotMatch,NotConMatch,ad,NotMatch
 b'Phoebe',1,b"The last candle's about to burn out.",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Phoebe',2,"b'10, 9, 8, 7... ... negative 46, negative 47, negative 48....'",neutral,sd,ad,sd,Match,NotConMatch,sd,NotMatch
 b'Ross',3,b'Thank you.',neutral,fc,ft,ft,Match,ConMatch,ft,NotMatch
@@ -5729,29 +5729,29 @@ b'Joey',6,b'Bwah-hah-hah!',joy,ba,fc,ba,Match,NotConMatch,ba,NotMatch
 b'Ross',7,"b'OK, guys, guys? I have the definitive one. Mwwwooooo-hah-hah...'",joy,sd,sd,fo,Match,NotConMatch,sd,NotMatch
 b'Ross',8,b'Oh.. oh... oh.',neutral,b,b,ba,Match,NotConMatch,b,NotMatch
 b'Joey',9,"b""Hey Ross. This probably isn't the best time to bring it up, but you have to throw a party for Monica.""",neutral,sv,sv,sd,Match,NotConMatch,sv,NotMatch
-b'Rachel',0,"b'All this stuff takes up a lot of room. Hey how uh, how serious are you about keeping Ben in your life?'",neutral,sd,sv,qh,NotMatch,NotConMatch,,NotMatch
+b'Rachel',0,"b'All this stuff takes up a lot of room. Hey how uh, how serious are you about keeping Ben in your life?'",neutral,sd,sv,qh,NotMatch,NotConMatch,qh,NotMatch
 b'Charlie',0,b'You blew them away!',joy,sv,sv,sd,Match,NotConMatch,sv,NotMatch
 b'Ross',1,"b""Oh, I can't tell you how great it was to look at the crowd and see your face!""",joy,sd,sv,sd,Match,NotConMatch,sd,NotMatch
 b'Ross',2,"b'I mean... uh, did you know you were  mouthing the words along with me?'",neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Charlie',3,b'I was',surprise,sd,na,sd,Match,NotConMatch,sd,NotMatch
 b'Ross',4,"b""No, it's ok! Made me feel like a rock star!""",joy,sd,sv,sv,Match,ConMatch,sv,NotMatch
-b'Charlie',5,b"Oh my God!  I'm your",surprise,ba,^q,sd,NotMatch,NotConMatch,,NotMatch
+b'Charlie',5,b"Oh my God!  I'm your",surprise,ba,^q,sd,NotMatch,NotConMatch,ba,NotMatch
 b'Ross',6,b"I'd better not found you naked in my hotel room!",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',7,"b'Look, I took it too far!'",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',0,"b'Okay, Monica: Right foot red.'",neutral,sd,sd,^q,Match,NotConMatch,sd,NotMatch
-b'Monica',1,b"Could've played",neutral,qy,ad,qy,Match,NotConMatch,qy,NotMatch
+b'Monica',1,b"Could've played",neutral,qy,ad,qy,Match,NotConMatch,ad,NotMatch
 b'Chandler',2,b'Thanks.',neutral,fc,ft,ft,Match,ConMatch,ft,NotMatch
-b'Ross',3,"b'Okay, Pheebs: Right hand blue. Good.'",neutral,sv,fc,fc,Match,ConMatch,fc,NotMatch
-b'Chandler',4,"b""Hello? Oh, uh, Rachel, it's the""",neutral,sv,fc,fc,Match,ConMatch,fc,NotMatch
+b'Ross',3,"b'Okay, Pheebs: Right hand blue. Good.'",neutral,sv,fc,fc,Match,ConMatch,b,NotMatch
+b'Chandler',4,"b""Hello? Oh, uh, Rachel, it's the""",neutral,sv,fc,fc,Match,ConMatch,ba,NotMatch
 b'Rachel',5,"b'Oh, okay. Will you take my place?'",neutral,fc,qy,qy,Match,ConMatch,qy,NotMatch
-b'Chandler',6,"b'Alright.  Yes, this is Rachel.'",neutral,sd,^q,fc,NotMatch,NotConMatch,,NotMatch
+b'Chandler',6,"b'Alright.  Yes, this is Rachel.'",neutral,sd,^q,fc,NotMatch,NotConMatch,ny,NotMatch
 b'Rachel',7,b'Nooo!',surprise,ba,ba,b^m,Match,NotConMatch,ba,NotMatch
 b'Rachel',8,b'Hello?',neutral,fp,^q,fp,Match,NotConMatch,fp,NotMatch
 b'Rachel',9,"b""Oh, yeah, no, I know, I-I haven't been using it much.""",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Rachel',10,"b""Oh, well, thanks, but, I'm okay, really.""",joy,fc,fp,fc,Match,NotConMatch,fc,NotMatch
-b'Ross',11,b'Green. To the green.',neutral,sd,sd,bf,Match,NotConMatch,sd,NotMatch
+b'Rachel',10,"b""Oh, well, thanks, but, I'm okay, really.""",joy,fc,fp,fc,Match,NotConMatch,ft,NotMatch
+b'Ross',11,b'Green. To the green.',neutral,sd,sd,bf,Match,NotConMatch,ad,NotMatch
 b'Rachel',12,b"I've got magic beans.  Never-never mind.",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Chandler',13,"b'To the left, to the left- aww!'",neutral,sd,bf,%,NotMatch,NotConMatch,,NotMatch
+b'Chandler',13,"b'To the left, to the left- aww!'",neutral,sd,bf,%,NotMatch,NotConMatch,bf,NotMatch
 b'Rachel',14,b"Ohhh... I'm fine.",neutral,sd,^q,sd,Match,NotConMatch,sd,NotMatch
 b'Joey',0,b'Hey!',joy,ba,fc,ba,Match,NotConMatch,ba,NotMatch
 b'Chandler',1,b'Please tell me you got the message!',fear,ad,ad,ad,Match,ConMatch,ad,AllMatch
@@ -5766,23 +5766,23 @@ b'Chandler',9,b'I went to any place that they made sandwiches!',neutral,sd,sd,sd
 b'Ross',0,"b'That\xc2\x92s the day you\xc2\x92re gonna die? See\xc2\x97darnit, I\xc2\x92ve got shuffleboard that day.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Phoebe',1,b'That\xc2\x92s what you think.',neutral,sv,sd,sv,Match,NotConMatch,sv,NotMatch
 b'Monica',2,"b'Well, I mean what about friends of your grandmother\xc2\x92s? Wouldn\xc2\x92t they have the recipe?'",neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Phoebe',3,"b'Well, y\xc2\x92know I may have relatives in France who would know. My grandmother said she got the recipe from her grandmother, Nesele Tolouse.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Phoebe',3,"b'Well, y\xc2\x92know I may have relatives in France who would know. My grandmother said she got the recipe from her grandmother, Nesele Tolouse.'",neutral,sd,sd,sd,Match,ConMatch,nd,AllMatch
 b'Monica',4,b'What was her name?',neutral,qw,qw,qw,Match,ConMatch,qw,AllMatch
 b'Phoebe',5,b'Nestley Toulouse.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Monica',6,b'Nestl\xc3\xa9 Toll House?',neutral,qy^d,sd,b^m,NotMatch,NotConMatch,,NotMatch
-b'Phoebe',7,"b'Oh, you Americans always butcher the French language.'",neutral,sv,sd,sd,Match,ConMatch,sd,NotMatch
+b'Monica',6,b'Nestl\xc3\xa9 Toll House?',neutral,qy^d,sd,b^m,NotMatch,NotConMatch,b^m,NotMatch
+b'Phoebe',7,"b'Oh, you Americans always butcher the French language.'",neutral,sv,sd,sd,Match,ConMatch,sv,NotMatch
 b'Phoebe',8,b'Yes!!  Oh.',surprise,ba,b,ba,Match,NotConMatch,ba,NotMatch
 b'Monica',9,b'I cannot believe that I just spent the last two days trying to figure out the recipe and it was in my cupboard the whole time!',anger,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Phoebe',10,b'I know! You see it is stuff like this which is why  you\xc2\x92re burning in hell!!',anger,sv,sd,sd,Match,ConMatch,sd,NotMatch
-b'Kim',0,"b""So, we're decided, no on plaid, yes on pink?""",neutral,sd,sd,^q,Match,NotConMatch,sd,NotMatch
+b'Kim',0,"b""So, we're decided, no on plaid, yes on pink?""",neutral,sd,sd,^q,Match,NotConMatch,ad,NotMatch
 b'Nancy',1,b'Absolutely!',joy,aa,aa,aa,Match,ConMatch,aa,AllMatch
 b'Rachel',2,b'I am so on board!',joy,sd,^q,^q,Match,ConMatch,^q,NotMatch
 b'Kim',3,b"Rachel didn't you just light that?",neutral,qy,qy^d,qy,Match,NotConMatch,qy,NotMatch
-b'Rachel',4,"b""Yeah, I did, but y'know what? I am really, really trying to cut back, y'know?  Good luck, Rach.""",neutral,sd,qy^d,ng,NotMatch,NotConMatch,,NotMatch
+b'Rachel',4,"b""Yeah, I did, but y'know what? I am really, really trying to cut back, y'know?  Good luck, Rach.""",neutral,sd,qy^d,ng,NotMatch,NotConMatch,na,NotMatch
 b'Nancy',5,b"I've actually been thinking about quitting lately.",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Kim',6,"b""Oh sure, every Sunday night I'm telling myself I'm quitting but every Monday morning it's like""",disgust,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Nancy',7,b'Tell me about it!',neutral,ad,ad,ad,Match,ConMatch,ad,AllMatch
-b'Rachel',8,b"Well then let's just quit! We'll just quit! Let's all quit!",joy,sv,ad,^q,NotMatch,NotConMatch,,NotMatch
+b'Rachel',8,b"Well then let's just quit! We'll just quit! Let's all quit!",joy,sv,ad,^q,NotMatch,NotConMatch,nd,NotMatch
 b'Kim',9,b'It does sound appealing.',neutral,sv,sv,sv,Match,ConMatch,sv,AllMatch
 b'Nancy',10,"b'Oh, I never could do it.'",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Rachel',11,b'Oh but you could.',neutral,sv,sv,sd,Match,NotConMatch,sv,NotMatch
@@ -5791,26 +5791,26 @@ b'Rachel',13,b'Absolutely!',joy,aa,aa,aa,Match,ConMatch,aa,AllMatch
 b'Rachel',14,b'We can help each other out!',joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Rachel',15,b'We can get--what are those--those patches!',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Rachel',16,b'We could be like the Patch Sisters!',joy,sv,sd,sv,Match,NotConMatch,sv,NotMatch
-b'Kim',17,"b""Oh y'know, we really should quit. Okay, let's quit!""",joy,sv,ad,^q,NotMatch,NotConMatch,,NotMatch
-b'Rachel',18,b'Yes! Great! Give me those cigs! Give it! Give it!',joy,fc,ad,^q,NotMatch,NotConMatch,,NotMatch
+b'Kim',17,"b""Oh y'know, we really should quit. Okay, let's quit!""",joy,sv,ad,^q,NotMatch,NotConMatch,ad,NotMatch
+b'Rachel',18,b'Yes! Great! Give me those cigs! Give it! Give it!',joy,fc,ad,^q,NotMatch,NotConMatch,ad,NotMatch
 b'Kim',19,b"My late husband gave me that lighter.  I'm not kidding.",sadness,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Rachel',20,b'Okay then!',joy,fo,^q,b,NotMatch,NotConMatch,,NotMatch
+b'Rachel',20,b'Okay then!',joy,fo,^q,b,NotMatch,NotConMatch,fo,NotMatch
 b'Chandler',0,"b""Well, maybe it's a contest, y'know? Like, collect all five?""",neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Phoebe',1,"b'Does, um, anyone wanna see?'",neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'All',2,b'Nooo..',disgust,fp,ba,nn,NotMatch,NotConMatch,,NotMatch
+b'All',2,b'Nooo..',disgust,fp,ba,nn,NotMatch,NotConMatch,nn,NotMatch
 b'All',3,"b""Oh, hey, don't do that! Cut it out!""",anger,ba,ad,ad,Match,ConMatch,ad,NotMatch
 b'Rachel',4,b"It's worse than the thumb!",disgust,sv,sv,qy,Match,NotConMatch,sv,NotMatch
 b'Chandler',5,"b'Hey, this is so unfair!'",anger,sv,sv,sv,Match,ConMatch,sv,AllMatch
 b'Monica',6,"b'Oh, why is it unfair?'",surprise,qw,qh,qh,Match,ConMatch,qh,NotMatch
 b'Chandler',7,b'So I have a flaw!',anger,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Chandler',8,b'Big deal!',anger,sv,ba,b^m,NotMatch,NotConMatch,,NotMatch
+b'Chandler',8,b'Big deal!',anger,sv,ba,b^m,NotMatch,NotConMatch,sv,NotMatch
 b'Chandler',9,b"Like Joey's constant knuckle-cracking isn't annoying?",anger,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Chandler',10,"b'And Ross, with his over-pronouncing every single word?'",anger,sv,na,qy,NotMatch,NotConMatch,,NotMatch
+b'Chandler',10,"b'And Ross, with his over-pronouncing every single word?'",anger,sv,na,qy,NotMatch,NotConMatch,qh,NotMatch
 b'Chandler',11,"b'And Monica, with that snort when she laughs?'",anger,qy,qy^d,qy,Match,NotConMatch,qy,NotMatch
 b'Chandler',12,"b'I mean, what the hell is that thing?'",disgust,qw,qw,qh,Match,NotConMatch,qw,NotMatch
-b'Chandler',13,"b""...I accept all those flaws, why can't you accept me for this?""",anger,qy,^q,^q,Match,ConMatch,^q,NotMatch
+b'Chandler',13,"b""...I accept all those flaws, why can't you accept me for this?""",anger,qy,^q,^q,Match,ConMatch,qh,NotMatch
 b'Joey',14,b'...Does the knuckle-cracking bother everybody?',anger,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Rachel',15,"b'Well, I-I could live without it.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Rachel',15,"b'Well, I-I could live without it.'",neutral,sd,sd,sd,Match,ConMatch,nd,AllMatch
 b'Joey',16,"b'Well, is it, like, a little annoying, or is it like when Phoebe chews her hair?'",neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Ross',17,"b""Oh, now, don't listen to him, Pheebs, I think it's endearing.""",neutral,sv,sv,sd,Match,NotConMatch,sv,NotMatch
 b'Joey',18,"b'Oh,  ""you do, do you""?'",anger,qy,qy,qy,Match,ConMatch,qy,AllMatch
@@ -5824,29 +5824,29 @@ b'Joey',2,b'Aw! Does that mean the',sadness,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Ross',3,b'Hey.',neutral,ba,ba,ba,Match,ConMatch,ba,AllMatch
 b'Joey',4,b'Hey.',neutral,ba,fp,fp,Match,ConMatch,fp,NotMatch
 b'Phoebe',0,b"You're sure? You're absolutely sure?",neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Monica',1,"b'Well, no. But, um, I bet she probably does.'",neutral,sv,sv,na,Match,NotConMatch,sv,NotMatch
+b'Monica',1,"b'Well, no. But, um, I bet she probably does.'",neutral,sv,sv,na,Match,NotConMatch,nd,NotMatch
 b'Phoebe',2,b'Probably?',neutral,bh,qy,qy,Match,ConMatch,qy,NotMatch
-b'Phoebe',3,"b""Yeah, I don't like that word.""",disgust,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Phoebe',3,"b""Yeah, I don't like that word.""",disgust,sd,sd,sd,Match,ConMatch,ny,AllMatch
 b'Phoebe',4,b'Kind of what \xc2\x91probably\xc2\x92 really means.',neutral,sv,sv,sv,Match,ConMatch,sv,AllMatch
 b'Phoebe',5,"b'Yeah, uh-huh.'",neutral,b,aa,b,Match,NotConMatch,b,NotMatch
 b'Phoebe',6,"b'Yeah, oh, ""Your mom probably won\'t kill herself,"" y\xc2\x92know?'",anger,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Phoebe',7,"b'I\'m sorry, but I\'m not hanging all my hopes of Rachel and I living together on-on ""Probably!""'",anger,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Phoebe',8,b'You gotta take care of yourselves!',neutral,fc,ad,^q,NotMatch,NotConMatch,,NotMatch
-b'Phoebe',9,b'In',neutral,b^m,qo,sd,NotMatch,NotConMatch,,NotMatch
+b'Phoebe',8,b'You gotta take care of yourselves!',neutral,fc,ad,^q,NotMatch,NotConMatch,ad,NotMatch
+b'Phoebe',9,b'In',neutral,b^m,qo,sd,NotMatch,NotConMatch,fo,NotMatch
 b'Chandler',10,"b""Bing doesn't seem so weird now, does it?""",neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Janice',0,b'Yoo-hoo! Aaron Litman-Neurolic would like to say hello to his future bride.',joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Rachel',1,b'Ohhh!  Wow! He kinda takes your breath away doesn\xc2\x92t he?',joy,qy,qy,qy^d,Match,NotConMatch,qy,NotMatch
-b'Janice',0,b'He\xc2\x92s a keeper. How are you feeling?',neutral,qw,qrr,qy,NotMatch,NotConMatch,,NotMatch
-b'Rachel',1,"b'Oh, I\xc2\x92m fine.'",neutral,b,na,sd,NotMatch,NotConMatch,,NotMatch
+b'Janice',0,b'He\xc2\x92s a keeper. How are you feeling?',neutral,qw,qrr,qy,NotMatch,NotConMatch,qw^d,NotMatch
+b'Rachel',1,"b'Oh, I\xc2\x92m fine.'",neutral,b,na,sd,NotMatch,NotConMatch,na,NotMatch
 b'Janice',2,"b'Can I just say, I really admire what you\xc2\x92re doing. Just raising her all alone.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Rachel',3,"b'Oh, I\xc2\x92m not doing it alone. I have Ross.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Janice',4,"b'Oh, sure. Now. But what happens when he meets somebody else and gets married?'",neutral,sd,ad,qw,NotMatch,NotConMatch,,NotMatch
-b'Rachel',5,"b'Well then he gets a divorce, it\xc2\x92s Ross!'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Janice',6,"b'I\xc2\x92m telling you Rachel, listen to Janice. They all say they\xc2\x92re gonna be there until they start their real family.'",neutral,qy^d,ad,sd,NotMatch,NotConMatch,,NotMatch
+b'Janice',4,"b'Oh, sure. Now. But what happens when he meets somebody else and gets married?'",neutral,sd,ad,qw,NotMatch,NotConMatch,qw,NotMatch
+b'Rachel',5,"b'Well then he gets a divorce, it\xc2\x92s Ross!'",neutral,sd,sd,sd,Match,ConMatch,nd,AllMatch
+b'Janice',6,"b'I\xc2\x92m telling you Rachel, listen to Janice. They all say they\xc2\x92re gonna be there until they start their real family.'",neutral,qy^d,ad,sd,NotMatch,NotConMatch,ad,NotMatch
 b'Rachel',7,b'Well I\xc2\x97That\xc2\x92s never gonna happen with Ross.',sadness,sv,sv,sd,Match,NotConMatch,sv,NotMatch
 b'Janice',8,"b'Oh well that\xc2\x92s what I thought about my first husband, now I\xc2\x92m lucky if my kid gets to spend the weekend with her father and the twins and little Ms. New Boobs.'",disgust,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Phoebe',0,"b'And Tim I just wanna say, good luck here.'",neutral,fc,sd,sd,Match,ConMatch,sd,NotMatch
-b'Ross',0,b'Hey. Who\xc2\x92s that?',neutral,br,qy,qy,Match,ConMatch,qy,NotMatch
+b'Ross',0,b'Hey. Who\xc2\x92s that?',neutral,br,qy,qy,Match,ConMatch,qw,NotMatch
 b'Rachel',1,b'New people.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',2,b'What happened to the Disgustingtons?',neutral,qw,qw,qw,Match,ConMatch,qw,AllMatch
 b'Rachel',3,b'They\xc2\x92re having their baby!',anger,sd,sd,sd,Match,ConMatch,sd,AllMatch
@@ -5855,8 +5855,8 @@ b'Rachel',5,b'Right after you left they wheeled her off into delivery.',neutral,
 b'Rachel',6,b'Oh but not before she gave me a juicy shot of little Jamie just crowning away.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',7,"b'Wow! Sorry. So uh, how are the new people?'",surprise,qw,bh,qw,Match,NotConMatch,qw,NotMatch
 b'Rachel',0,b'Phoebe?',neutral,br,br,qy,Match,NotConMatch,br,NotMatch
-b'Phoebe',1,b'Yeah?',neutral,bh,ny,qh,NotMatch,NotConMatch,,NotMatch
-b'Rachel',2,"b'Look at that guy by the window, wow!'",surprise,sd,ad,^h,NotMatch,NotConMatch,,NotMatch
+b'Phoebe',1,b'Yeah?',neutral,bh,ny,qh,NotMatch,NotConMatch,qh,NotMatch
+b'Rachel',2,"b'Look at that guy by the window, wow!'",surprise,sd,ad,^h,NotMatch,NotConMatch,ad,NotMatch
 b'Phoebe',3,"b'He\xc2\x92s awfully short and I think he\xc2\x92s talking to himself. And to be completely honest, he\xc2\x92s not that good in bed.'",neutral,sv,sv,sd,Match,NotConMatch,sv,NotMatch
 b'Rachel',4,"b'Oh, what is wrong with me lately?'",sadness,qw,qw,qw,Match,ConMatch,qw,AllMatch
 b'Rachel',5,b'I mean it\xc2\x92s like every guy I see\xc2\x97I mean look here.',neutral,sd,sv,sd,Match,NotConMatch,sd,NotMatch
@@ -5881,41 +5881,41 @@ b'Ross',8,b'And the guys from work had a blast.',joy,sd,sd,sd,Match,ConMatch,sd,
 b'Ross',9,"b'Y\xc2\x92know, one of them had never been to a bachelor party before.'",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',10,b'Yeah!',joy,b,b,b,Match,ConMatch,b,AllMatch
 b'Ross',11,"b'And-and another one had never been to a party before, so'",surprise,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Joey',12,"b'So uh, hey, that uh, that wedding ring, huh? Man, that\xc2\x92s nice!'",joy,sv,sd,qy,NotMatch,NotConMatch,,NotMatch
+b'Joey',12,"b'So uh, hey, that uh, that wedding ring, huh? Man, that\xc2\x92s nice!'",joy,sv,sd,qy,NotMatch,NotConMatch,sv,NotMatch
 b'Ross',13,"b'Yeah, right!'",joy,aa,aa,aa,Match,ConMatch,aa,AllMatch
 b'Joey',14,"b'I was uh, I was thinking I might want to pick one of those babies up for myself, I might want to get one of those'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',15,"b'That ring? When my grandmother first came to this country, that ring and the clothes on her back were all she had with her.'",surprise,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Chandler',16,"b'So you might say, the ring is irreplaceable?'",surprise,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Ross',17,"b'Oh absolutely! It has been in my family for generations, and every bride who has worn it has had a long and happy life.'",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Ross',17,"b'Oh absolutely! It has been in my family for generations, and every bride who has worn it has had a long and happy life.'",joy,sd,sd,sd,Match,ConMatch,na,AllMatch
 b'Chandler',18,"b'So you might say, it\xc2\x92s a magic ring.'",joy,sd,sv,sd,Match,NotConMatch,sd,NotMatch
 b'Ross',0,b'OH MY GOD!! I didn\xc2\x92t really believe it until you just said it!!',surprise,sv,sd,sd,Match,ConMatch,sd,NotMatch
 b'Ross',0,b'Well obviously only one of us can keep dating her.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Joey',1,"b'Obviously! So, how do we decide?'",neutral,qw,qh,qw,Match,NotConMatch,qw,NotMatch
-b'Ross',2,"b'Well now let\xc2\x92s-let\xc2\x92s look at this objectively, I think I should date her'",neutral,sd,sv,sd,Match,NotConMatch,sd,NotMatch
+b'Ross',2,"b'Well now let\xc2\x92s-let\xc2\x92s look at this objectively, I think I should date her'",neutral,sd,sv,sd,Match,NotConMatch,nd,NotMatch
 b'Joey',3,b'Uh-huh. Uh-huh.',neutral,b,b,b,Match,ConMatch,b,AllMatch
 b'Ross',4,"b'That\xc2\x92s interesting, but check this out. I date her'",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Joey',5,b'Yeah-yeah I like that but just to go in another direction',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Ross',6,"b'Okay, okay. This can go on for a while.'",neutral,sd,sv,fc,NotMatch,NotConMatch,,NotMatch
-b'Joey',7,b'Yeah well we should order some food then.',neutral,sd,ad,sv,NotMatch,NotConMatch,,NotMatch
-b'Ross',8,"b'No Joey! Look why don\xc2\x92t, why don\xc2\x92t we just let her decide? Okay? Hey-hey, we\xc2\x92ll'",neutral,sd,ad,qy,NotMatch,NotConMatch,,NotMatch
+b'Ross',6,"b'Okay, okay. This can go on for a while.'",neutral,sd,sv,fc,NotMatch,NotConMatch,sv,NotMatch
+b'Joey',7,b'Yeah well we should order some food then.',neutral,sd,ad,sv,NotMatch,NotConMatch,ad,NotMatch
+b'Ross',8,"b'No Joey! Look why don\xc2\x92t, why don\xc2\x92t we just let her decide? Okay? Hey-hey, we\xc2\x92ll'",neutral,sd,ad,qy,NotMatch,NotConMatch,ar,NotMatch
 b'Joey',9,b'That sounds fair.',neutral,sv,sv,sv,Match,ConMatch,sv,AllMatch
 b'Ross',10,b'Maybe I\xc2\x92ll take her to that new French restaurant down the street',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Joey',11,b'Ah yeah\xc2\x97wait a second now!',anger,sd,ad,sd,Match,NotConMatch,sd,NotMatch
 b'Joey',12,b'Look we\xc2\x92re gonna have to set a spending limit on the date.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Joey',13,b'I don\xc2\x92t have the money to take her to a fancy place like that.',anger,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',14,"b'Well sorry, that\xc2\x92s what I do on dates.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Joey',15,"b'All right, well I guess I\xc2\x92ll just have to do what I do on dates.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Ross',16,b'So let\xc2\x92s decide on the spending limit',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Joey',15,"b'All right, well I guess I\xc2\x92ll just have to do what I do on dates.'",neutral,sd,sd,sd,Match,ConMatch,sv,AllMatch
+b'Ross',16,b'So let\xc2\x92s decide on the spending limit',neutral,sd,sd,sd,Match,ConMatch,ad,AllMatch
 b'Joey',17,"b'Yeah. Uh, \xc2\x85a slice\xc2\x85\xc2\x85six dollars?'",neutral,qy,bf,bf,Match,ConMatch,bf,NotMatch
 b'Ross',18,b'I was thinking more like a hundred.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Joey',19,b'Okay. Can I borrow 94 dollars?',neutral,qy,ad,qy,Match,NotConMatch,qy,NotMatch
-b'Monica',0,"b'Hi, again.'",neutral,fc,ad,fp,NotMatch,NotConMatch,,NotMatch
+b'Monica',0,"b'Hi, again.'",neutral,fc,ad,fp,NotMatch,NotConMatch,fp,NotMatch
 b'Joey',1,b'Hey!',neutral,ba,fp,fp,Match,ConMatch,fp,NotMatch
-b'Chandler',2,b'Hey!',neutral,ba,fc,ba,Match,NotConMatch,ba,NotMatch
-b'Monica',3,"b'Thank you soo, much.'",joy,fc,ft,fc,Match,NotConMatch,fc,NotMatch
-b'Chandler',4,"b'Oh, don\xc2\x92t thank me, thank the jerk that never showed up. Okay, I gotta get to get to work.'",anger,sd,fc,fc,Match,ConMatch,fc,NotMatch
+b'Chandler',2,b'Hey!',neutral,ba,fc,ba,Match,NotConMatch,fp,NotMatch
+b'Monica',3,"b'Thank you soo, much.'",joy,fc,ft,fc,Match,NotConMatch,ft,NotMatch
+b'Chandler',4,"b'Oh, don\xc2\x92t thank me, thank the jerk that never showed up. Okay, I gotta get to get to work.'",anger,sd,fc,fc,Match,ConMatch,ad,NotMatch
 b'Monica',5,b'You want some help with that?',neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Joey',6,"b'Oh, no thanks, I got it.  No I don\xc2\x92t!'",neutral,sd,fc,sd,Match,NotConMatch,sd,NotMatch
+b'Joey',6,"b'Oh, no thanks, I got it.  No I don\xc2\x92t!'",neutral,sd,fc,sd,Match,NotConMatch,nn,NotMatch
 b'Monica',7,b'Whoa! Are you okay?',surprise,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Joey',8,"b'Whew! Stood up to fast, got a little head rush.'",surprise,sv,sv,sd,Match,NotConMatch,sv,NotMatch
 b'Monica',9,b'It\xc2\x92s the heat.  And-and the humidity.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
@@ -5930,64 +5930,64 @@ b'Joey',2,"b'Ooohh, to a Porsche!'",surprise,sv,sv,sv,Match,ConMatch,sv,AllMatch
 b'Joey',3,"b'Hey Gunther, these yours?'",neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Gunther',4,"b'Yeah, that\xc2\x92s what I drive. I make four bucks an hour, I saved up for 350 years!'",disgust,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Joey',5,b'Na-uh!  Hey did anybody lose their keys?',neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Monica',6,"b'Joey, why don\xc2\x92t you put them in the lost and found?'",neutral,qy^d,^q,qh,NotMatch,NotConMatch,,NotMatch
+b'Monica',6,"b'Joey, why don\xc2\x92t you put them in the lost and found?'",neutral,qy^d,^q,qh,NotMatch,NotConMatch,qh,NotMatch
 b'Joey',7,b'There\xc2\x92s a lost and found?  My shoe!',surprise,qy^d,qy,qy^d,Match,NotConMatch,qy^d,NotMatch
 b'Chandler',8,b'You left a shoe here?!',surprise,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Joey',9,"b'Well, I didn\xc2\x92t realize until I got home.'",neutral,sd,sd,na,Match,NotConMatch,sd,NotMatch
+b'Joey',9,"b'Well, I didn\xc2\x92t realize until I got home.'",neutral,sd,sd,na,Match,NotConMatch,nd,NotMatch
 b'Joey',10,b'I wasn\xc2\x92t gonna walk all the way back down here with one shoe!',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Joey',11,b'I\xc2\x92m gonna go find that guy\xc2\x92s car and leave a note on the windshield.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Chandler',12,"b'Oh good, when he comes back for his keys, I\xc2\x92ll be sure to give him your shoe.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Joey',13,b'Great! Thanks.',joy,ba,ba,ba,Match,ConMatch,ba,AllMatch
+b'Chandler',12,"b'Oh good, when he comes back for his keys, I\xc2\x92ll be sure to give him your shoe.'",neutral,sd,sd,sd,Match,ConMatch,ad,AllMatch
+b'Joey',13,b'Great! Thanks.',joy,ba,ba,ba,Match,ConMatch,ft,AllMatch
 b'Carol',0,"b""Ok, and this is Funny Clown. Funny Clown is only for after his naps, not before his naps or he won't sleep.""",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Ross',1,"b""Carol, we've been through this before, ok?""",joy,sd,sd,qy,Match,NotConMatch,sd,NotMatch
-b'Ross',2,b'We have a good time.',joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Ross',1,"b""Carol, we've been through this before, ok?""",joy,sd,sd,qy,Match,NotConMatch,qy^d,NotMatch
+b'Ross',2,b'We have a good time.',joy,sd,sd,sd,Match,ConMatch,sv,AllMatch
 b'Ross',3,"b'We laugh, we play.'",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Ross',4,b"It's like we're father and son.",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Ross',4,b"It's like we're father and son.",joy,sd,sd,sd,Match,ConMatch,sv,AllMatch
 b'Susan',5,"b""Honey, relax. Ross is great with him.  Don't look so surprised. I'm a lovely person.""",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Rachel',6,"b'Oh, this is so cute.'",joy,sv,sv,sv,Match,ConMatch,sv,AllMatch
 b'Susan',7,"b'Oh, I got that for him.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',8,b"My mommies love me. That's clever.",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Monica',9,b'Hello?',neutral,fp,br,fp,Match,NotConMatch,fp,NotMatch
 b'Monica',10,"b'Oh, Hi, Ju\xc2\x97\xc2\x97Hi, Jew!'",neutral,ba,fp,fp,Match,ConMatch,fp,NotMatch
-b'Monica',11,b'Uh huh?',neutral,b,fp,fp,Match,ConMatch,fp,NotMatch
-b'Monica',12,b'Uh huh?',neutral,b,fp,b^m,NotMatch,NotConMatch,,NotMatch
-b'Monica',13,"b""Ok.  Um, sure, that'd be great.""",neutral,sv,sd,sd,Match,ConMatch,sd,NotMatch
+b'Monica',11,b'Uh huh?',neutral,b,fp,fp,Match,ConMatch,b,NotMatch
+b'Monica',12,b'Uh huh?',neutral,b,fp,b^m,NotMatch,NotConMatch,b,NotMatch
+b'Monica',13,"b""Ok.  Um, sure, that'd be great.""",neutral,sv,sd,sd,Match,ConMatch,sv,NotMatch
 b'Monica',14,b'See ya then.',neutral,fc,ad,ad,Match,ConMatch,ad,NotMatch
 b'Monica',15,b'Bye.',neutral,fc,fc,fc,Match,ConMatch,fc,AllMatch
 b'Rachel',16,"b'Did you just say Hi, Jew?'",surprise,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Monica',17,"b'Yes. Uh, yes, I did. That was my friend, Eddie Moskowitz. Yeah, he likes it. Reaffirms his faith.'",neutral,sd,na,sd,Match,NotConMatch,sd,NotMatch
+b'Monica',17,"b'Yes. Uh, yes, I did. That was my friend, Eddie Moskowitz. Yeah, he likes it. Reaffirms his faith.'",neutral,sd,na,sd,Match,NotConMatch,na,NotMatch
 b'Monica',0,b'Now there you go! I wouldn\xc2\x92t want my best guest to strain her eyes!',joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Phoebe',1,b'Thanks Monica!',joy,fc,ny,fc,Match,NotConMatch,fc,NotMatch
+b'Phoebe',1,b'Thanks Monica!',joy,fc,ny,fc,Match,NotConMatch,ft,NotMatch
 b'Monica',2,b'Does that smell bother you?',disgust,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Phoebe',3,"b'What the smell from Joey\xc2\x92s? No, I can hardly smell it over here.'",surprise,sd,sd,qw^d,Match,NotConMatch,sd,NotMatch
-b'Monica',4,"b'Well you let me know if you can, because y\xc2\x92know I can bake a pie to cover it.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Phoebe',3,"b'What the smell from Joey\xc2\x92s? No, I can hardly smell it over here.'",surprise,sd,sd,qw^d,Match,NotConMatch,qw^d,NotMatch
+b'Monica',4,"b'Well you let me know if you can, because y\xc2\x92know I can bake a pie to cover it.'",neutral,sd,sd,sd,Match,ConMatch,nd,AllMatch
 b'Phoebe',5,"b'I can smell it a little, bake the pie.'",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Monica',6,b'Okay!',joy,fo,b,b,Match,ConMatch,b,NotMatch
 b'Phoebe',7,b'Okay.',neutral,b,b,b,Match,ConMatch,b,AllMatch
-b'Monica',8,"b'Hello?  Oh yes, one minute please.  It\xc2\x92s for you. It\xc2\x92s the fire inspector.'",neutral,qy,ad,fc,NotMatch,NotConMatch,,NotMatch
+b'Monica',8,"b'Hello?  Oh yes, one minute please.  It\xc2\x92s for you. It\xc2\x92s the fire inspector.'",neutral,qy,ad,fc,NotMatch,NotConMatch,ad,NotMatch
 b'Phoebe',9,b'Oh!  Hello?  Yeah this is Phoebe.  Really?!',surprise,qy,qy,fp,Match,NotConMatch,qy,NotMatch
-b'Joey',10,"b'Yeah, so it turns out that it wasn\xc2\x92t the hair straightener that started the fire.'",neutral,sv,sd,sd,Match,ConMatch,sd,NotMatch
-b'Joey',11,"b'No-no, it was the candles.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Joey',12,b'It\xc2\x92s very not good leaving candles unattended.',neutral,sv,sd,sd,Match,ConMatch,sd,NotMatch
+b'Joey',10,"b'Yeah, so it turns out that it wasn\xc2\x92t the hair straightener that started the fire.'",neutral,sv,sd,sd,Match,ConMatch,na,NotMatch
+b'Joey',11,"b'No-no, it was the candles.'",neutral,sd,sd,sd,Match,ConMatch,ar,AllMatch
+b'Joey',12,b'It\xc2\x92s very not good leaving candles unattended.',neutral,sv,sd,sd,Match,ConMatch,sv,NotMatch
 b'Joey',13,"b'In fact, one of the first things they teach you in fire school is\xc2\x85  Uhh\xc2\x85 Uhh\xc2\x85 Okay.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Joey',14,"b'Well, I have to go now.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Rachel',0,b'Joey proposed to me.',surprise,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Monica',0,b'Is he crazy?! You just had Ross\xe2\x80\x99s baby!',surprise,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Rachel',1,"b'Well, I-I said yes.'",fear,sd,na,ny,NotMatch,NotConMatch,,NotMatch
+b'Rachel',1,"b'Well, I-I said yes.'",fear,sd,na,ny,NotMatch,NotConMatch,na,NotMatch
 b'Monica',2,b'What?!',surprise,qw,br,qw,Match,NotConMatch,qw,NotMatch
 b'Monica',3,b'Are you crazy?',anger,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Monica',4,b'You just had Ross\xe2\x80\x99s baby!',anger,sv,qy,qy,Match,ConMatch,qy,NotMatch
+b'Monica',4,b'You just had Ross\xe2\x80\x99s baby!',anger,sv,qy,qy,Match,ConMatch,sv,NotMatch
 b'Monica',5,b'It\xe2\x80\x99s-it\xe2\x80\x99s so  inappropriate.',anger,sv,sv,sv,Match,ConMatch,sv,AllMatch
 b'Monica',6,"b'No, it\xe2\x80\x99s worse than that.'",disgust,sv,sv,sd,Match,NotConMatch,sv,NotMatch
 b'Monica',7,b'It\xe2\x80\x99s wrong.',disgust,sv,sv,sv,Match,ConMatch,sv,AllMatch
-b'Monica',8,b'It\xe2\x80\x99s\xe2\x80\xa6 It is bigger than  mine!',surprise,sd,sv,sd,Match,NotConMatch,sd,NotMatch
-b'Rachel',9,b'I know.',neutral,sd,aa,sd,Match,NotConMatch,sd,NotMatch
-b'Monica',10,b'You can\xe2\x80\x99t marry him!',sadness,qy^d,sv,sd,NotMatch,NotConMatch,,NotMatch
+b'Monica',8,b'It\xe2\x80\x99s\xe2\x80\xa6 It is bigger than  mine!',surprise,sd,sv,sd,Match,NotConMatch,sv,NotMatch
+b'Rachel',9,b'I know.',neutral,sd,aa,sd,Match,NotConMatch,aa,NotMatch
+b'Monica',10,b'You can\xe2\x80\x99t marry him!',sadness,qy^d,sv,sd,NotMatch,NotConMatch,sv,NotMatch
 b'Rachel',11,b'Why not? I don\xe2\x80\x99t want to do this alone! And he\xe2\x80\x99s such a sweet  guy and he loves me so much.',sadness,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Monica',12,b'Well do you love him?',neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Rachel',13,b'Sure.',neutral,b,na,na,Match,ConMatch,na,NotMatch
-b'Monica',14,b'Sure?',neutral,ba,qy,bh,NotMatch,NotConMatch,,NotMatch
-b'Rachel',15,"b'Yeah, I mean whatever.'",neutral,sd,sv,ny,NotMatch,NotConMatch,,NotMatch
+b'Monica',14,b'Sure?',neutral,ba,qy,bh,NotMatch,NotConMatch,bh,NotMatch
+b'Rachel',15,"b'Yeah, I mean whatever.'",neutral,sd,sv,ny,NotMatch,NotConMatch,aa,NotMatch
 b'Monica',16,"b'Honey, the question is\xe2\x80\xa6do you really want to marry Joey?'",sadness,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Rachel',17,"b'No. No, I don\xe2\x80\x99t. Could you be a dear and go tell him?'",sadness,qy,^q,qy,Match,NotConMatch,qy,NotMatch
 b'Phoebe',0,b'So-so you two were married huh? What happened? You just drift apart?',neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
@@ -5998,27 +5998,27 @@ b'Rachel',4,b'You look so beautiful.',joy,sv,sv,sv,Match,ConMatch,sv,AllMatch
 b'Monica',5,b'I\xc2\x92m so happy for me.',joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Rachel',6,b'Hello?',neutral,fp,qy,fp,Match,NotConMatch,fp,NotMatch
 b'Joey',7,b'Hey! Did Chandler show up yet?',fear,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Rachel',8,"b'Yeah, we got him back. Everything\xc2\x92s fine.'",neutral,sd,ng,sd,Match,NotConMatch,sd,NotMatch
+b'Rachel',8,"b'Yeah, we got him back. Everything\xc2\x92s fine.'",neutral,sd,ng,sd,Match,NotConMatch,ng,NotMatch
 b'Joey',9,b'Damnit!',anger,ba,ba,qy^d,Match,NotConMatch,ba,NotMatch
 b'Ross',0,"b'I will be! Listen, I don\xc2\x92t want you teaching my son that stuff anymore. Okay?'",anger,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Rachel',1,b'Fine.',neutral,ba,fp,fc,NotMatch,NotConMatch,,NotMatch
+b'Rachel',1,b'Fine.',neutral,ba,fp,fc,NotMatch,NotConMatch,ba,NotMatch
 b'Rachel',2,"b'Fine, but I\xc2\x92ll have you know that once I taught him that stuff he called me Fun Aunt Rachel.'",anger,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Rachel',3,b'And I loved being Fun Aunt Rachel but I\xc2\x92ll go back to being Boring and Uncomfortable Aunt Rachel if that\xc2\x92s what you want!',anger,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Ross',4,"b'No that\xc2\x92s not what I want. Uh, I\xc2\x92m glad you guys were bonding but I'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Rachel',3,b'And I loved being Fun Aunt Rachel but I\xc2\x92ll go back to being Boring and Uncomfortable Aunt Rachel if that\xc2\x92s what you want!',anger,sd,sd,sd,Match,ConMatch,sv,AllMatch
+b'Ross',4,"b'No that\xc2\x92s not what I want. Uh, I\xc2\x92m glad you guys were bonding but I'",neutral,sd,sd,sd,Match,ConMatch,ar,AllMatch
 b'Rachel',5,"b'Look he doesn\xc2\x92t have any brothers or sisters, somebody\xc2\x92s gonna have to teach him this stuff!'",sadness,qy,sd,sd,Match,ConMatch,sd,NotMatch
 b'Rachel',6,b'And I haven\xc2\x92t taught him anything that a normal 6-year-old doesn\xc2\x92t know anyway!',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Ben',7,b'Crap!!',anger,ba,^q,qy^d,NotMatch,NotConMatch,,NotMatch
-b'Rachel',8,b'I gotta go!',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Monica',0,b'Look at that! Look at that! They\xc2\x92re going into the first class lounge! Do you know what they have in there?',surprise,qy,ad,^q,NotMatch,NotConMatch,,NotMatch
+b'Ben',7,b'Crap!!',anger,ba,^q,qy^d,NotMatch,NotConMatch,ba,NotMatch
+b'Rachel',8,b'I gotta go!',neutral,sd,sd,sd,Match,ConMatch,ad,AllMatch
+b'Monica',0,b'Look at that! Look at that! They\xc2\x92re going into the first class lounge! Do you know what they have in there?',surprise,qy,ad,^q,NotMatch,NotConMatch,qy,NotMatch
 b'Chandler',1,b'No.',neutral,aa,nn,nn,Match,ConMatch,nn,NotMatch
 b'Monica',2,b'Me neither! We have to get in!',surprise,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Chandler',3,b'Just act like you belong.',neutral,sv,^q,sv,Match,NotConMatch,sv,NotMatch
 b'Monica',4,b'Oh my God! Oranges!',surprise,ba,ba,ba,Match,ConMatch,ba,AllMatch
 b'Chandler',5,b'Shh!  Nice to see you again.',neutral,fc,fc,fc,Match,ConMatch,fc,AllMatch
 b'Airline Employee',6,"b'Uh sir, may I see your tickets please?'",neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Chandler',7,"b'Yes, of course.'",neutral,aa,sd,fc,NotMatch,NotConMatch,,NotMatch
+b'Chandler',7,"b'Yes, of course.'",neutral,aa,sd,fc,NotMatch,NotConMatch,ny,NotMatch
 b'Airline Employee',8,"b'I\xc2\x92m sorry, would you move your thumb? I can\xc2\x92t see the seat number.'",neutral,qy,^q,qy,Match,NotConMatch,qy,NotMatch
-b'Chandler',9,"b'Oh that\xc2\x92s all right, I have it memorized. It\xc2\x92s 1A.'",neutral,sd,ad,sd,Match,NotConMatch,sd,NotMatch
+b'Chandler',9,"b'Oh that\xc2\x92s all right, I have it memorized. It\xc2\x92s 1A.'",neutral,sd,ad,sd,Match,NotConMatch,ad,NotMatch
 b'Rachel',0,b'Okay!',joy,b,b,fc,Match,NotConMatch,b,NotMatch
 b'Rachel',1,b'Y\xc2\x92know what?',neutral,br,qw,qw,Match,ConMatch,qw,NotMatch
 b'Rachel',2,b'I realized it was stupid to get upset about not having a husband and kids.',joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
@@ -6032,45 +6032,45 @@ b'Joey',2,b'Oh-oh! So that\xc2\x92s the way it\xc2\x92s gonna be huh? Yeah I can
 b'Ross',3,b'Oh yeah? What are you gonna do?',anger,qw,^q,qw,Match,NotConMatch,qw,NotMatch
 b'Joey',4,b'I don\xc2\x92t know.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',5,b'Why am I not surprised?',disgust,qw,qw,qy,Match,NotConMatch,qw,NotMatch
-b'Joey',6,b'Y\xc2\x92know what Ross? I\xc2\x92m not gonna let you get away with this!',anger,sd,^q,qy,NotMatch,NotConMatch,,NotMatch
+b'Joey',6,b'Y\xc2\x92know what Ross? I\xc2\x92m not gonna let you get away with this!',anger,sd,^q,qy,NotMatch,NotConMatch,qh,NotMatch
 b'Ross',7,b'I don\xc2\x92t think you have much choice.',neutral,sv,sv,sv,Match,ConMatch,sv,AllMatch
-b'Joey',8,b'Well we\xc2\x92ll see!',anger,fo,sv,^h,NotMatch,NotConMatch,,NotMatch
+b'Joey',8,b'Well we\xc2\x92ll see!',anger,fo,sv,^h,NotMatch,NotConMatch,nd,NotMatch
 b'Ross',9,b'Bye-bye!',neutral,fc,fc,fc,Match,ConMatch,fc,AllMatch
 b'Joey',10,b'Yeah bye-bye!  Hey! So just a light layer?',neutral,fc,fc,fc,Match,ConMatch,fc,AllMatch
-b'Ross',11,b'Yes. Yes. Just here  and there .',neutral,aa,ad,fc,NotMatch,NotConMatch,,NotMatch
+b'Ross',11,b'Yes. Yes. Just here  and there .',neutral,aa,ad,fc,NotMatch,NotConMatch,aa,NotMatch
 b'Ross',0,b'Dad?',neutral,br,qy,qy,Match,ConMatch,qy,NotMatch
 b'Mr. Geller',1,b'I\xc2\x92m here!',neutral,fo,sd,sd,Match,ConMatch,sd,NotMatch
 b'Ross',2,b'Hey!',surprise,ba,ba,ba,Match,ConMatch,ba,AllMatch
 b'Mr. Geller',3,"b'Hi. God, it seems like just yesterday you guys used to come out to watch me work.'",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',4,"b'Dad, we-we can\xc2\x92t believe you\xc2\x92re selling the house.'",sadness,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Mr. Geller',5,"b'Well, it\xc2\x92s time for a new family to start their memories here and hopefully their check will clear before they find the crack in the foundation and the asbestos in the ceiling.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Ross',6,b'Let\xc2\x92s grab our stuff and get the hell out of here.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Mr. Geller',7,b'I\xc2\x92m sorry we can\xc2\x92t store your childhood things anymore.',sadness,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Monica',8,"b'Oh, that\xc2\x92s okay, I can\xc2\x92t wait to see everything again! All of the memories'",joy,sd,^q,sd,Match,NotConMatch,sd,NotMatch
+b'Mr. Geller',5,"b'Well, it\xc2\x92s time for a new family to start their memories here and hopefully their check will clear before they find the crack in the foundation and the asbestos in the ceiling.'",neutral,sd,sd,sd,Match,ConMatch,sv,AllMatch
+b'Ross',6,b'Let\xc2\x92s grab our stuff and get the hell out of here.',neutral,sd,sd,sd,Match,ConMatch,ad,AllMatch
+b'Mr. Geller',7,b'I\xc2\x92m sorry we can\xc2\x92t store your childhood things anymore.',sadness,sd,sd,sd,Match,ConMatch,fa,AllMatch
+b'Monica',8,"b'Oh, that\xc2\x92s okay, I can\xc2\x92t wait to see everything again! All of the memories'",joy,sd,^q,sd,Match,NotConMatch,ad,NotMatch
 b'Mr. Geller',9,"b'Well, I don\xc2\x92t know what\xc2\x92s in the boxes down here, but I do know there are six or seven'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Monica',10,b'I used to',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Ross',11,"b'Yeah, not as much as you used to love to play uncooked batter eater.'",neutral,sv,sd,sd,Match,ConMatch,sd,NotMatch
+b'Monica',10,b'I used to',neutral,sd,sd,sd,Match,ConMatch,ad,AllMatch
+b'Ross',11,"b'Yeah, not as much as you used to love to play uncooked batter eater.'",neutral,sv,sd,sd,Match,ConMatch,sv,NotMatch
 b'Monica',12,"b'Hey, it is unreasonable to expect a child to wait for a'",neutral,sv,sv,sv,Match,ConMatch,sv,AllMatch
 b'Ross',0,"b'Ok, got the vent open.'",neutral,sd,sv,sd,Match,NotConMatch,sd,NotMatch
 b'Phoebe',1,"b""Hi, I'm Ben. I'm hospital worker Ben. It's Ben... to the rescue!""",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Ross',2,"b'Ben, you ready?'",neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
-b'Ross',3,"b'All right, gimme your foot.'",neutral,fo,fc,na,NotMatch,NotConMatch,,NotMatch
-b'Ross',4,"b'Ok, on three, Ben.'",neutral,sd,fc,b^m,NotMatch,NotConMatch,,NotMatch
+b'Ross',3,"b'All right, gimme your foot.'",neutral,fo,fc,na,NotMatch,NotConMatch,na,NotMatch
+b'Ross',4,"b'Ok, on three, Ben.'",neutral,sd,fc,b^m,NotMatch,NotConMatch,b^m,NotMatch
 b'Ross',5,"b'One, two, three.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Ross',6,"b""Ok, That's it, Ben.""",neutral,fc,sd,fc,Match,NotConMatch,fc,NotMatch
+b'Ross',6,"b""Ok, That's it, Ben.""",neutral,fc,sd,fc,Match,NotConMatch,fo,NotMatch
 b'Susan',7,b'What do you see?',neutral,qw,qw,qw,Match,ConMatch,qw,AllMatch
-b'Phoebe',8,"b'Well, Susan, I see what appears to be a dark vent. Wait. Yes, it is in fact a dark vent.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Phoebe',8,"b'Well, Susan, I see what appears to be a dark vent. Wait. Yes, it is in fact a dark vent.'",neutral,sd,sd,sd,Match,ConMatch,nd,AllMatch
 b'Ross',9,"b""Phoebs, It's open! It's open!""",surprise,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Janitor',10,b'Wait! You forgot your legs!',surprise,qy^d,ad,sd,NotMatch,NotConMatch,,NotMatch
-b'Mr. Posner',0,"b'You have a very impressive resume, Ms. Green. I especially like what I see here about implementing a new filing system.'",joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
+b'Janitor',10,b'Wait! You forgot your legs!',surprise,qy^d,ad,sd,NotMatch,NotConMatch,ad,NotMatch
+b'Mr. Posner',0,"b'You have a very impressive resume, Ms. Green. I especially like what I see here about implementing a new filing system.'",joy,sd,sd,sd,Match,ConMatch,sv,AllMatch
 b'Rachel',1,b'Thank you.',joy,ft,ft,ft,Match,ConMatch,ft,AllMatch
 b'Joanna',2,b'Filing system?',neutral,qy,fc,qy,Match,NotConMatch,qy,NotMatch
-b'Joanna',3,b'Oh-oh!',surprise,b,fc,ba,NotMatch,NotConMatch,,NotMatch
+b'Joanna',3,b'Oh-oh!',surprise,b,fc,ba,NotMatch,NotConMatch,b,NotMatch
 b'Joanna',4,b'You mean those-those little colored labels you put on all the folders?',neutral,qy,qy,qy,Match,ConMatch,qy,AllMatch
 b'Joanna',5,b'It certainly did brighten up the inside of the filing cabinets.',joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Rachel',6,"b'Well, they uh, they-they do more than that.'",neutral,sv,sv,sd,Match,NotConMatch,sv,NotMatch
-b'Mrs. Lynch',7,b'I notice that you\xc2\x92ve been trusted with a lot of rather important responsibilities.',neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
-b'Rachel',8,"b'Yes, Joanna really has been an incredible mentor to me.'",joy,sd,sv,sd,Match,NotConMatch,sd,NotMatch
+b'Rachel',6,"b'Well, they uh, they-they do more than that.'",neutral,sv,sv,sd,Match,NotConMatch,nd,NotMatch
+b'Mrs. Lynch',7,b'I notice that you\xc2\x92ve been trusted with a lot of rather important responsibilities.',neutral,sd,sd,sd,Match,ConMatch,sv,AllMatch
+b'Rachel',8,"b'Yes, Joanna really has been an incredible mentor to me.'",joy,sd,sv,sd,Match,NotConMatch,aa,NotMatch
 b'Joanna',9,b'Oh. And Rachel has been really incredible in getting my morning bagel for me. It\xc2\x92s amazing how she gets it right almost',joy,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Rachel',10,"b'I-I-I of course, I have more responsibilities than that.'",neutral,sd,sd,sd,Match,ConMatch,sd,AllMatch
 b'Joanna',11,"b'Oh yes, well there\xc2\x92s the coffee too.  Rachel can carry two things at once!'",joy,sd,sd,sv,Match,NotConMatch,sd,NotMatch
