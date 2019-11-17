@@ -63,6 +63,39 @@ DAs = {
 }
 
 
+EDAs = {
+    # 'Statement': ['sd', 'sv'],
+    'sd': 'Statement-non-opinion', 'sv': 'Statement-opinion',
+    # 'Questions': ['qw', 'qy^d', 'qy', 'qh', 'qo', 'qrr', '^q', 'qw^d', '^g'],
+    'qw': 'Wh-Question', 'qw^d': 'Declarative Wh-Question',
+    'qy': 'Yes-No-Question', 'qy^d': 'Declarative Yes-No-Question',
+    'qh': 'Rhetorical-Question', 'qo': 'Open-question', 'qrr': 'Or-Clause-Question',
+    '^q': 'Quotation', '^g': 'Tag-Question',
+    # 'Answers': ['nn', 'na', 'ny', 'no', 'ng'],
+    'nn': 'No-Answer', 'ng': 'Negative non-no answers',
+    'ny': 'Yes-Answer', 'na': 'Affirmative non-yes answers',
+    'no': 'Other Answer', 'nd': 'Dispreferred answer',
+    # 'Agreement': ['aa', 'ar', 'ad', '^h', 'aap_am', 'arp_nd'],
+    'aa': 'Agree or Accept', 'ar': 'Reject', 'aap': 'Accept-part', 'am': 'Maybe',
+    'ad': 'Action-directive', '^h': 'Hold before answer or agreement',
+    # 'BackwardFunction': ['b', 'bk', 'bh', 'ba', 'bf', 'br', 'bd', '^2'],
+    'b': 'Acknowledge (Backchannel)', 'bk': 'Response Acknowledgement',
+    'bh': 'Rhetorical Backchannel', 'ba': 'Appreciation or Assessment',
+    'bf': 'Reformulate', 'br': 'Signal-non-understanding',
+    'bd': 'Downplaying-response', '^2': 'Collaborative Completion',
+    # 'ForwardFunction': ['fo_o_fw_"_by_bc', 'fc', 'ft', 'fp', 'fa', 'oo_co_cc', 'fo_o', 'fw'],
+    'fo': 'Other Forward Function', 'fc': 'Conventional-closing', 'fp': 'Conventional-opening',
+    'ft': 'Thanking', 'fa': 'Apology', 'oo_co_cc': 'Offers, Options, Commits',
+    # 'CommInfoStatus': ['%', 'b^m', 't1', 't3'],
+    '%': 'Uninterpretable', 'b^m': 'Repeat-phrase',
+    't1': 'Self-talk', 't3': '3rd-party-talk',
+    # 'Other': ['h', '^q'],
+    'h': 'Hedge',
+    # 'NonSpeechVerbal': ['x']
+    'x': 'Non-verbal',
+}
+
+
 def prepare_output(predictions, tag, it_value):
     str_preds = []
     for item in sorted(predictions[0], reverse=1):
