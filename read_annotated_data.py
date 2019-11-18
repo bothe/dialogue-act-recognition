@@ -10,12 +10,17 @@ utt, utt_id, utt_Emotion, utt_EDAs, utt_Speaker = read_data_file('results/eda_me
 train_data = 'MELD/data/MELD/train_sent_emo.csv'
 utt_train_data, dia_id_train_data, utt_id_train_data, \
 utt_Emotion_train_data, utt_Sentiment_train_data, utt_Speaker_train = read_data_file(train_data)
-colors_emo = ['Green', 'Blue', 'Gray', 'Black',   'Magenta', 'Orange', 'Red', 'White']
+colors_emo = ['Green', 'Blue', 'Olive', 'Black',   'Mediumvioletred', 'Orangered', 'Red', 'White']
 emotions = ['joy', 'sadness', 'fear', 'neutral', 'surprise', 'disgust', 'anger', 'White']
-colors_sent = ['Green', 'Black', 'Red', 'White']
+colors_sent = ['Limegreen', 'Black', 'Darkorange', 'White']
 sentiments =['positive', 'neutral', 'negative', 'White']
 
 tags = list(Counter(utt_EDAs).keys())
+c = Counter(utt_EDAs)
+x = [(i, c[i] / len(utt_EDAs) * 100.0) for i, count in c.most_common()]
+for item in x:
+    print(item[0], round(item[1], 2))
+
 pass_emotions, pass_values = [], []
 for tag in tags:
     if tag is not str:

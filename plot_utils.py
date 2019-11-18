@@ -22,11 +22,11 @@ def plot_pie_half_usage(labels, label_values, title, colors_emo,
     p.gca().add_artist(my_circle)
 
     # plt.title(title, y=1)
-    plt.text(0, -0.15, title, fontdict={'size': 15.0, 'horizontalalignment':'center'})
+    plt.text(0, -0.15, title, fontdict={'size': 15.0, 'horizontalalignment': 'center'})
     if test_show_plot:
         plt.show()
         return
-    plt.savefig('figures/meld/fig_' + title.split('\n')[0])
+    plt.savefig('figures/meld/fig_' + title.split('\n')[0], bbox_inches='tight', transparent=True)
     plt.close()
 
 
@@ -45,7 +45,6 @@ def plot_normal_bars(labels, label_values, title, test_show_plot=False):
         return
     plt.savefig('figures/meld/fig_' + title.split('\n')[0])
     plt.close()
-
 
 # create data
 # emotions = ['12', '11', '3', '30', '0', '23', '4']
