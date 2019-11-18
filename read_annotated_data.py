@@ -3,12 +3,14 @@ from collections import Counter
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 from diswiz.utils_server import EDAs
+from plot_utils import *
 
 utt, utt_id, utt_Emotion, utt_EDAs, utt_Speaker = read_data_file('results/eda_meld_dataset_bk.csv',
                                                                  annotated_meld=True)
 
 emotions = ['joy', 'anger', 'disgust', 'sadness', 'surprise', 'fear', 'neutral']
 tags = list(Counter(utt_EDAs).keys())
+pass_emotions, pass_values = [], []
 for tag in tags:
     if tag is not str:
         pass
@@ -22,19 +24,13 @@ for tag in tags:
         values.append(data[emotion])
 
     try:
-        title = tag + ' - ' + EDAs[tag]
+        title = tag + '\n' + EDAs[tag]
     except TypeError:
         title = str(tag)
 
-    plt.rcParams.update({'font.size': 16})
-    plt.bar(emotions, values)
-    plt.title(title)
-    plt.xticks(rotation=15)
-
-    # plt.yaxis.set_major_locator(MaxNLocator(integer=True))
-    # plt.ylim(.5, 5.5)
-    # plt.xlim(.5, 5.5)
-    # plt.xlabel('Emotions')
-    # plt.ylabel('Number of Utterances')
-    plt.savefig('figures/meld/fig_' + title)
-    plt.close()
+    pass_emotions = emotions
+    pass_emotions.extend(['White'])
+    pass_values = values
+    pass_values.extend([sum(values)])
+    # plot_normal_bars(emotions, values, title)
+    plot_pie_half_usage(pass_emotions, pass_values, title)
