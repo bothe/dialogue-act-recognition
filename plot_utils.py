@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
 
 
-def plot_pie_half_usage(labels, label_values, title, test_show_plot=False):
+def plot_pie_half_usage(labels, label_values, title, colors, test_show_plot=False):
     # Create a pieplot
-    colors = ['Grey', 'Purple', 'Blue', 'Green', 'Orange', 'Red', 'Magenta', 'White']
     # label_values.append(sum(label_values))
     # labels.append('White')
     print(len(labels), labels)
@@ -15,7 +14,7 @@ def plot_pie_half_usage(labels, label_values, title, test_show_plot=False):
     p = plt.gcf()
     p.gca().add_artist(my_circle)
 
-    plt.title(title, pad=-145)
+    plt.title(title, pad=25)
     if test_show_plot:
         plt.show()
         return
@@ -45,5 +44,5 @@ def plot_normal_bars(labels, label_values, title, test_show_plot=False):
 # values = [12, 11, 3, 30, 0, 23, 4]
 # title = 'tag\nHello World'
 #
-# plot_pie_half_usage(emotions, values, title, test_show_plot=True)
+# plot_pie_half_usage(emotions, values, title, colors, test_show_plot=True)
 # plot_normal_bars(emotions, values, title, test_show_plot=True)

@@ -7,7 +7,7 @@ from plot_utils import *
 
 utt, utt_id, utt_Emotion, utt_EDAs, utt_Speaker = read_data_file('results/eda_meld_dataset_bk.csv',
                                                                  annotated_meld=True)
-
+colors = ['Green', 'Red', 'Orange', 'Gray', 'Magenta', 'Black', 'Blue', 'White']
 emotions = ['joy', 'anger', 'disgust', 'sadness', 'surprise', 'fear', 'neutral']
 tags = list(Counter(utt_EDAs).keys())
 pass_emotions, pass_values = [], []
@@ -33,4 +33,4 @@ for tag in tags:
     pass_values = values
     pass_values.extend([sum(values)])
     # plot_normal_bars(emotions, values, title)
-    plot_pie_half_usage(pass_emotions, pass_values, title)
+    plot_pie_half_usage(pass_emotions, pass_values, title, colors)
