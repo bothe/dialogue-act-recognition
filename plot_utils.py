@@ -8,7 +8,7 @@ def plot_pie_half_usage(labels, label_values, title, test_show_plot=False):
     # labels.append('White')
     print(len(labels), labels)
     print(len(label_values), label_values)
-    plt.pie(label_values, colors=colors, counterclock=False, startangle=180, labels=labels)
+    plt.pie(label_values[0:7] + [label_values[-1]], colors=colors, counterclock=False, startangle=180)  # , labels=labels)
 
     # add a circle at the center
     my_circle = plt.Circle((0, 0), 0.55, color='white')
