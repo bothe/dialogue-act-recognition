@@ -6,7 +6,7 @@ from keras.optimizers import Adam
 from keras.models import Model, load_model
 import keras.backend as K
 from sklearn.model_selection import train_test_split
-from data_helpers import Dataloader
+from MELD.baseline.data_helpers import Dataloader
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_recall_fscore_support
