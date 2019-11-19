@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from diswiz.utils_server import highDAClass, DAs
 
-utterances, emotion, emo_evo, v, a, d = get_mocap_data()
+utterances, emotion, emo_evo, v, a, d, speaker_id = get_mocap_data()
 con_elmo_embs, con_diswiz, non_con_elmo_embs, non_con_diswiz = read_all_predictions()
 all_classes = Counter(list(con_elmo_embs) + list(non_con_elmo_embs))
 # all_classes = Counter(list(con_diswiz) + list(con_elmo_embs) + list(non_con_diswiz) + list(non_con_elmo_embs))

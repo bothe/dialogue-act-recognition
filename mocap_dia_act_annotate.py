@@ -7,7 +7,7 @@ from scipy.stats import stats
 from statsmodels.stats.inter_rater import fleiss_kappa
 from diswiz.main import predict_das_diswiz
 
-utterances, emotion, emo_evo, v, a, d = get_mocap_data()
+utterances, emotion, emo_evo, v, a, d, speaker_id = get_mocap_data()
 
 con_das, non_con_das, con_da_nums, non_con_da_nums = predict_das_diswiz(utterances)
 

@@ -10,7 +10,7 @@ def get_mocap_data(wirte=False):
     emo_dialogues = []
     emo_evo = []
     v, a, d = [], [], []
-
+    speaker_id = []
     file_paths = []
     transcriptions = {}
     emotions = {}
@@ -35,6 +35,7 @@ def get_mocap_data(wirte=False):
                     a.append(emots[key]['a'])
                     d.append(emots[key]['d'])
                     utterances.append(utts[key])
+                    speaker_id.append(key)
                     if wirte:
                         writer.writerow(
                             {'speaker_id': key, 'utterance': str(utts[key]), 'emotion': emots[key]['emotion'],
@@ -45,4 +46,8 @@ def get_mocap_data(wirte=False):
                     pass
 
             file_paths.append(file_path_utt)
-    return utterances, emo_dialogues, emo_evo, v, a, d
+    return utterances, emo_dialogues, emo_evo, v, a, d, speaker_id
+
+
+utterances, emo_dialogues, emo_evo, v, a, d, speaker_id =get_mocap_data(wirte=False)
+print('debug')
