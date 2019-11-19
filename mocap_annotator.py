@@ -49,5 +49,5 @@ def get_mocap_data(wirte=False):
     return utterances, emo_dialogues, emo_evo, v, a, d, speaker_id
 
 
-utterances, emo_dialogues, emo_evo, v, a, d, speaker_id =get_mocap_data(wirte=False)
-print('debug')
+# utterances, emo_dialogues, emo_evo, v, a, d, speaker_id = get_mocap_data(wirte=False)
+# print('debug')
