@@ -87,7 +87,8 @@ def predict_classes_from_features(x):
             con_out_nums.append(np.argmax(item))
 
     else:
-        con_out = [0, 0]
+        con_out = ['None', 'None']
+        con_out_nums = [0, 0]
 
     return non_con_out, con_out, non_con_out_nums, con_out_nums
 
