@@ -1,7 +1,5 @@
 from MELD.utils.read_meld import read_data_file
 from collections import Counter
-import matplotlib.pyplot as plt
-from matplotlib.ticker import MaxNLocator
 from diswiz.utils_server import EDAs
 from plot_utils import *
 
