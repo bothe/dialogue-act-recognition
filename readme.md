@@ -4,5 +4,7 @@
  the models.
 2. To annotate IEMOCAP data:
 run ```mocap_dia_act_annotate.py``` to get context and non-context 
-annotations and save as numpy arrays.
+annotations and save as numpy arrays, 
+and generate final annotation (csv) file.
+
 
