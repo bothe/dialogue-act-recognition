@@ -58,12 +58,30 @@ if train:
 
     context_model.load_weights(con_model_name)
     evaluation = context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
-    print('Context Score results: {}'.format(evaluation[1]))
+    print('Test results for context model: {}'.format(evaluation[1]))
 else:
     non_context_model.load_weights(non_con_model_name)
     evaluation = non_context_model.evaluate(X_test, target_category_test, verbose=2)
-    print("Test results for non-context model - accuracy: {}".format(evaluation[1]))
+    print("Test results for non-context model: {}".format(evaluation[1]))
 
     context_model.load_weights(con_model_name)
     evaluation = context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
-    print('Context Score results: {}'.format(evaluation[1]))
+    print('Test results for context model: {}'.format(evaluation[1]))
+
+
+def predict_classes_elmo_mean_features(x):
+    non_con_predictions = non_context_model.predict(x)
+    non_con_out = []
+    for item in non_con_predictions:
+        non_con_out.append(tags[np.argmax(item)])
+
+    if len(x) > con_seq_length:
+        x = prepare_data(x, [], con_seq_length, with_y=False)
+        con_predictions = context_model.predict(x)
+        # take first two DAs from non-context model as we skip in context model (two since "con_seq_length-1")
+        con_out = [non_con_out[0], non_con_out[1]]
+        for item in con_predictions:
+            con_out.append(tags[np.argmax(item)])
+    else:
+        con_out = [non_con_out[0], non_con_out[1]]
+    return non_con_out, con_out
