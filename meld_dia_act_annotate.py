@@ -43,7 +43,7 @@ if predict_with_elmo_mean:
 
     from main_swda_elmo_mean import *
 
-    meld_elmo_features_train_mean_con = prepare_data(meld_elmo_features_train_mean, [], seq_length, with_y=False)
+    meld_elmo_features_train_mean_con = prepare_data(meld_elmo_features_train_mean, [], con_seq_length, with_y=False)
     mean_con_predictions = context_model.predict(meld_elmo_features_train_mean_con)
     con_out_mean = []
     for item in mean_con_predictions:

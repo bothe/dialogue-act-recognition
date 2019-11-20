@@ -1,5 +1,5 @@
 from keras.layers import Dense, SimpleRNN, LSTM, Input, Flatten, Bidirectional, GRU, \
-    TimeDistributed, Embedding, Conv2D, ConvLSTM2D
+    TimeDistributed, Embedding, Conv1D, ConvLSTM2D, MaxPooling1D
 from keras.layers.merge import multiply, concatenate
 from keras.layers.core import *
 from keras.optimizers import Adam
@@ -139,6 +139,22 @@ def model_for_utterance_level(seq_length, emb_dim, num_classes, single_attention
     attention_mul = Flatten()(attention_mul)
     # inter_rep     = Dense(100)(attention_mul)
     output = Dense(num_classes, activation='softmax')(attention_mul)
+    model = Model(inputs=[inputs], outputs=output)
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    print(model.summary())
+    return model
+
+
+def non_context_model_for_utterance_level(emb_dim, num_classes):
+    inputs = Input(shape=(emb_dim,))
+    units = 128
+    reshape_features = Reshape((32, 32))(inputs)
+    hidden_out = Conv1D(units, kernel_size=3, activation='relu')(reshape_features)
+    hidden_out = Conv1D(units, kernel_size=3, activation='relu')(hidden_out)
+    hidden_out_pooling = MaxPooling1D(pool_size=2)(hidden_out)
+    inter_rep = Flatten()(hidden_out_pooling)
+    inter_rep = Dense(100)(inter_rep)
+    output = Dense(num_classes, activation='softmax')(inter_rep)
     model = Model(inputs=[inputs], outputs=output)
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     print(model.summary())
