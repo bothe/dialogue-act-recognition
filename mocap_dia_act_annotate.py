@@ -12,6 +12,7 @@ utterances, emotion, emo_evo, v, a, d, speaker_id = get_mocap_data()
 
 ### Get features
 # iemocap_elmo_features = get_elmo_fea(utterances, mean=False)
+iemocap_elmo_mean_features = np.load('features/iemocap_elmo_mean_features.npy', allow_pickle=True)
 iemocap_elmo_features = np.load('features/iemocap_elmo_features.npy', allow_pickle=True)
 
 ## Predict with DISWIZ
@@ -25,7 +26,7 @@ iemocap_elmo_features = np.load('features/iemocap_elmo_features.npy', allow_pick
 ## Predict with elmo mean features
 from main_swda_elmo_mean import *
 
-non_con_out, con_out = predict_classes_elmo_mean_features(iemocap_elmo_features)
+non_con_out, con_out = predict_classes_elmo_mean_features(iemocap_elmo_mean_features)
 con_elmo_embs, con_diswiz, non_con_elmo_embs, non_con_diswiz = read_all_predictions()
 
 print('Accuracy comparision between context and non-context predictions elmo: {}% elmo_mean: {}% '
