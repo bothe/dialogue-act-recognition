@@ -1,4 +1,5 @@
 import csv
+import numpy as np
 
 
 def ensemble_annotation(non_con_out, con_out, con_out_mean, utt_Speaker_train, utt_train_data,
@@ -65,3 +66,22 @@ def ensemble_annotation(non_con_out, con_out, con_out_mean, utt_Speaker_train, u
         round((total_match / (i + 1)) * 100, 2), round((con_matches / (i + 1)) * 100, 2),
         round((any_two_matches / (i + 1)) * 100, 2), round((none_matches / (i + 1)) * 100, 2)))
     return utt_info_rows
+
+
+def convert_predictions_to_indices(con_out, non_con_out, con_elmo_embs, non_con_elmo_embs, tags):
+    def return_indices(con_out_strs):
+        con_out_nums = []
+        for item in con_out_strs:
+            con_out_nums.append(list(tags).index(item))
+        return np.array(con_out_nums)
+
+    con_out = return_indices(con_out)
+    con_elmo_embs = return_indices(con_elmo_embs)
+    non_con_out = return_indices(non_con_out)
+    non_con_elmo_embs = return_indices(non_con_elmo_embs)
+    nominal = False
+    if nominal:
+        return np.reshape(np.concatenate((con_out, con_elmo_embs,
+                                          non_con_out, non_con_elmo_embs)), (4, len(con_out))).transpose()
+    else:
+        return np.array([con_out, con_elmo_embs, non_con_out, non_con_elmo_embs])

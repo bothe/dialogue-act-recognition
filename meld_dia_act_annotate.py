@@ -1,14 +1,17 @@
 import numpy as np
+from krippendorff import alpha
 from scipy.stats import stats
 from sklearn.metrics import classification
-
+import os
 from MELD.utils.read_meld import *
-from final_annotator_utils import ensemble_annotation
+from final_annotator_utils import ensemble_annotation, convert_predictions_to_indices
 
 elmo_feature_retrieval = False
 predict_with_elmo = False
 predict_with_elmo_mean = False
-write_final_csv = False
+
+if os.path.exists('results/tags.npy'):
+    tags = np.load('results/tags.npy')
 
 if elmo_feature_retrieval:
     from elmo_features import get_elmo_fea
@@ -62,9 +65,13 @@ print('Kappa (Cohen) score between context- and non-context-based prediction: {}
 print(classification.classification_report(con_out, con_out_mean))
 print('Spearman Correlation between context- and non-context-based prediction: {}'.format(
     stats.spearmanr(con_out, con_out_mean)))
+reliability_data = convert_predictions_to_indices(con_out, non_con_out, con_out_mean, non_con_out, tags)
+k_alpha = alpha(reliability_data, level_of_measurement='nominal')
+print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
 
 # Generate final file of annotations; contains CORRECT label for corrections in EDAs
 row = ensemble_annotation(non_con_out, con_out, con_out_mean, utt_Speaker_train, utt_train_data,
                           utt_id_train_data, utt_Emotion_train_data, sentiment_labels=utt_Sentiment_train_data,
-                          meld_data=True, file_name='meld_emotion', write_final_csv=write_final_csv)
-print('debug')
+                          meld_data=True, file_name='meld_emotion', write_final_csv=False)
+
+print('ran meld_dia_act_annotate.py')
