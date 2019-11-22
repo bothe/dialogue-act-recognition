@@ -19,6 +19,7 @@ x = [(i, c[i] / len(utt_EDAs) * 100.0) for i, count in c.most_common()]
 for item in x:
     print(item[0], round(item[1], 2))
 
+stack_da_emotions, stack_da_sentiments = {}, {}
 pass_emotions, pass_values = [], []
 for tag in tags:
     if tag is not str:
@@ -48,4 +49,6 @@ for tag in tags:
     pass_values_sent = values_sentiment
     pass_values_sent.extend([sum(values_sentiment)])
     # plot_normal_bars(emotions, values, title)
-    plot_pie_half_usage(emotions, pass_values, title, colors_emo, sentiments, pass_values_sent, colors_sent)
+    # plot_eda_usage(emotions, pass_values, title, colors_emo, sentiments, pass_values_sent, colors_sent)
+    stack_da_emotions[title] = values_emotion
+    stack_da_sentiments[title] = values_sentiment

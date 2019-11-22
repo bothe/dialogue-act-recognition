@@ -21,7 +21,9 @@ x = [(i, c[i] / len(utt_EDAs) * 100.0) for i, count in c.most_common()]
 for item in x:
     print(item[0], round(item[1], 2))
 
+stack_emotions_values = []
 pass_emotions, pass_values = [], []
+stack_da_names = []
 for tag in tags:
     if tag is not str:
         pass
@@ -31,7 +33,7 @@ for tag in tags:
             temp_emotion.append(utt_Emotion[i])
     data_emotion = Counter(temp_emotion)
     values_emotion = []
-    for emotion in emotions:
+    for emotion in emotions[0:9]:
         values_emotion.append(data_emotion[emotion])
 
     try:
@@ -43,6 +45,24 @@ for tag in tags:
     pass_values = values_emotion
     pass_values.extend([sum(values_emotion)])
 
+    stack_emotions_values.append(values_emotion)
+    stack_da_names.append(tag)
+
     # plot_normal_bars(emotions, values, title)
-    plot_pie_half_usage(emotions, pass_values, title, colors_emo, sentiments, sentiments,
-                        colors_sent, data_name='iemocap')
+    # plot_eda_usage(emotions, pass_values, title, colors_emo, sentiments, sentiments,
+                 #   colors_sent, data_name='iemocap')
+
+stack_emo_names = {}
+das_stacked = np.array(stack_emotions_values).transpose()
+for i in range(len(emotions)):
+    stack_emo_names[emotions[i]] = das_stacked[i]
+totals = das_stacked.sum(axis=0)
+
+
+stack_emo_bars = []
+for key in stack_emo_names.keys():
+    stack_emo_bars.append([i / j * 100 for i, j in zip(stack_emo_names[key], totals)])
+
+r = np.arange(len(stack_da_names))
+
+print('dd')
