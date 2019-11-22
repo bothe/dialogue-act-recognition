@@ -1,6 +1,7 @@
 from sklearn.metrics import classification
 from collections import Counter
 from mocap_data_reader import get_mocap_data
+from read_annotated_data_utils import read_data
 from results.read_predictions_utils import labels_to_indices, read_all_predictions
 import matplotlib.pyplot as plt
 import numpy as np
@@ -8,7 +9,9 @@ from diswiz.utils_server import highDAClass, DAs
 
 utterances, emotion, emo_evo, v, a, d, speaker_id = get_mocap_data()
 con_elmo_embs, con_diswiz, non_con_elmo_embs, non_con_diswiz = read_all_predictions()
-all_classes = Counter(list(con_elmo_embs) + list(non_con_elmo_embs))
+utt_Speaker, utt, utt_Emotion, utt_EDAs, utt_EDAs_corrected = read_data('results/eda_iemocap_dataset.csv')
+
+all_classes = Counter(list(utt_EDAs))  # + list(non_con_elmo_embs))
 # all_classes = Counter(list(con_diswiz) + list(con_elmo_embs) + list(non_con_diswiz) + list(non_con_elmo_embs))
 classes = list(all_classes.keys())
 #  classes = list(Counter(con_elmo_embs).keys())
@@ -16,8 +19,8 @@ dict_of_all_info = {}
 for item in classes:
     v_temp, a_temp = [], []
     v_a_temp = []
-    for i in range(len(con_elmo_embs)):
-        if con_elmo_embs[i] == item:
+    for i in range(len(utt_EDAs)):
+        if utt_EDAs[i] == item:
             v_temp.append(v[i])
             a_temp.append(a[i])
             v_a_temp.append((v[i], a[i]))
@@ -40,7 +43,7 @@ for item in classes:
     plt.xlim(.5, 5.5)
     plt.xlabel('valence')
     plt.ylabel('arousal')
-    plt.savefig('figures/fig_'+item)
+    plt.savefig('figures/iemocap_va/fig_'+item)
     plt.close()
 
 con_elmo_embs = labels_to_indices(con_elmo_embs, classes)

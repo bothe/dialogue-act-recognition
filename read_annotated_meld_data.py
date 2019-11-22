@@ -8,8 +8,8 @@ utt, utt_id, utt_Emotion, utt_EDAs, utt_Speaker = read_data_file('results/eda_me
 train_data = 'MELD/data/MELD/train_sent_emo.csv'
 utt_train_data, dia_id_train_data, utt_id_train_data, \
 utt_Emotion_train_data, utt_Sentiment_train_data, utt_Speaker_train = read_data_file(train_data)
-colors_emo = ['Green', 'Blue', 'Olive', 'Black',   'Mediumvioletred', 'Orangered', 'Red', 'White']
-emotions = ['joy', 'sadness', 'fear', 'neutral', 'surprise', 'disgust', 'anger', 'White']
+colors_emo = ['Green', 'Blue',       'Olive',    'Black',   'Mediumvioletred', 'Orangered', 'Red', 'White']
+emotions = ['joy',     'sadness',     'fear',    'neutral',    'surprise',      'disgust', 'anger', 'White']
 colors_sent = ['Limegreen', 'Black', 'Darkorange', 'White']
 sentiments =['positive', 'neutral', 'negative', 'White']
 

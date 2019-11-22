@@ -119,7 +119,7 @@ b'Ses01M_script01_3_M008',Ses01M_script01_3_M008,"b""So then would you want to? 
 b'Ses01M_script01_3_F009',Ses01M_script01_3_F009,b"Well I guess that's why I came.",xxx,sentiment,sd,na,sd,Match,NotConMatch,sd,sd,NotMatch
 b'Ses01M_script01_3_M009',Ses01M_script01_3_M009,"b'Ann, I love you.  I love you.'",hap,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
 b'Ses01M_script01_3_M010',Ses01M_script01_3_M010,b'I love you a great deal.',xxx,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
-b'Ses01M_script01_3_M011',Ses01M_script01_3_M011,b"I'm sorry I don't really have much of an imagination.",xxx,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
+b'Ses01M_script01_3_M011',Ses01M_script01_3_M011,b"I'm sorry I don't really have much of an imagination.",xxx,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,fa,AllMatch
 b'Ses01M_script01_3_F010',Ses01M_script01_3_F010,"b'Chris,'",xxx,sentiment,qy,sd,sd,NotMatch,ConMatch,sd,sd,NotMatch
 b'Ses01M_script01_3_M012',Ses01M_script01_3_M012,"b""I'm sorry I'm embarrassing you, aren't I?  See, I didn't want to do it here I didn't on this porch, with this ring--I didn't want to win you away from anything.""",xxx,sentiment,sd,qy,^q,NotMatch,NotConMatch,qy,CORRECT,NotMatch
 b'Ses01M_script01_3_F011',Ses01M_script01_3_F011,"b""I've been ready a long, long time.""",xxx,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
@@ -184,7 +184,7 @@ b'Ses01F_script02_2_F003',Ses01F_script02_2_F003,b"It's PR! Somebody sold you a 
 b'Ses01F_script02_2_M004',Ses01F_script02_2_M004,"b'Not just me, look at all of these people.'",fru,sentiment,sd,sv,sv,NotMatch,ConMatch,sv,sv,NotMatch
 b'Ses01F_script02_2_F004',Ses01F_script02_2_F004,"b""Everybody's told the same story.  It keeps us coming back for more, it keeps us excited.  We keep thinking that life is going start at any minute if we can just find the right spot, get in on the action.""",xxx,sentiment,sd,sd,sv,Match,NotConMatch,sd,sd,NotMatch
 b'Ses01F_script02_2_M005',Ses01F_script02_2_M005,"b'Are we talking about the same thing, here?'",xxx,sentiment,qy,qy,qy,NotMatch,NotConMatch,qy,qy,AllMatch
-b'Ses01F_script02_2_F005',Ses01F_script02_2_F005,"b""I'm sorry, it's just fish to me.""",xxx,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
+b'Ses01F_script02_2_F005',Ses01F_script02_2_F005,"b""I'm sorry, it's just fish to me.""",xxx,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,fa,AllMatch
 b'Ses01F_script02_2_M006',Ses01F_script02_2_M006,"b""Carla, can I ask you something?  Now, don't take this the wrong way, but are you on your period?""",neu,sentiment,qy,qy,qy,NotMatch,NotConMatch,qy,qy,AllMatch
 b'Ses01F_script02_2_F006',Ses01F_script02_2_F006,"b""Don't ask me that.  I hate it when you ask me that, you always ask me that.  It's insulting.""",ang,sentiment,sd,sd,ad,Match,NotConMatch,sd,sd,NotMatch
 b'Ses01F_script02_2_M007',Ses01F_script02_2_M007,"b""Well then, what's bugging you?""",fru,sentiment,qw,qw,^q,Match,NotConMatch,qw,qw,NotMatch
@@ -267,7 +267,7 @@ b'Ses01F_script02_2_F044',Ses01F_script02_2_F044,b"I guess we don't need glasses
 b'Ses01F_script02_2_M046',Ses01F_script02_2_M046,b'[BREATHING]',hap,sentiment,sv,sd,sd,NotMatch,ConMatch,sd,sd,NotMatch
 b'Ses01F_script02_2_M047',Ses01F_script02_2_M047,b'Do you want to go home?  Are you cold?',neu,sentiment,qy,qy,qy,NotMatch,NotConMatch,qy,qy,AllMatch
 b'Ses01F_script02_2_F045',Ses01F_script02_2_F045,b"I'm beginning to think this might be the right spot after all.",hap,sentiment,sd,sv,sv,NotMatch,ConMatch,sv,sv,NotMatch
-b'Ses01F_script02_2_F046',Ses01F_script02_2_F046,"b""Augie, I'm sorry.""",sad,sentiment,sd,sd,ft,Match,NotConMatch,sd,sd,NotMatch
+b'Ses01F_script02_2_F046',Ses01F_script02_2_F046,"b""Augie, I'm sorry.""",sad,sentiment,sd,sd,ft,Match,NotConMatch,sd,fa,NotMatch
 b'Ses01F_script02_2_M048',Ses01F_script02_2_M048,"b""Shh.  If we're very quiet, the fish might come.""",neu,sentiment,sv,sd,sv,Match,NotConMatch,sv,sv,NotMatch
 b'Ses01F_script02_2_F047',Ses01F_script02_2_F047,b'Or not.',neu,sentiment,sd,sv,fc,NotMatch,NotConMatch,sv,CORRECT,NotMatch
 b'Ses01F_script02_2_M049',Ses01F_script02_2_M049,b'Or not.',hap,sentiment,sd,sv,sd,Match,NotConMatch,sd,sd,NotMatch
@@ -281,7 +281,7 @@ b'Ses01M_impro06_M004',Ses01M_impro06_M004,b"God I've told this story so many ti
 b'Ses01M_impro06_F002',Ses01M_impro06_F002,b"You don't have to if you don't want to.",neu,sentiment,sv,sd,sd,NotMatch,ConMatch,sd,sd,NotMatch
 b'Ses01M_impro06_M005',Ses01M_impro06_M005,b'I just...I just basically lost someone that was really close to me.',sad,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
 b'Ses01M_impro06_M006',Ses01M_impro06_M006,"b""And I've kind of been dealing with all of the...the stuff, you know the hospital and people work because...""",sad,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
-b'Ses01M_impro06_F003',Ses01M_impro06_F003,b"I'm sorry to hear that.",sad,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
+b'Ses01M_impro06_F003',Ses01M_impro06_F003,b"I'm sorry to hear that.",sad,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,fa,AllMatch
 b'Ses01M_impro06_M007',Ses01M_impro06_M007,"b""He kind of didn't have anyone to take care of that for him, so--""",sad,sentiment,sv,sd,sv,Match,NotConMatch,sv,sv,NotMatch
 b'Ses01M_impro06_F004',Ses01M_impro06_F004,b"You've been taking care of it all?",sad,sentiment,qy,qy,qy,NotMatch,NotConMatch,qy,qy,AllMatch
 b'Ses01M_impro06_F005',Ses01M_impro06_F005,b'Oh Jesus.',sad,sentiment,ba,na,ba,Match,NotConMatch,ba,ba,NotMatch
@@ -548,7 +548,7 @@ b'Ses01F_impro05_M003',Ses01F_impro05_M003,b'Okay.',neu,sentiment,b,b,b,NotMatch
 b'Ses01F_impro05_F003',Ses01F_impro05_F003,"b""I flew in over three hours ago, I've been in four different lines.""",fru,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
 b'Ses01F_impro05_M004',Ses01F_impro05_M004,b'Okay.',neu,sentiment,b,bk,b,Match,NotConMatch,b,b,NotMatch
 b'Ses01F_impro05_F004',Ses01F_impro05_F004,b"I waited the entire baggage- I waited for the whole baggage carousel four times.  They told me to go to the next one.  I waited through that for three planes and now I'm here.",fru,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
-b'Ses01F_impro05_M005',Ses01F_impro05_M005,b"Okay.  Great.  I'm really sorry that you had to do that.  What's your last name?  Let's start there.",neu,sentiment,fc,qy,^q,NotMatch,NotConMatch,qy,CORRECT,NotMatch
+b'Ses01F_impro05_M005',Ses01F_impro05_M005,b"Okay.  Great.  I'm really sorry that you had to do that.  What's your last name?  Let's start there.",neu,sentiment,fc,qy,^q,NotMatch,NotConMatch,qy,fa,NotMatch
 b'Ses01F_impro05_F005',Ses01F_impro05_F005,b'Nash.',fru,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
 b'Ses01F_impro05_M006',Ses01F_impro05_M006,b'Okay.',neu,sentiment,b,fc,b,Match,NotConMatch,b,b,NotMatch
 b'Ses01F_impro05_F006',Ses01F_impro05_F006,b'No G.',xxx,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
@@ -559,7 +559,7 @@ b'Ses01F_impro05_M008',Ses01F_impro05_M008,b'Uh-huh.',neu,sentiment,b,b,b,NotMat
 b'Ses01F_impro05_F009',Ses01F_impro05_F009,"b'Am I going to be getting, like, free tickets, free mileage. When can I expect my bag here?'",ang,sentiment,qy,sd,qy,Match,NotConMatch,qy,qy,NotMatch
 b'Ses01F_impro05_M009',Ses01F_impro05_M009,"b""Yeah. Yeah, I don't see- I don't see any--""",neu,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
 b'Ses01F_impro05_M010',Ses01F_impro05_M010,"b""I don't see any record of it, and I-usually when I don't see a record of it, that means um-""",neu,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
-b'Ses01F_impro05_M011',Ses01F_impro05_M011,"b""we've mistakenly lost your baggage.  We're very sorry.  On behalf of Jet Blue I would like to apologize for any inconvenience.  I am allowed to issue you a fifty dollar gift card which you can use any future flights you want to take with us.  I'm very sorry, once again...""",neu,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
+b'Ses01F_impro05_M011',Ses01F_impro05_M011,"b""we've mistakenly lost your baggage.  We're very sorry.  On behalf of Jet Blue I would like to apologize for any inconvenience.  I am allowed to issue you a fifty dollar gift card which you can use any future flights you want to take with us.  I'm very sorry, once again...""",neu,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,fa,AllMatch
 b'Ses01F_impro05_F010',Ses01F_impro05_F010,"b'Oh, Are you kidding me?'",xxx,sentiment,qy,qy,qy,NotMatch,NotConMatch,qy,qy,AllMatch
 b'Ses01F_impro05_M012',Ses01F_impro05_M012,"b'for such an inconvenience and your bag, but'",neu,sentiment,sv,sd,sd,NotMatch,ConMatch,sd,sd,NotMatch
 b'Ses01F_impro05_F011',Ses01F_impro05_F011,b'Is this a joke?',ang,sentiment,qy,qy,qy,NotMatch,NotConMatch,qy,qy,AllMatch
@@ -571,12 +571,12 @@ b'Ses01F_impro05_F013',Ses01F_impro05_F013,b"So you'll give me money and then I'
 b'Ses01F_impro05_M016',Ses01F_impro05_M016,"b""No.  I'm just giving you money, the bag is gone.  If it's not here, I'm really sorry there is nothing I can do because...""",neu,sentiment,sd,sd,^q,Match,NotConMatch,sd,sd,NotMatch
 b'Ses01F_impro05_M017',Ses01F_impro05_M017,b"this is the only track record that we have and if it's not listed here then it's probably not anywhere.",neu,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
 b'Ses01F_impro05_F014',Ses01F_impro05_F014,"b""You're kidding me, this is a joke.""",ang,sentiment,sv,sd,sv,Match,NotConMatch,sv,sv,NotMatch
-b'Ses01F_impro05_M018',Ses01F_impro05_M018,"b""Once again, I'm really- I'm really sorry.""",xxx,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
+b'Ses01F_impro05_M018',Ses01F_impro05_M018,"b""Once again, I'm really- I'm really sorry.""",xxx,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,fa,AllMatch
 b'Ses01F_impro05_F015',Ses01F_impro05_F015,b"Do you have any idea-- fifty dollars?  That's supposed to replace everything that I have?  Do you understand how much I have packed in there? Not only does it have sentimental value; it can't be replaced like that.  It was incredibly expensive.",ang,sentiment,qy,qy,qy,NotMatch,NotConMatch,qy,qy,AllMatch
 b'Ses01F_impro05_M019',Ses01F_impro05_M019,b'Yes.',neu,sentiment,b,ny,ny,NotMatch,ConMatch,ny,ny,NotMatch
 b'Ses01F_impro05_M020',Ses01F_impro05_M020,b'I know.',neu,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
 b'Ses01F_impro05_F016',Ses01F_impro05_F016,b"We flew in from Paris.  I've been shopping for three weeks.",ang,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
-b'Ses01F_impro05_M021',Ses01F_impro05_M021,"b""I'm very sorry.  But if you see the sign that's right behind me here, it spells it out really clearly that we are not held liable--""",xxx,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
+b'Ses01F_impro05_M021',Ses01F_impro05_M021,"b""I'm very sorry.  But if you see the sign that's right behind me here, it spells it out really clearly that we are not held liable--""",xxx,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,fa,AllMatch
 b'Ses01F_impro05_F017',Ses01F_impro05_F017,b"I don't care what you're freaking sign says.  Somebody- Somebody needs to replace everything I've got there and give me money for my inconvenience.",ang,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
 b'Ses01F_impro05_M022',Ses01F_impro05_M022,b'Okay. Calm-',neu,sentiment,b,b,b,NotMatch,NotConMatch,b,b,AllMatch
 b'Ses01F_impro05_M023',Ses01F_impro05_M023,"b""Actually, we are not necessarily liable to give you- to even give you this fifty dollars so... it's actually- it's actually really""",neu,sentiment,sv,sv,sv,NotMatch,NotConMatch,sv,sv,AllMatch
@@ -1022,7 +1022,7 @@ b'Ses01M_script02_1_M044',Ses01M_script02_1_M044,"b'And form the line and starte
 b'Ses01M_script02_1_M045',Ses01M_script02_1_M045,b"It's like urgency that's pure urge you know.  It's single-mindedness with no mind.",exc,sentiment,sv,sv,sd,Match,NotConMatch,sv,sv,NotMatch
 b'Ses01M_script02_1_M046',Ses01M_script02_1_M046,"b""It's crazy.  Look at this, I'm giving myself goose bumps, the hairs are standing up on my arm.""",exc,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
 b'Ses01M_script02_1_F024',Ses01M_script02_1_F024,b"That's the wind.",xxx,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
-b'Ses01F_impro06_M000',Ses01F_impro06_M000,"b""I'm sorry, Joy.""",sad,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,sd,AllMatch
+b'Ses01F_impro06_M000',Ses01F_impro06_M000,"b""I'm sorry, Joy.""",sad,sentiment,sd,sd,sd,NotMatch,NotConMatch,sd,fa,AllMatch
 b'Ses01F_impro06_F000',Ses01F_impro06_F000,b"It's okay.",xxx,sentiment,sv,sd,sv,Match,NotConMatch,sv,sv,NotMatch
 b'Ses01F_impro06_M001',Ses01F_impro06_M001,b'Is there anything I can get you?  Do you want me to take care of anything for you or...?',neu,sentiment,qy,qy,qy,NotMatch,NotConMatch,qy,qy,AllMatch
 b'Ses01F_impro06_F001',Ses01F_impro06_F001,"b'No, no, no.'",xxx,sentiment,nn,nn,nn,NotMatch,NotConMatch,nn,nn,AllMatch
