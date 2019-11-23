@@ -61,37 +61,47 @@ def predict_classes(text_input, link_online=True):
         con_out = ['None', 'None']
         for item in con_predictions:
             con_out.append(tags[np.argmax(item)])
-
     else:
         con_out = []
-
     return non_con_out, con_out
 
 
-def predict_classes_from_features(x):
+def predict_classes_for_elmo(x, predict_from_text=False, link_online=False):
+    ''' Predicting from text takes 'x' as a list of utterances and
+    will require to have ELMo emb server running at port 4004 or online hosting service. '''
+    if predict_from_text:
+        if link_online:
+            link = "https://d55da20d.eu.ngrok.io/"
+        else:
+            link = "http://0.0.0.0:4004/"
+        x = string_to_floats(
+            requests.post(link + 'elmo_embed_words',
+                          json={"text": x}).json()['result'])
+
     x = padSequencesKeras(x, max_seq_len, toPadding)
+
     non_con_predictions = model.predict(x)
     non_con_out = []
-    non_con_out_nums = []
+    non_con_out_confs = []
     for item in non_con_predictions:
-        non_con_out.append(tags[np.argmax(item)])
-        non_con_out_nums.append(np.argmax(item))
+        non_con_out.append(tags[item.argmax()])
+        non_con_out_confs.append(item[item.argmax()])
 
     if len(x) > seq_length:
         x = prepare_data(x, [], seq_length, with_y=False)
         con_predictions = context_model.predict(x)
-        con_out = ['None', 'None']
-        con_out_nums = [0, 0]
+        # as context based model starts from third utterance
+        # we are taking first two DAs from non-context model
+        # in the end, it will be checked with their conf values
+        con_out = [non_con_out[0], non_con_out[1]]
+        con_out_confs = [non_con_out_confs[0], non_con_out_confs[1]]
         for item in con_predictions:
             con_out.append(tags[np.argmax(item)])
-            con_out_nums.append(np.argmax(item))
-
+            con_out_confs.append(item[item.argmax()])
     else:
         con_out = ['None', 'None']
-        con_out_nums = [0, 0]
-
-    return non_con_out, con_out, non_con_out_nums, con_out_nums
-
+        con_out_confs = [0.0, 0.0]
+    return non_con_out, con_out, non_con_out_confs, con_out_confs
 
 # print(predict_classes(
 #     "I don't know,  \r\n Where did you go? \r\n  What? \r\n  "

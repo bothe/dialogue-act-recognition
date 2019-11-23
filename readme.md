@@ -1,7 +1,12 @@
 
 ### Steps to reproduce the results
-1. Run ```main_swda_elmo_mean.py``` for training (set ```train = True```)
- the models.
+#### Training and usege of the variant models 
+Run ```main_swda_elmo_mean.py``` for training (set ```train = True```)
+ the models, else it will return the context and non-context models 
+ with direct function ```predict_classes_elmo_mean_features```.
+ 
+ Similarly, ```main_predictor_online.py``` is for models of 
+ ELMo normal features.
 
 2. To annotate IEMOCAP data:
 run ```mocap_dia_act_annotate.py``` to get context and non-context 
