@@ -7,7 +7,7 @@ import pyprind
 elmo = ElmoEmbedder()
 
 
-def get_elmo_fea(data, mean=True, print_length=False):
+def get_elmo_embs(data, mean=True, print_length=False):
     n = len(data)
     tk = word_tokenizer.WordTokenizer()
     tokens = tk.batch_tokenize(data)

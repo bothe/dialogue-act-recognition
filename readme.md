@@ -8,12 +8,18 @@ Run ```main_swda_elmo_mean.py``` for training (set ```train = True```)
  Similarly, ```main_predictor_online.py``` is for models of 
  ELMo normal features.
 
-2. To annotate IEMOCAP data:
+They are already called in the following scripts for their _usage_, 
+and hence before running following scripts, 
+directory ```params``` should contain all the weight files and 
+directory ```features``` should contain all the elmo features.
+
+#### Annotating the emotion corpora with dialogue acts
+1. To annotate IEMOCAP data:
 run ```mocap_dia_act_annotate.py``` to get context and non-context 
 annotations and save as numpy arrays, 
 and generate final annotation (csv) file.
 
-3. To annotate MELD data:
+2. To annotate MELD data:
 run ```meld_dia_act_annotate.py``` to get context and non-context
 annotations and save as numpy arrays,
 and generate final annotation (csv) file.

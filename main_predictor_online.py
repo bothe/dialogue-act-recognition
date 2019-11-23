@@ -1,9 +1,8 @@
 from keras.utils import to_categorical
 import pickle, os
 import requests
-import numpy as np
-# requests.post('http://0:4004/elmo_embed_words', json={"text":'is it?'}).json()
-# requests.post('https://55898a32.eu.ngrok.io/elmo_embed_words', json={"text":'is it?\r\nokay got it.'}).json()
+
+# TODO: need statements "if train" similar to main_swda_elmo_mean.py
 
 from models import model_attention_applied_after_bilstm, context_model_att
 from utils import *
@@ -30,7 +29,7 @@ model.load_weights('params/weight_parameters')
 evaluation = model.evaluate(X_Test, target_category_test, verbose=2)
 print("Test results for non-context model - accuracy: {}".format(evaluation[1]))
 
-seq_length = 3  # Preparing data for contextual training with Seq_length
+seq_length = 3  # Preparing test data for contextual training with Seq_length
 X_test_con, Y_test_con = prepare_data(X_Test, target_category_test, seq_length)
 
 # CONTEXT MODEL
@@ -39,31 +38,6 @@ con_model_name = 'params/context_model_att_{}'.format(seq_length)
 context_model.load_weights(con_model_name)
 loss, old_acc = context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
 print('Context Score results:', old_acc)
-
-
-def predict_classes(text_input, link_online=True):
-    if link_online:
-        link = "https://d55da20d.eu.ngrok.io/"
-    else:
-        link = "http://0.0.0.0:4004/"
-    x = string_to_floats(
-        requests.post(link + 'elmo_embed_words',
-                      json={"text": text_input}).json()['result'])
-    x = padSequencesKeras(x, max_seq_len, toPadding)
-    non_con_predictions = model.predict(x)
-    non_con_out = []
-    for item in non_con_predictions:
-        non_con_out.append(tags[np.argmax(item)])
-
-    if len(x) > seq_length:
-        x = prepare_data(x, [], seq_length, with_y=False)
-        con_predictions = context_model.predict(x)
-        con_out = ['None', 'None']
-        for item in con_predictions:
-            con_out.append(tags[np.argmax(item)])
-    else:
-        con_out = []
-    return non_con_out, con_out
 
 
 def predict_classes_for_elmo(x, predict_from_text=False, link_online=False):
@@ -103,8 +77,11 @@ def predict_classes_for_elmo(x, predict_from_text=False, link_online=False):
         con_out_confs = [0.0, 0.0]
     return non_con_out, con_out, non_con_out_confs, con_out_confs
 
-# print(predict_classes(
+# manual tests
+# print(predict_classes_for_elmo(
 #     "I don't know,  \r\n Where did you go? \r\n  What? \r\n  "
-#     "Where did you go? \r\n I went to University. \r\n Uh-huh."))
-# print(predict_classes("\r\n".join(Xtest[0:100])))
+#     "Where did you go? \r\n I went to University. \r\n Uh-huh.",
+#     predict_from_text=True, link_online=False))
+# print(predict_classes("\r\n".join(Xtest[0:100]),
+#     predict_from_text=True, link_online=False))
 # print(Ytest[0:100])
