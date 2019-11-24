@@ -33,10 +33,10 @@ seq_length = 3  # Preparing test data for contextual training with Seq_length
 X_test_con, Y_test_con = prepare_data(X_Test, target_category_test, seq_length)
 
 # CONTEXT MODEL
-context_model = context_model_att(seq_length, max_seq_len, X_test_con.shape[3], len(tags))
+context_model_elmo = context_model_att(seq_length, max_seq_len, X_test_con.shape[3], len(tags))
 con_model_name = 'params/context_model_att_{}'.format(seq_length)
-context_model.load_weights(con_model_name)
-loss, old_acc = context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
+context_model_elmo.load_weights(con_model_name)
+loss, old_acc = context_model_elmo.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
 print('Context Score results:', old_acc)
 
 
@@ -63,7 +63,7 @@ def predict_classes_for_elmo(x, predict_from_text=False, link_online=False):
 
     if len(x) > seq_length:
         x = prepare_data(x, [], seq_length, with_y=False)
-        con_predictions = context_model.predict(x)
+        con_predictions = context_model_elmo.predict(x)
         # as context based model starts from third utterance
         # we are taking first two DAs from non-context model
         # in the end, it will be checked with their conf values

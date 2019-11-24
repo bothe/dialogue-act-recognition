@@ -7,9 +7,8 @@ from MELD.utils.read_meld import *
 from final_annotator_utils import ensemble_annotation, convert_predictions_to_indices
 
 elmo_feature_retrieval = False
-predict_with_elmo = True
-predict_with_elmo_mean = True
-model_output_labels_directory = 'model_output_labels'
+predict_with_elmo = False
+predict_with_elmo_mean = False
 
 if os.path.exists('results/tags.npy'):
     tags = np.load('results/tags.npy')
@@ -31,17 +30,19 @@ elif predict_with_elmo or predict_with_elmo_mean:
 if predict_with_elmo:
     from main_predictor_online import predict_classes_for_elmo
 
-    meld_non_con_out_elmo, meld_con_out_elmo, meld_non_con_out_confs, meld_con_out_confs = predict_classes_for_elmo(
-        meld_elmo_features_train)
-    np.save('model_output_labels/meld_con_out_elmo', meld_con_out_elmo)
-    np.save('model_output_labels/meld_non_con_out_elmo', meld_non_con_out_elmo)
-    np.save('model_output_labels/meld_con_out_elmo_confs', meld_con_out_confs)
-    np.save('model_output_labels/meld_non_con_out_elmo_confs', meld_non_con_out_confs)
+    concatenated_vectors = np.concatenate((meld_elmo_features_train, meld_elmo_features_dev, meld_elmo_features_test))
+    meld_elmo_non_con_out, meld_elmo_con_out, meld_elmo_non_con_out_confs, meld_elmo_con_out_confs = \
+        predict_classes_for_elmo(concatenated_vectors)
+
+    np.save('model_output_labels/meld_elmo_con_out', meld_elmo_con_out)
+    np.save('model_output_labels/meld_elmo_non_con_out', meld_elmo_non_con_out)
+    np.save('model_output_labels/meld_elmo_con_out_confs', meld_elmo_con_out_confs)
+    np.save('model_output_labels/meld_elmo_non_con_out_confs', meld_elmo_non_con_out_confs)
 else:
-    meld_con_out_elmo = np.load('model_output_labels/meld_con_out_elmo.npy')
-    meld_non_con_out_elmo = np.load('model_output_labels/meld_non_con_out_elmo.npy')
-    meld_con_out_confs = np.load('model_output_labels/meld_con_out_elmo_confs')
-    meld_non_con_out_confs = np.load('model_output_labels/meld_non_con_out_elmo_confs')
+    meld_elmo_con_out = np.load('model_output_labels/meld_elmo_con_out.npy')
+    meld_elmo_non_con_out = np.load('model_output_labels/meld_elmo_non_con_out.npy')
+    meld_elmo_con_out_confs = np.load('model_output_labels/meld_elmo_con_out_confs.npy')
+    meld_elmo_non_con_out_confs = np.load('model_output_labels/meld_elmo_non_con_out_confs.npy')
 
 if predict_with_elmo_mean:
     meld_elmo_features_test_mean = np.array([item.mean(axis=0) for item in meld_elmo_features_test])
@@ -50,36 +51,43 @@ if predict_with_elmo_mean:
 
     from main_swda_elmo_mean import *
 
-    meld_non_con_out_elmo_mean, meld_con_out_elmo_mean, meld_non_con_out_confs_mean, \
-    meld_con_out_confs_mean = predict_classes_for_elmo_mean(meld_elmo_features_train_mean)
+    meld_elmo_mean_non_con_out, meld_elmo_mean_con_out, meld_elmo_mean_non_con_out_confs, \
+    meld_elmo_mean_con_out_confs = predict_classes_for_elmo_mean(np.concatenate((meld_elmo_features_train_mean,
+                                                                                 meld_elmo_features_dev_mean,
+                                                                                 meld_elmo_features_test_mean)))
 
-    meld_elmo_features_train_mean_con = prepare_data(meld_elmo_features_train_mean, [], con_seq_length, with_y=False)
-    mean_con_predictions = context_model.predict(meld_elmo_features_train_mean_con)
-    meld_con_out_mean = []
-    for item in mean_con_predictions:
-        meld_con_out_mean.append(tags[np.argmax(item)])
-    meld_con_out_mean.insert(0, meld_non_con_out_elmo[1])
-    meld_con_out_mean.insert(0, meld_non_con_out_elmo[0])
-    np.save("model_output_labels/con_out_mean", meld_con_out_mean)
+    np.save('model_output_labels/meld_elmo_mean_con_out', meld_elmo_mean_con_out)
+    np.save('model_output_labels/meld_elmo_mean_non_con_out', meld_elmo_mean_non_con_out)
+    np.save('model_output_labels/meld_elmo_mean_con_out_confs', meld_elmo_mean_con_out_confs)
+    np.save('model_output_labels/meld_elmo_mean_non_con_out_confs', meld_elmo_mean_non_con_out_confs)
 else:
-    meld_con_out_mean = np.load("model_output_labels/con_out_mean.npy")
+    meld_elmo_mean_con_out = np.load('model_output_labels/meld_elmo_mean_con_out.npy')
+    meld_elmo_mean_non_con_out = np.load('model_output_labels/meld_elmo_mean_non_con_out.npy')
+    meld_elmo_mean_con_out_confs = np.load('model_output_labels/meld_elmo_mean_con_out_confs.npy')
+    meld_elmo_mean_non_con_out_confs = np.load('model_output_labels/meld_elmo_mean_non_con_out_confs.npy')
 
 # Evaluation of context model predictions
 print('Accuracy comparision between context- and non-context-based prediction: {}'.format(
-    classification.accuracy_score(meld_con_out_elmo, meld_con_out_mean)))
+    classification.accuracy_score(meld_elmo_con_out, meld_elmo_mean_con_out)))
 print('Kappa (Cohen) score between context- and non-context-based prediction: {}'.format(
-    classification.cohen_kappa_score(meld_con_out_elmo, meld_con_out_mean)))
-print(classification.classification_report(meld_con_out_elmo, meld_con_out_mean))
+    classification.cohen_kappa_score(meld_elmo_con_out, meld_elmo_mean_con_out)))
+print(classification.classification_report(meld_elmo_con_out, meld_elmo_mean_con_out))
 print('Spearman Correlation between context- and non-context-based prediction: {}'.format(
-    stats.spearmanr(meld_con_out_elmo, meld_con_out_mean)))
-reliability_data = convert_predictions_to_indices(meld_con_out_elmo, meld_non_con_out_elmo,
-                                                  meld_con_out_mean, meld_non_con_out_elmo, tags)
+    stats.spearmanr(meld_elmo_con_out, meld_elmo_mean_con_out)))
+reliability_data = convert_predictions_to_indices(meld_elmo_con_out, meld_elmo_non_con_out,
+                                                  meld_elmo_mean_con_out, meld_elmo_mean_non_con_out, tags)
 k_alpha = alpha(reliability_data, level_of_measurement='nominal')
 print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
 
 # Generate final file of annotations; contains CORRECT label for corrections in EDAs
-row = ensemble_annotation(meld_non_con_out_elmo, meld_con_out_elmo, meld_con_out_mean, utt_Speaker_train, utt_train_data,
-                          utt_id_train_data, utt_Emotion_train_data, sentiment_labels=utt_Sentiment_train_data,
-                          meld_data=True, file_name='meld_emotion', write_final_csv=False)
+utt_Speaker = utt_Speaker_train + utt_Speaker_dev + utt_Speaker_test
+utt_data = utt_train_data + utt_dev_data + utt_test_data
+utt_id_data = utt_id_train_data + utt_id_dev_data + utt_id_test_data
+utt_Emotion_data = utt_Emotion_train_data + utt_Emotion_dev_data + utt_Emotion_test_data
+utt_Sentiment_data = utt_Sentiment_train_data + utt_Sentiment_dev_data + utt_Sentiment_test_data
+
+row = ensemble_annotation(meld_elmo_non_con_out, meld_elmo_con_out, meld_elmo_mean_con_out, utt_Speaker,
+                          utt_data, utt_id_data, utt_Emotion_data, sentiment_labels=utt_Sentiment_data,
+                          meld_data=True, file_name='meld_emotion', write_final_csv=True)
 
 print('ran meld_dia_act_annotate.py')
