@@ -21,7 +21,7 @@ iemocap_elmo_features = np.load('features/iemocap_elmo_features.npy', allow_pick
 # con_das, non_con_das, con_da_nums, non_con_da_nums = predict_das_diswiz(utterances)
 
 ## Predict with normal elmo features
-from main_predictor_online import predict_classes_for_elmo
+from main_swda_elmo_predictor import predict_classes_for_elmo
 non_con_out, con_out, non_con_out_nums, con_out_nums = predict_classes_for_elmo(iemocap_elmo_features)
 
 con_elmo_embs, con_diswiz, non_con_elmo_embs, non_con_diswiz = read_all_predictions()

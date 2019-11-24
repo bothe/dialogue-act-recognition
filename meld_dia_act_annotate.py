@@ -29,7 +29,7 @@ elif predict_with_elmo or predict_with_elmo_mean:
     meld_elmo_features_train = np.load('features/meld_elmo_features_train.npy', allow_pickle=True)
 
 if predict_with_elmo:
-    from main_predictor_online import predict_classes_for_elmo
+    from main_swda_elmo_predictor import predict_classes_for_elmo
 
     concatenated_vectors = np.concatenate((meld_elmo_features_train, meld_elmo_features_dev, meld_elmo_features_test))
     meld_elmo_non_con_out, meld_elmo_con_out, meld_elmo_non_con_out_confs, meld_elmo_con_out_confs = \
@@ -94,12 +94,12 @@ print('Kappa (Cohen) score between context-based predictions: {}'.format(
 print(classification.classification_report(meld_elmo_con_out, meld_elmo_mean_con_out))
 print('Spearman Correlation between context-based predictions: {}'.format(
     stats.spearmanr(meld_elmo_con_out, meld_elmo_mean_con_out)))
-reliability_data = convert_predictions_to_indices(meld_elmo_con_out, meld_elmo_non_con_out,
-                                                  meld_elmo_mean_con_out, meld_elmo_mean_non_con_out, tags)
+reliability_data = convert_predictions_to_indices(meld_elmo_con_out, meld_elmo_non_con_out, meld_elmo_mean_con_out,
+                                                  meld_elmo_mean_non_con_out, meld_diswiz_con_out, tags)
 k_alpha = alpha(reliability_data, level_of_measurement='nominal')
 print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
 
-# Generate final file of annotations; contains CORRECT label for corrections in EDAs
+# Generate final file of annotations; contains "xx" label for corrections in EDAs
 row = ensemble_eda_annotation(meld_elmo_non_con_out, meld_elmo_mean_non_con_out,
                               meld_elmo_con_out, meld_elmo_mean_con_out, meld_diswiz_con_out,
                               meld_elmo_non_con_out_confs, meld_elmo_mean_non_con_out_confs,

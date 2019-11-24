@@ -106,7 +106,7 @@ def model_attention_applied_after_bilstm(seq_length, emb_dim, num_classes, singl
     # lstm_out      = (SimpleRNN(lstm_units, return_sequences=True))(inputs)
     lstm_out = Bidirectional(LSTM(lstm_units, return_sequences=True))(inputs)
     attention_mul = attention_3d_block(lstm_out, seq_length, single_attention_vector)
-    attention_mul = Flatten()(attention_mul)
+    attention_mul = Flatten(name='flatten_attention')(attention_mul)
     # inter_rep     = Dense(100)(attention_mul)
     output = Dense(num_classes, activation='softmax')(attention_mul)
     model = Model(inputs=[inputs], outputs=output)

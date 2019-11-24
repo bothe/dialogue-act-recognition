@@ -68,30 +68,32 @@ def ensemble_annotation(non_con_out, con_out, con_out_mean, utt_Speaker_train, u
     return utt_info_rows
 
 
-def convert_predictions_to_indices(con_out, non_con_out, con_elmo_embs, non_con_elmo_embs, tags):
+def convert_predictions_to_indices(eda1, eda2, eda3, eda4, eda5, tags):
     def return_indices(con_out_strs):
         con_out_nums = []
         for item in con_out_strs:
+            if item == 'fo_o':
+                item = 'fo_o_fw_"_by_bc'
             con_out_nums.append(list(tags).index(item))
         return np.array(con_out_nums)
 
-    con_out = return_indices(con_out)
-    con_elmo_embs = return_indices(con_elmo_embs)
-    non_con_out = return_indices(non_con_out)
-    non_con_elmo_embs = return_indices(non_con_elmo_embs)
+    eda1 = return_indices(eda1)
+    eda3 = return_indices(eda3)
+    eda2 = return_indices(eda2)
+    eda4 = return_indices(eda4)
+    eda5 = return_indices(eda5)
     nominal = False
     if nominal:
-        return np.reshape(np.concatenate((con_out, con_elmo_embs,
-                                          non_con_out, non_con_elmo_embs)), (4, len(con_out))).transpose()
+        return np.reshape(np.concatenate((eda1, eda3, eda2, eda4, eda5)), (5, len(eda1))).transpose()
     else:
-        return np.array([con_out, con_elmo_embs, non_con_out, non_con_elmo_embs])
+        return np.array([eda1, eda3, eda2, eda4, eda5])
 
 
 def ensemble_eda_annotation(eda1, eda2, eda3, eda4, eda5,
                             eda1_conf, eda2_conf, eda3_conf, eda4_conf, eda5_conf,
                             utt_speaker, utterances, utt_id, utt_emotion,
                             sentiment_labels=[], meld_data=True,
-                            file_name='meld_emotion', write_final_csv=True):
+                            file_name='meld_emotion', write_final_csv=True, write_utterances=True):
     if write_final_csv:
         fieldnames = ['speaker', 'utt_id', 'utterance', 'emotion', 'sentiment',
                       'eda1', 'eda2', 'eda3', 'eda4', 'eda5', 'EDA',
@@ -161,8 +163,14 @@ def ensemble_eda_annotation(eda1, eda2, eda3, eda4, eda5,
         else:
             sentiment = 'sentiment'
 
+        # We would do this for IEMOCAP
+        if write_utterances:
+            utterance = utterances[i]
+        else:
+            utterance = ''
+
         utt_info_row = {'speaker': utt_speaker[i].encode("utf-8"), 'utt_id': utt_id[i],
-                        'utterance': utterances[i].encode("utf-8"),
+                        'utterance': utterance.encode("utf-8"),
                         'emotion': utt_emotion[i], 'sentiment': sentiment,
 
                         'eda1': str(eda1[i]), 'eda2': str(eda2[i]), 'eda3': str(eda3[i]),
