@@ -4,7 +4,7 @@ from scipy.stats import stats
 from sklearn.metrics import classification
 import os
 from MELD.utils.read_meld import *
-from final_annotator_utils import ensemble_annotation, convert_predictions_to_indices
+from final_annotator_utils import ensemble_annotation, convert_predictions_to_indices, ensemble_eda_annotation
 
 elmo_feature_retrieval = False
 predict_with_elmo = False
@@ -51,10 +51,10 @@ if predict_with_elmo_mean:
 
     from main_swda_elmo_mean import *
 
+    concatenated_mean_vectors = np.concatenate((meld_elmo_features_train_mean, meld_elmo_features_dev_mean,
+                                                meld_elmo_features_test_mean))
     meld_elmo_mean_non_con_out, meld_elmo_mean_con_out, meld_elmo_mean_non_con_out_confs, \
-    meld_elmo_mean_con_out_confs = predict_classes_for_elmo_mean(np.concatenate((meld_elmo_features_train_mean,
-                                                                                 meld_elmo_features_dev_mean,
-                                                                                 meld_elmo_features_test_mean)))
+    meld_elmo_mean_con_out_confs = predict_classes_for_elmo_mean(concatenated_mean_vectors)
 
     np.save('model_output_labels/meld_elmo_mean_con_out', meld_elmo_mean_con_out)
     np.save('model_output_labels/meld_elmo_mean_non_con_out', meld_elmo_mean_non_con_out)
@@ -86,8 +86,12 @@ utt_id_data = utt_id_train_data + utt_id_dev_data + utt_id_test_data
 utt_Emotion_data = utt_Emotion_train_data + utt_Emotion_dev_data + utt_Emotion_test_data
 utt_Sentiment_data = utt_Sentiment_train_data + utt_Sentiment_dev_data + utt_Sentiment_test_data
 
-row = ensemble_annotation(meld_elmo_non_con_out, meld_elmo_con_out, meld_elmo_mean_con_out, utt_Speaker,
-                          utt_data, utt_id_data, utt_Emotion_data, sentiment_labels=utt_Sentiment_data,
-                          meld_data=True, file_name='meld_emotion', write_final_csv=True)
+row = ensemble_eda_annotation(meld_elmo_non_con_out, meld_elmo_mean_non_con_out,
+                              meld_elmo_con_out, meld_elmo_mean_con_out, meld_elmo_con_out,
+                              meld_elmo_non_con_out_confs, meld_elmo_mean_non_con_out_confs,
+                              meld_elmo_con_out_confs, meld_elmo_mean_con_out_confs, meld_elmo_con_out_confs,
+                              utt_Speaker, utt_data, utt_id_data, utt_Emotion_data,
+                              sentiment_labels=utt_Sentiment_data, meld_data=True,
+                              file_name='meld_emotion', write_final_csv=True)
 
 print('ran meld_dia_act_annotate.py')
