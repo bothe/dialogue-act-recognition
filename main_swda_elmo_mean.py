@@ -92,7 +92,8 @@ def predict_classes_elmo_mean_features(x):
     if len(x) > con_seq_length:
         x = prepare_data(x, [], con_seq_length, with_y=False)
         con_predictions = context_model.predict(x)
-        # take first two DAs from non-context model as we skip in context model (two since "con_seq_length-1")
+        # take first two DAs from non-context model as we skip in context model
+        # (two since "con_seq_length-1")
         con_out = [non_con_out[0], non_con_out[1]]
         for item in con_predictions:
             con_out.append(tags[np.argmax(item)])
@@ -102,8 +103,10 @@ def predict_classes_elmo_mean_features(x):
 
 
 def predict_classes_for_elmo_mean(x, predict_from_text=False, link_online=False):
-    ''' Predicting from text takes 'x' as a list of utterances and
-    will require to have ELMo emb server running at port 4004 or online hosting service. '''
+    """
+    Predicting from text takes 'x' as a list of utterances (text) and
+    will require to have ELMo emb server running at port 4004 or online hosting service.
+    """
     if predict_from_text:
         if link_online:
             link = "https://d55da20d.eu.ngrok.io/"

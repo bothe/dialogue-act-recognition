@@ -1,5 +1,4 @@
 import os
-
 import numpy as np
 from krippendorff import alpha
 from scipy.stats import stats
@@ -38,6 +37,9 @@ if os.path.exists(elmo_mean_con_out_file_name) and os.path.exists(elmo_mean_non_
     tags = np.load(tags_file_name)
 else:
     from main_swda_elmo_mean import *
+
+    mocap_non_con_out_elmo_mean, mocap_con_out_elmo_mean, mocap_non_con_out_confs_mean, \
+    mocap_con_out_confs_mean = predict_classes_for_elmo_mean(iemocap_elmo_mean_features)
 
     elmo_mean_non_con_out, elmo_mean_con_out = predict_classes_elmo_mean_features(iemocap_elmo_mean_features)
     np.save(elmo_mean_con_out_file_name, elmo_mean_con_out)
