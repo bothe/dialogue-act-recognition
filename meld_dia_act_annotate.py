@@ -9,6 +9,7 @@ from final_annotator_utils import ensemble_annotation, convert_predictions_to_in
 elmo_feature_retrieval = False
 predict_with_elmo = False
 predict_with_elmo_mean = False
+predict_with_diswiz = False
 
 if os.path.exists('results/tags.npy'):
     tags = np.load('results/tags.npy')
@@ -66,13 +67,32 @@ else:
     meld_elmo_mean_con_out_confs = np.load('model_output_labels/meld_elmo_mean_con_out_confs.npy')
     meld_elmo_mean_non_con_out_confs = np.load('model_output_labels/meld_elmo_mean_non_con_out_confs.npy')
 
+
+
+utt_Speaker = utt_Speaker_train + utt_Speaker_dev + utt_Speaker_test
+utt_data = utt_train_data + utt_dev_data + utt_test_data
+utt_id_data = utt_id_train_data + utt_id_dev_data + utt_id_test_data
+utt_Emotion_data = utt_Emotion_train_data + utt_Emotion_dev_data + utt_Emotion_test_data
+utt_Sentiment_data = utt_Sentiment_train_data + utt_Sentiment_dev_data + utt_Sentiment_test_data
+
+if predict_with_diswiz:
+    from diswiz.main import predict_das_diswiz
+    meld_diswiz_con_out, meld_diswiz_non_con_out, meld_diswiz_con_out_confs, \
+        meld_diswiz_non_con_out_confs = predict_das_diswiz(utt_data)
+    np.save('model_output_labels/meld_diswiz_con_out', meld_diswiz_con_out)
+    np.save('model_output_labels/meld_diswiz_con_out_confs', meld_diswiz_con_out_confs)
+else:
+    meld_diswiz_con_out = np.load('model_output_labels/meld_diswiz_con_out.npy')
+    meld_diswiz_con_out_confs = np.load('model_output_labels/meld_diswiz_con_out_confs.npy')
+
+
 # Evaluation of context model predictions
-print('Accuracy comparision between context- and non-context-based prediction: {}'.format(
+print('Accuracy comparision between context-based predictions: {}'.format(
     classification.accuracy_score(meld_elmo_con_out, meld_elmo_mean_con_out)))
-print('Kappa (Cohen) score between context- and non-context-based prediction: {}'.format(
+print('Kappa (Cohen) score between context-based predictions: {}'.format(
     classification.cohen_kappa_score(meld_elmo_con_out, meld_elmo_mean_con_out)))
 print(classification.classification_report(meld_elmo_con_out, meld_elmo_mean_con_out))
-print('Spearman Correlation between context- and non-context-based prediction: {}'.format(
+print('Spearman Correlation between context-based predictions: {}'.format(
     stats.spearmanr(meld_elmo_con_out, meld_elmo_mean_con_out)))
 reliability_data = convert_predictions_to_indices(meld_elmo_con_out, meld_elmo_non_con_out,
                                                   meld_elmo_mean_con_out, meld_elmo_mean_non_con_out, tags)
@@ -80,16 +100,10 @@ k_alpha = alpha(reliability_data, level_of_measurement='nominal')
 print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
 
 # Generate final file of annotations; contains CORRECT label for corrections in EDAs
-utt_Speaker = utt_Speaker_train + utt_Speaker_dev + utt_Speaker_test
-utt_data = utt_train_data + utt_dev_data + utt_test_data
-utt_id_data = utt_id_train_data + utt_id_dev_data + utt_id_test_data
-utt_Emotion_data = utt_Emotion_train_data + utt_Emotion_dev_data + utt_Emotion_test_data
-utt_Sentiment_data = utt_Sentiment_train_data + utt_Sentiment_dev_data + utt_Sentiment_test_data
-
 row = ensemble_eda_annotation(meld_elmo_non_con_out, meld_elmo_mean_non_con_out,
-                              meld_elmo_con_out, meld_elmo_mean_con_out, meld_elmo_con_out,
+                              meld_elmo_con_out, meld_elmo_mean_con_out, meld_diswiz_con_out,
                               meld_elmo_non_con_out_confs, meld_elmo_mean_non_con_out_confs,
-                              meld_elmo_con_out_confs, meld_elmo_mean_con_out_confs, meld_elmo_con_out_confs,
+                              meld_elmo_con_out_confs, meld_elmo_mean_con_out_confs, meld_diswiz_con_out_confs,
                               utt_Speaker, utt_data, utt_id_data, utt_Emotion_data,
                               sentiment_labels=utt_Sentiment_data, meld_data=True,
                               file_name='meld_emotion', write_final_csv=True)

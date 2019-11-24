@@ -106,20 +106,32 @@ def ensemble_eda_annotation(eda1, eda2, eda3, eda4, eda5,
     con_matches = 0
     based_on_confs = 0
     utt_info_rows = []
-    for i in range(len(eda2)):
+    for i in range(len(eda1)):
         match = "NotMatch"
         con_match = "NotConMatch"
-        all_match = "NoneMatch"
+        all_match = "AllNotMatch"
         matched_element = 'xx'
         # All labels
         if eda5[i] == eda4[i] == eda3[i] == eda2[i] == eda1[i]:
             all_match = "AllMatch"
-            matched_element = eda2[i]
+            matched_element = eda5[i]
             total_match += 1
         # Context labels
         elif eda5[i] == eda4[i] == eda3[i]:
             con_match = "ConMatch"
-            matched_element = eda2[i]
+            matched_element = eda5[i]
+            con_matches += 1
+        elif eda5[i] == eda3[i] and eda5[i] in [eda1[i], eda2[i]]:
+            con_match = "ConMatch_eda5_eda3"
+            matched_element = eda5[i]
+            con_matches += 1
+        elif eda5[i] == eda4[i] and eda5[i] in [eda1[i], eda2[i]]:
+            con_match = "ConMatch_eda5_eda4"
+            matched_element = eda4[i]
+            con_matches += 1
+        elif eda4[i] == eda3[i] and eda4[i] in [eda1[i], eda2[i]]:
+            con_match = "ConMatch_eda4_eda3"
+            matched_element = eda4[i]
             con_matches += 1
 
         # None of above resulted any label, rank the confidence values
@@ -130,13 +142,19 @@ def ensemble_eda_annotation(eda1, eda2, eda3, eda4, eda5,
             opt_eda1 = temp_edas[sorted_temp_edas_conf[0]]
             opt_eda2 = temp_edas[sorted_temp_edas_conf[1]]
             opt_eda3 = temp_edas[sorted_temp_edas_conf[2]]
-            if opt_eda1 == opt_eda2:
+            opt_eda4 = temp_edas[sorted_temp_edas_conf[3]]
+            if opt_eda1 == opt_eda2 == opt_eda3:
                 matched_element = opt_eda1  # first order
-                match = "ConfMatch" + 'First'
-            elif opt_eda1 == opt_eda3:
+                match = "ConfMatch" + 'First123'
+                based_on_confs += 1
+            elif opt_eda1 == opt_eda2 == opt_eda4:
                 matched_element = opt_eda1  # second order
-                match = "ConfMatch" + 'Second'
-            based_on_confs += 1
+                match = "ConfMatch" + 'Second124'
+                based_on_confs += 1
+            elif opt_eda1 == opt_eda2:
+                matched_element = opt_eda1  # second order
+                match = "ConfMatch" + 'OnlyTwo12'
+                based_on_confs += 1
 
         if meld_data:
             sentiment = sentiment_labels[i]
@@ -153,10 +171,12 @@ def ensemble_eda_annotation(eda1, eda2, eda3, eda4, eda5,
 
         if write_final_csv:
             writer.writerow(utt_info_row)
+        if matched_element == 'xx':
+            none_matches+=1
         utt_info_rows.append(utt_info_row)
 
     print(
-        "Matches in all lists(3): {}% and in context lists(2): {}%, any two matches: {}%, None matched: {}%".format(
-            round((total_match / (i + 1)) * 100, 2), round((con_matches / (i + 1)) * 100, 2),
-            round((based_on_confs / (i + 1)) * 100, 2), round((none_matches / (i + 1)) * 100, 2)))
+        "Matches in all: {}%, in context: {}%, based on confidence rank: {}%, and none matched: {}%".format(
+            round((total_match / len(eda1)) * 100, 2), round((con_matches / len(eda1)) * 100, 2),
+            round((based_on_confs / len(eda1)) * 100, 2), round((none_matches / len(eda1)) * 100, 2)))
     return utt_info_rows
