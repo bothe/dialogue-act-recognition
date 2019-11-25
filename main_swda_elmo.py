@@ -5,7 +5,7 @@ from models import model_attention_applied_after_bilstm, context_model_att
 from utils import *
 
 max_seq_len = 20
-train_non_context_model = True
+train_non_context_model = False
 train_context_model = False
 
 trainFile = 'data/swda-actags_train_speaker.csv'

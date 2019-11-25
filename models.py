@@ -71,7 +71,7 @@ def context_model_att(seq_len, max_seq_length, emb_dim, classes, nodes=128, drop
     seq_encoded = LSTM(nodes, return_sequences=True)(seq_encoded)
     # Apply attention layer
     attention_mul = attention_3d_block(seq_encoded, seq_len, single_attention_vector)
-    attention_mul = Flatten()(attention_mul)
+    attention_mul = Flatten(name='flatten_attention')(attention_mul)
     # Prediction
     prediction = Dense(classes, activation='softmax')(attention_mul)
 
