@@ -7,8 +7,8 @@ from final_annotator_utils import ensemble_annotation, convert_predictions_to_in
 from mocap_data_reader import get_mocap_data
 
 elmo_feature_retrieval = False
-predict_with_elmo = True
-predict_with_elmo_mean = True
+predict_with_elmo = False
+predict_with_elmo_mean = False
 
 if os.path.exists('results/tags.npy'):
     tags = np.load('results/tags.npy')
