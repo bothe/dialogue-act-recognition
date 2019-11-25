@@ -4,7 +4,7 @@ from krippendorff import alpha
 from scipy.stats import stats
 from sklearn.metrics import classification
 
-from final_annotator_utils import ensemble_annotation, convert_predictions_to_indices
+from final_annotator_utils import ensemble_annotation, convert_predictions_to_indices, ensemble_eda_annotation
 from mocap_data_reader import get_mocap_data
 # Get IEMOCAP data
 from results.read_predictions_utils import read_all_predictions
@@ -22,7 +22,8 @@ iemocap_elmo_features = np.load('features/iemocap_elmo_features.npy', allow_pick
 
 ## Predict with normal elmo features
 from main_swda_elmo_predictor import predict_classes_for_elmo
-non_con_out, con_out, non_con_out_nums, con_out_nums = predict_classes_for_elmo(iemocap_elmo_features)
+non_con_out, con_out, non_con_out_nums, con_out_nums, \
+    mocap_elmo_top_con_out, mocap_elmo_top_con_out_confs = predict_classes_for_elmo(iemocap_elmo_features)
 
 con_elmo_embs, con_diswiz, non_con_elmo_embs, non_con_diswiz = read_all_predictions()
 
@@ -47,7 +48,7 @@ else:
     np.save(tags_file_name, tags)
 
 reliability_data = convert_predictions_to_indices(elmo_mean_con_out, elmo_mean_non_con_out, con_elmo_embs,
-                                                  non_con_elmo_embs, tags)
+                                                  non_con_elmo_embs, mocap_elmo_top_con_out, tags)
 k_alpha = alpha(reliability_data, level_of_measurement='nominal')
 print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
 
@@ -71,5 +72,15 @@ print('Spearman Correlation between context-based predictions: {}'.format(
 rows = ensemble_annotation(non_con_elmo_embs, elmo_mean_con_out, con_elmo_embs,
                            speaker_id, utterances, speaker_id,
                            emotion, meld_data=False, file_name='iemocap', write_final_csv=False)
+
+
+# Generate final file of annotations; contains "xx" label for corrections in EDAs
+row = ensemble_eda_annotation(non_con_elmo_embs, elmo_mean_con_out, con_elmo_embs, mocap_elmo_top_con_out,
+                              non_con_out_nums, con_out_nums, non_con_out_nums, con_out_nums,
+                              mocap_elmo_top_con_out_confs,
+                              speaker_id, utterances, speaker_id, emotion,
+                              sentiment_labels=[], meld_data=True,
+                              file_name='meld_emotion', write_final_csv=True)
+
 
 print('ran mocap_dia_act_annotate.py')
