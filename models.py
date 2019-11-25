@@ -1,5 +1,5 @@
 from keras.layers import Dense, SimpleRNN, LSTM, Input, Flatten, Bidirectional, GRU, \
-    TimeDistributed, Embedding, Conv1D, ConvLSTM2D, MaxPooling1D
+    TimeDistributed, Embedding, Conv1D, ConvLSTM2D, MaxPooling1D, Average, Concatenate, merge, average
 from keras.layers.merge import multiply, concatenate
 from keras.layers.core import *
 from keras.optimizers import Adam
@@ -52,15 +52,22 @@ def context_model(seq_len, max_seq_length, emb_dim, classes, nodes=128, dropout=
 
 
 def context_model_att(seq_len, max_seq_length, emb_dim, classes, nodes=128, dropout=0.2,
-                      single_attention_vector=False):
+                      single_attention_vector=False, train_with_mean=False):
     # Encode each time step  # dummyModel(3, 20, 1024, 42)
     in_sentence = Input(shape=(max_seq_length, emb_dim,))  # , dtype='int64')
     # embedded_sentence = Embedding(len(word_index) + 1, emb_dim, trainable=True)(in_sentence)
     lstm_sentence = LSTM(nodes, return_sequences=True)(in_sentence)
     # Apply attention layer
     attention_mul = attention_3d_block(lstm_sentence, max_seq_length, single_attention_vector)
-    attention_mul = Flatten()(attention_mul)
-    encoded_model = Model(in_sentence, attention_mul)
+    # encoded_sentence = Flatten()(attention_mul)
+    if train_with_mean:
+        mean_vectors_norms = Lambda(lambda x: K.mean(x, axis=1), name='dim_reduction1')(attention_mul)
+        mean_vectors = Lambda(lambda x: K.mean(x, axis=1), name='dim_reduction2')(in_sentence)
+        concatenate_sentence = Concatenate()([mean_vectors_norms, mean_vectors])
+        encoded_model = Model(in_sentence, concatenate_sentence)
+    else:
+        encoded_sentence = Flatten()(attention_mul)
+        encoded_model = Model(in_sentence, encoded_sentence)
     encoded_model.summary()
 
     # Model contextual time steps
