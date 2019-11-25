@@ -1,5 +1,5 @@
 import time
-
+from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras import Model
 from keras.utils import to_categorical
 import pickle, os
@@ -7,7 +7,7 @@ from models import model_attention_applied_after_bilstm
 from training_utils import keras_callbacks
 from utils import *
 
-get_inter_reps_from_model = True
+get_inter_reps_from_model = False
 train_con_model = True
 con_seq_length = 3
 trainFile = 'data/swda-actags_train_speaker.csv'
@@ -18,12 +18,13 @@ print(len(Xtest), len(Xtrain))
 tags, num, Y_train, Y_test = categorize_raw_data(Ztrain, Ztest)
 target_category_test = to_categorical(Y_test, len(tags))
 target_category_train = to_categorical(Y_train, len(tags))
+callbacks_con = [EarlyStopping(patience=3), ModelCheckpoint(filepath=con_model_name, save_best_only=True)]
 
 
 if get_inter_reps_from_model:
     max_seq_len = 20
-    toPadding = np.load('features/pad_a_token.npy')
-    X_Test = np.load('features/X_test_elmo_features.npy')
+    toPadding = np.load('features/pad_a_token.npy', allow_pickle=True)
+    X_Test = np.load('features/X_test_elmo_features.npy', allow_pickle=True)
     X_Test = padSequencesKeras(X_Test, max_seq_len, toPadding)
 
     # NON-CONTEXT MODEL
@@ -43,7 +44,7 @@ if get_inter_reps_from_model:
         i += 1
         print('X_train_elmo_features_{}.npy'.format(i))
         # X_Train.extend(np.load('X_train_elmo_features_{}.npy'.format(i)))
-        X_Train = np.load('features/X_train_elmo_features_{}.npy'.format(i))
+        X_Train = np.load('features/X_train_elmo_features_{}.npy'.format(i), allow_pickle=True)
         print(X_Train.shape)
         X_Train = padSequencesKeras(np.array(X_Train), max_seq_len, toPadding)
         target = Y_train[(i - 1) * len(X_Train):(i - 1) * len(X_Train) + len(X_Train)]
@@ -60,28 +61,43 @@ else:
     intermediate_output_x_train = np.load('features/swda_inter_reps/X_train_elmo_features_flatten_attention.npy')
 
 if train_con_model:
-    X_train = np.load('features/X_train_elmo_mean_features.npy')
-    X_test = np.load('features/X_test_elmo_mean_features.npy')
+    X_train_mean = np.load('features/X_train_elmo_mean_features.npy')
+    X_test_mean = np.load('features/X_test_elmo_mean_features.npy')
 
-    X_test = np.hstack((X_test, intermediate_output_x_test))
-    X_train = np.hstack((X_train, intermediate_output_x_train))
+    for i in range(8):
+        i += 1
+        print('X_train_elmo_features_{}.npy'.format(i))
+        # X_Train.extend(np.load('X_train_elmo_features_{}.npy'.format(i)))
+        X_Train = np.load('features/X_train_elmo_features_{}.npy'.format(i), allow_pickle=True)
+        print(X_Train.shape)
+        X_Train = padSequencesKeras(np.array(X_Train), max_seq_len, toPadding)
+        target = Y_train[(i - 1) * len(X_Train):(i - 1) * len(X_Train) + len(X_Train)]
+        target_category_train = to_categorical(target, 42)
+        print(X_Train.shape, target_category_train.shape)
 
-    X_test_con, Y_test_con = prepare_data(X_test, target_category_test, con_seq_length)
-    X_train_con, Y_train_con = prepare_data(X_train, target_category_train, con_seq_length)
+        X_Train, Y_train_con = prepare_data(X_Train, target_category_train, con_seq_length)
+        print(X_Train.shape, Y_train_con.shape)
 
-    # train non-context model
-    con_model_name = 'params/context_model_3_reps'
-    logdir = "logs/scalars/" + 'cmreps_' + str(time.time()).split('.')[0]
-    callbacks = keras_callbacks(con_model_name, logdir)
-    context_model_reps = model_attention_applied_after_bilstm(con_seq_length, X_test_con.shape[2], len(tags))
-    if os.path.exists(con_model_name):
-        context_model_reps.load_weights(con_model_name)
-    else:
-        print('No model parameters found, model will be trained from start.')
+        X_Train = 0
 
-    context_model_reps.fit(X_train_con, Y_train_con, epochs=50, verbose=2, validation_split=0.20,
-                           callbacks=callbacks)
+        # train non-context model
+        con_model_name = 'params/context_model_3_reps'
+        logdir = "logs/scalars/" + 'cmreps_' + str(time.time()).split('.')[0]
+        callbacks_con = [EarlyStopping(patience=3), ModelCheckpoint(filepath=con_model_name, save_best_only=True)]
+        context_model_reps = model_attention_applied_after_bilstm(con_seq_length, X_test_con.shape[2], len(tags))
+        if os.path.exists(con_model_name):
+            context_model_reps.load_weights(con_model_name)
+        else:
+            print('No model parameters found, model will be trained from start.')
 
-    context_model_reps.load_weights(con_model_name)
-    evaluation = context_model_reps.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
-    print('Test results for context model: {}'.format(evaluation[1]))
+        context_model_reps.fit(X_Train, Y_train_con, epochs=50, verbose=2, validation_split=0.20,
+                               callbacks=callbacks_con)
+
+        new_acc = context_model_reps.load_weights(con_model_name)[1]
+        print('Context Score results: ', new_acc)
+        if old_acc < new_acc:
+            context_model_reps.save_weights(con_model_name)
+            print('Weights are saved with {} % acc while old acc was {} %'.format(new_acc, old_acc))
+            old_acc = new_acc
+        evaluation = context_model_reps.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
+        print('Test results for context model: {}'.format(evaluation[1]))
