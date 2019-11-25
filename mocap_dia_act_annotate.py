@@ -76,9 +76,10 @@ rows = ensemble_annotation(non_con_elmo_embs, elmo_mean_con_out, con_elmo_embs,
 
 # Generate final file of annotations; contains "xx" label for corrections in EDAs
 row = ensemble_eda_annotation(non_con_elmo_embs, elmo_mean_con_out, con_elmo_embs, mocap_elmo_top_con_out,
-                              non_con_out_nums, con_out_nums, non_con_out_nums, con_out_nums, mocap_elmo_top_con_out_confs,
-                              utt_Speaker, utt_data, utt_id_data, utt_Emotion_data,
-                              sentiment_labels=utt_Sentiment_data, meld_data=True,
+                              non_con_out_nums, con_out_nums, non_con_out_nums, con_out_nums,
+                              mocap_elmo_top_con_out_confs,
+                              speaker_id, utterances, speaker_id, emotion,
+                              sentiment_labels=[], meld_data=True,
                               file_name='meld_emotion', write_final_csv=True)
 
 
