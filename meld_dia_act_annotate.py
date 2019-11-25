@@ -4,7 +4,7 @@ from scipy.stats import stats
 from sklearn.metrics import classification
 import os
 from MELD.utils.read_meld import *
-from final_annotator_utils import ensemble_annotation, convert_predictions_to_indices, ensemble_eda_annotation
+from final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation
 
 elmo_feature_retrieval = False
 predict_with_elmo = False
@@ -28,12 +28,13 @@ elif predict_with_elmo or predict_with_elmo_mean:
     meld_elmo_features_dev = np.load('features/meld_elmo_features_dev.npy', allow_pickle=True)
     meld_elmo_features_train = np.load('features/meld_elmo_features_train.npy', allow_pickle=True)
 
+# Predict with normal elmo features
 if predict_with_elmo:
     from main_swda_elmo_predictor import predict_classes_for_elmo
 
     concatenated_vectors = np.concatenate((meld_elmo_features_train, meld_elmo_features_dev, meld_elmo_features_test))
     meld_elmo_non_con_out, meld_elmo_con_out, meld_elmo_non_con_out_confs, meld_elmo_con_out_confs, \
-        meld_elmo_top_con_out, meld_elmo_top_con_out_confs = predict_classes_for_elmo(concatenated_vectors)
+    meld_elmo_top_con_out, meld_elmo_top_con_out_confs = predict_classes_for_elmo(concatenated_vectors)
 
     np.save('model_output_labels/meld_elmo_con_out', meld_elmo_con_out)
     np.save('model_output_labels/meld_elmo_non_con_out', meld_elmo_non_con_out)
@@ -71,7 +72,6 @@ else:
     meld_elmo_mean_con_out_confs = np.load('model_output_labels/meld_elmo_mean_con_out_confs.npy')
     meld_elmo_mean_non_con_out_confs = np.load('model_output_labels/meld_elmo_mean_non_con_out_confs.npy')
 
-
 utt_Speaker = utt_Speaker_train + utt_Speaker_dev + utt_Speaker_test
 utt_data = utt_train_data + utt_dev_data + utt_test_data
 utt_id_data = utt_id_train_data + utt_id_dev_data + utt_id_test_data
@@ -80,14 +80,14 @@ utt_Sentiment_data = utt_Sentiment_train_data + utt_Sentiment_dev_data + utt_Sen
 
 if predict_with_diswiz:
     from diswiz.main import predict_das_diswiz
+
     meld_diswiz_con_out, meld_diswiz_non_con_out, meld_diswiz_con_out_confs, \
-        meld_diswiz_non_con_out_confs = predict_das_diswiz(utt_data)
+    meld_diswiz_non_con_out_confs = predict_das_diswiz(utt_data)
     np.save('model_output_labels/meld_diswiz_con_out', meld_diswiz_con_out)
     np.save('model_output_labels/meld_diswiz_con_out_confs', meld_diswiz_con_out_confs)
 else:
     meld_diswiz_con_out = np.load('model_output_labels/meld_diswiz_con_out.npy')
     meld_diswiz_con_out_confs = np.load('model_output_labels/meld_diswiz_con_out_confs.npy')
-
 
 # Evaluation of context model predictions
 print('Accuracy comparision between context-based predictions: {}'.format(
@@ -102,7 +102,7 @@ reliability_data = convert_predictions_to_indices(meld_elmo_con_out, meld_elmo_n
 k_alpha = alpha(reliability_data, level_of_measurement='nominal')
 print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
 
-# Generate final file of annotations; contains "xx" label for corrections in EDAs
+# Generate final file of annotations; contains "xx" label for unknown/corrections of EDAs
 row = ensemble_eda_annotation(meld_elmo_non_con_out, meld_elmo_mean_non_con_out,
                               meld_elmo_con_out, meld_elmo_mean_con_out, meld_elmo_top_con_out,
                               meld_elmo_non_con_out_confs, meld_elmo_mean_non_con_out_confs,

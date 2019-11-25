@@ -14,11 +14,10 @@ features/X_train_elmo_features_6.npy
 features/X_train_elmo_features_7.npy
 features/X_train_elmo_features_8.npy
 features/X_train_elmo_mean_features.npy
-features/iemocap_elmo_features.npy
-/features/iemocap_elmo_features.npy.zip
+features/iemocap_elmo_mean_features.npy
+/features/iemocap_elmo_features.np
 /figures/
 /features/meld_elmo_features_test.npy
 /features/meld_elmo_features_dev.npy
 /features/meld_elmo_features_train.npy
 /logs/
-/features/iemocap_elmo_mean_features.npy

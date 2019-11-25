@@ -86,8 +86,8 @@ def predict_classes_for_elmo(x, predict_from_text=False, link_online=False):
             con_out.append(tags[np.argmax(item)])
             con_out_confs.append(item[item.argmax()])
         for item in top_con_predictions:
-            top_context_model.append(tags[np.argmax(item)])
-            top_context_model.append(item[item.argmax()])
+            top_con_out.append(tags[np.argmax(item)])
+            top_con_out_confs.append(item[item.argmax()])
     else:
         con_out = ['None', 'None']
         con_out_confs = [0.0, 0.0]
