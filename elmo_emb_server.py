@@ -12,7 +12,7 @@ def index():
     # print(value)
     value = value.split('\r\n')
     # print(value)
-    res = get_elmo_fea(value, mean=False)
+    res = get_elmo_embs(value, mean=False)
 
     vectors = float_to_string(res)
     return jsonify({'result': vectors})

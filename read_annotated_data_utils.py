@@ -7,6 +7,7 @@ def read_data(data):
     utt = df_train['utterance'].tolist()  # load the list of utterances
     utt_Emotion = df_train['emotion'].tolist()
     utt_EDAs = df_train['EDA'].tolist()
+    utt_EDAs_corrected = df_train['Cor_EDA'].tolist()
     # utt_Sentiment = df_train['Sentiment'].tolist()
     utt_Speaker = df_train['speaker'].tolist()
-    return utt_Speaker, utt, utt_Emotion, utt_EDAs
+    return utt_Speaker, utt, utt_Emotion, utt_EDAs, utt_EDAs_corrected

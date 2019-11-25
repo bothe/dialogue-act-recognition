@@ -1,5 +1,4 @@
 import os
-
 import numpy as np
 from krippendorff import alpha
 from scipy.stats import stats
@@ -15,15 +14,15 @@ utterances, emotion, emo_evo, v, a, d, speaker_id = get_mocap_data()
 ### Get features
 # iemocap_elmo_features = get_elmo_fea(utterances, mean=False)
 iemocap_elmo_mean_features = np.load('features/iemocap_elmo_mean_features.npy', allow_pickle=True)
-# iemocap_elmo_features = np.load('features/iemocap_elmo_features.npy', allow_pickle=True)
+iemocap_elmo_features = np.load('features/iemocap_elmo_features.npy', allow_pickle=True)
 
 ## Predict with DISWIZ
 # from diswiz.main import predict_das_diswiz
 # con_das, non_con_das, con_da_nums, non_con_da_nums = predict_das_diswiz(utterances)
 
 ## Predict with normal elmo features
-# from main_predictor_online import predict_classes_from_features
-# non_con_out, con_out, non_con_out_nums, con_out_nums = predict_classes_from_features(iemocap_elmo_features)
+from main_swda_elmo_predictor import predict_classes_for_elmo
+non_con_out, con_out, non_con_out_nums, con_out_nums = predict_classes_for_elmo(iemocap_elmo_features)
 
 con_elmo_embs, con_diswiz, non_con_elmo_embs, non_con_diswiz = read_all_predictions()
 
@@ -38,6 +37,9 @@ if os.path.exists(elmo_mean_con_out_file_name) and os.path.exists(elmo_mean_non_
     tags = np.load(tags_file_name)
 else:
     from main_swda_elmo_mean import *
+
+    mocap_non_con_out_elmo_mean, mocap_con_out_elmo_mean, mocap_non_con_out_confs_mean, \
+    mocap_con_out_confs_mean = predict_classes_for_elmo_mean(iemocap_elmo_mean_features)
 
     elmo_mean_non_con_out, elmo_mean_con_out = predict_classes_elmo_mean_features(iemocap_elmo_mean_features)
     np.save(elmo_mean_con_out_file_name, elmo_mean_con_out)
