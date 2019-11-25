@@ -22,7 +22,8 @@ iemocap_elmo_features = np.load('features/iemocap_elmo_features.npy', allow_pick
 
 ## Predict with normal elmo features
 from main_swda_elmo_predictor import predict_classes_for_elmo
-non_con_out, con_out, non_con_out_nums, con_out_nums = predict_classes_for_elmo(iemocap_elmo_features)
+non_con_out, con_out, non_con_out_nums, con_out_nums, \
+    mocap_elmo_top_con_out, mocap_elmo_top_con_out_confs = predict_classes_for_elmo(iemocap_elmo_features)
 
 con_elmo_embs, con_diswiz, non_con_elmo_embs, non_con_diswiz = read_all_predictions()
 
@@ -47,7 +48,7 @@ else:
     np.save(tags_file_name, tags)
 
 reliability_data = convert_predictions_to_indices(elmo_mean_con_out, elmo_mean_non_con_out, con_elmo_embs,
-                                                  non_con_elmo_embs, tags)
+                                                  non_con_elmo_embs, mocap_elmo_top_con_out, tags)
 k_alpha = alpha(reliability_data, level_of_measurement='nominal')
 print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
 
