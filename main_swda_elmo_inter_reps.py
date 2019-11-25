@@ -7,7 +7,7 @@ from models import model_attention_applied_after_bilstm
 from training_utils import keras_callbacks
 from utils import *
 
-get_inter_reps = False
+get_inter_reps_from_model = True
 train_con_model = True
 con_seq_length = 3
 trainFile = 'data/swda-actags_train_speaker.csv'
@@ -20,7 +20,7 @@ target_category_test = to_categorical(Y_test, len(tags))
 target_category_train = to_categorical(Y_train, len(tags))
 
 
-if get_inter_reps:
+if get_inter_reps_from_model:
     max_seq_len = 20
     toPadding = np.load('features/pad_a_token.npy')
     X_Test = np.load('features/X_test_elmo_features.npy')
