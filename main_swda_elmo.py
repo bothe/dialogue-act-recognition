@@ -62,7 +62,7 @@ if os.path.exists(top_con_model_name):
 
 
 if train_non_context_model:
-    # old_acc = 0
+    old_acc = 0
     for iteration in range(10):
         print('Iteration number {}'.format(str(iteration + 1)))
         for i in range(8):
@@ -124,7 +124,7 @@ if train_context_model:
 
 
 if train_top_context_model:
-    # old_acc = 0
+    old_acc = 0
     for iteration in range(10):
         print('Iteration number {}'.format(str(iteration + 1)))
         for i in range(8):
@@ -141,13 +141,18 @@ if train_top_context_model:
             print(X_Train.shape, target_category_train.shape)
             X_Train, Y_train_con = prepare_data(X_Train, target_category_train, seq_length)
             print(X_Train.shape, Y_train_con.shape)
-            top_context_model.load_weights(top_con_model_name)
-            top_context_model.fit(X_Train, Y_train_con, epochs=5, batch_size=32, verbose=2,
-                              callbacks=callbacks_top_con)  # , validation_split=0.13)
+            if os.path.exists(top_con_model_name):
+                top_context_model.load_weights(top_con_model_name) 
+                loss, old_acc = top_context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
+                print('Context Score result before starting training: ', old_acc)
+
+            top_context_model.fit(X_Train, Y_train_con, epochs=1, batch_size=32, verbose=2)
+            #                  callbacks=callbacks_top_con, validation_split=0.1)
             loss, new_acc = top_context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
             print('Context Score results: ', new_acc)
             if old_acc < new_acc:
                 top_context_model.save_weights(top_con_model_name)
                 print('Weights are saved with {} % acc while old acc was {} %'.format(new_acc, old_acc))
                 old_acc = new_acc
-            X_Train = 0
+            X_Train = []
+
