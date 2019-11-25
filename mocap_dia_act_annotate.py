@@ -4,7 +4,7 @@ from krippendorff import alpha
 from scipy.stats import stats
 from sklearn.metrics import classification
 
-from final_annotator_utils import ensemble_annotation, convert_predictions_to_indices
+from final_annotator_utils import ensemble_annotation, convert_predictions_to_indices, ensemble_eda_annotation
 from mocap_data_reader import get_mocap_data
 # Get IEMOCAP data
 from results.read_predictions_utils import read_all_predictions
@@ -72,5 +72,14 @@ print('Spearman Correlation between context-based predictions: {}'.format(
 rows = ensemble_annotation(non_con_elmo_embs, elmo_mean_con_out, con_elmo_embs,
                            speaker_id, utterances, speaker_id,
                            emotion, meld_data=False, file_name='iemocap', write_final_csv=False)
+
+
+# Generate final file of annotations; contains "xx" label for corrections in EDAs
+row = ensemble_eda_annotation(non_con_elmo_embs, elmo_mean_con_out, con_elmo_embs, mocap_elmo_top_con_out,
+                              non_con_out_nums, con_out_nums, non_con_out_nums, con_out_nums, mocap_elmo_top_con_out_confs,
+                              utt_Speaker, utt_data, utt_id_data, utt_Emotion_data,
+                              sentiment_labels=utt_Sentiment_data, meld_data=True,
+                              file_name='meld_emotion', write_final_csv=True)
+
 
 print('ran mocap_dia_act_annotate.py')
