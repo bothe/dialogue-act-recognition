@@ -1,4 +1,5 @@
 import csv
+
 import numpy as np
 
 
@@ -124,15 +125,27 @@ def ensemble_eda_annotation(eda1, eda2, eda3, eda4, eda5,
             matched_element = eda5[i]
             con_matches += 1
         elif eda5[i] == eda3[i] and eda5[i] in [eda1[i], eda2[i]]:
-            con_match = "ConMatch_eda5_eda3"
+            con_match = "ConMatch_eda5_eda3_strong"
             matched_element = eda5[i]
             con_matches += 1
         elif eda5[i] == eda4[i] and eda5[i] in [eda1[i], eda2[i]]:
-            con_match = "ConMatch_eda5_eda4"
+            con_match = "ConMatch_eda5_eda4_strong"
             matched_element = eda4[i]
             con_matches += 1
         elif eda4[i] == eda3[i] and eda4[i] in [eda1[i], eda2[i]]:
-            con_match = "ConMatch_eda4_eda3"
+            con_match = "ConMatch_eda4_eda3_strong"
+            matched_element = eda4[i]
+            con_matches += 1
+        elif eda5[i] == eda3[i]:
+            con_match = "ConMatch_eda5_eda3_con"
+            matched_element = eda5[i]
+            con_matches += 1
+        elif eda5[i] == eda4[i]:
+            con_match = "ConMatch_eda5_eda4_con"
+            matched_element = eda4[i]
+            con_matches += 1
+        elif eda4[i] == eda3[i]:
+            con_match = "ConMatch_eda4_eda3_con"
             matched_element = eda4[i]
             con_matches += 1
 
@@ -180,7 +193,7 @@ def ensemble_eda_annotation(eda1, eda2, eda3, eda4, eda5,
         if write_final_csv:
             writer.writerow(utt_info_row)
         if matched_element == 'xx':
-            none_matches+=1
+            none_matches += 1
         utt_info_rows.append(utt_info_row)
 
     print(
@@ -188,3 +201,113 @@ def ensemble_eda_annotation(eda1, eda2, eda3, eda4, eda5,
             round((total_match / len(eda1)) * 100, 2), round((con_matches / len(eda1)) * 100, 2),
             round((based_on_confs / len(eda1)) * 100, 2), round((none_matches / len(eda1)) * 100, 2)))
     return utt_info_rows
+
+
+def fleiss_kappa(ratings, n):
+    """
+    Computes the Fleiss' kappa measure for assessing the reliability of
+    agreement between a fixed number n of raters when assigning categorical
+    ratings to a number of items.
+
+    Args:
+        ratings: a list of (item, category)-ratings
+        n: number of raters
+        k: number of categories
+    Returns:
+        the Fleiss' kappa score
+
+    See also:
+        http://en.wikipedia.org/wiki/Fleiss'_kappa
+    """
+    items = set()
+    categories = set()
+    n_ij = {}
+
+    for i, c in ratings:
+        items.add(i)
+        categories.add(c)
+        n_ij[(i, c)] = n_ij.get((i, c), 0) + 1
+
+    N = len(items)
+
+    p_j = dict(((c, sum(n_ij.get((i, c), 0) for i in items) / (1.0 * n * N)) for c in categories))
+    P_i = dict(((i, (sum(n_ij.get((i, c), 0) ** 2 for c in categories) - n) / (n * (n - 1.0))) for i in items))
+
+    P_bar = sum(P_i.values()) / (1.0 * N)
+    P_e_bar = sum(value ** 2 for value in p_j.values())
+
+    kappa = (P_bar - P_e_bar) / (1 - P_e_bar)
+
+    return kappa
+
+
+'''
+Created on Aug 1, 2016
+@author: skarumbaiah
+Computes Fleiss' Kappa 
+Joseph L. Fleiss, Measuring Nominal Scale Agreement Among Many Raters, 1971.
+'''
+
+
+def checkInput(rate, n):
+    """
+    Check correctness of the input matrix
+    @param rate - ratings matrix
+    @return n - number of raters
+    @throws AssertionError
+    """
+    N = len(rate)
+    k = len(rate[0])
+    assert all(len(rate[i]) == k for i in range(k)), "Row length != #categories)"
+    assert all(isinstance(int(rate[i][j]), int) for i in range(N) for j in range(k)), "Element not integer"
+    assert all(sum(row) == n for row in rate), "Sum of ratings != #raters)"
+
+
+def fleissKappa(rate, n):
+    """
+    Computes the Kappa value
+    @param rate - ratings matrix containing number of ratings for each subject per category
+    [size - N X k where N = #subjects and k = #categories]
+    @param n - number of raters
+    @return fleiss' kappa
+    """
+
+    N = len(rate)
+    k = len(rate[0])
+    print("#raters = ", n, ", #subjects = ", N, ", #categories = ", k)
+    checkInput(rate, n)
+
+    # mean of the extent to which raters agree for the ith subject
+    PA = sum([(sum([i ** 2 for i in row]) - n) / (n * (n - 1)) for row in rate]) / N
+    print("PA = ", PA)
+
+    # mean of squares of proportion of all assignments which were to jth category
+    PE = sum([j ** 2 for j in [sum([rows[i] for rows in rate]) / (N * n) for i in range(k)]])
+    print("PE =", PE)
+
+    kappa = -float("inf")
+    try:
+        kappa = (PA - PE) / (1 - PE)
+        kappa = float("{:.3f}".format(kappa))
+    except ZeroDivisionError:
+        print("Expected agreement = 1")
+
+    print("Fleiss' Kappa =", kappa)
+
+    return kappa
+
+
+def kappa_data(reliability_data):
+    global final_list, noted_samples
+    final_list = []
+    noted_samples = 0
+    for item in reliability_data.transpose():
+        temp_list = [0] * (reliability_data.max() + 1)
+        for i in item:
+            for j in range(len(temp_list)):
+                if i == j + 1:
+                    temp_list[j] = temp_list[j] + 1
+        if sum(temp_list) == 5:  # only a few (around 200 out of 10000) are excluded
+            final_list.append(temp_list)
+            noted_samples += 1
+    return final_list, noted_samples

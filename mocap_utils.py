@@ -76,6 +76,8 @@ def get_emotions(filename):
 def get_directory_structure(rootdir):
     """
     Creates a nested dictionary that represents the folder structure of rootdir
+    Sorts differently on Windows and Ubuntu,
+    hence better to save csv after we read all data, and use that one latter
     """
     dir = {}
     rootdir = rootdir.rstrip(os.sep)

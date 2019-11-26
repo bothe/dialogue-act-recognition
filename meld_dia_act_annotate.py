@@ -1,10 +1,12 @@
+import os
+
 import numpy as np
 from krippendorff import alpha
 from scipy.stats import stats
 from sklearn.metrics import classification
-import os
+
 from MELD.utils.read_meld import *
-from final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation
+from final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation, fleissKappa, kappa_data
 
 elmo_feature_retrieval = False
 predict_with_elmo = False
@@ -102,6 +104,12 @@ reliability_data = convert_predictions_to_indices(meld_elmo_con_out, meld_elmo_n
 k_alpha = alpha(reliability_data, level_of_measurement='nominal')
 print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
 
+final_list, noted_samples = kappa_data(reliability_data)
+
+print("Skipped items: {}%".format(
+    round(((reliability_data.shape[1] - noted_samples) / reliability_data.shape[1]) * 100, 4)))
+fleiss_kappa_score = fleissKappa(final_list, 5)
+
 # Generate final file of annotations; contains "xx" label for unknown/corrections of EDAs
 row = ensemble_eda_annotation(meld_elmo_non_con_out, meld_elmo_mean_non_con_out,
                               meld_elmo_con_out, meld_elmo_mean_con_out, meld_elmo_top_con_out,
@@ -111,4 +119,4 @@ row = ensemble_eda_annotation(meld_elmo_non_con_out, meld_elmo_mean_non_con_out,
                               sentiment_labels=utt_Sentiment_data, meld_data=True,
                               file_name='meld_emotion', write_final_csv=True)
 
-print('ran meld_dia_act_annotate.py')
+print('ran meld_dia_act_annotate.py, with total {} number of utterances'.format(len(utt_data)))

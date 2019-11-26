@@ -3,8 +3,10 @@ import numpy as np
 from krippendorff import alpha
 from scipy.stats import stats
 from sklearn.metrics import classification
-from final_annotator_utils import ensemble_annotation, convert_predictions_to_indices, ensemble_eda_annotation
+from final_annotator_utils import ensemble_annotation, convert_predictions_to_indices, ensemble_eda_annotation, \
+    fleiss_kappa, fleissKappa, kappa_data
 from mocap_data_reader import get_mocap_data
+from collections import Counter
 
 elmo_feature_retrieval = False
 predict_with_elmo = False
@@ -13,7 +15,7 @@ predict_with_elmo_mean = False
 if os.path.exists('results/tags.npy'):
     tags = np.load('results/tags.npy')
 
-utterances, emotion, emo_evo, v, a, d, speaker_id = get_mocap_data()
+utterances, emotion, emo_evo, v, a, d, speaker_id = get_mocap_data(read_from_csv=True)
 
 if elmo_feature_retrieval:
     from elmo_features import get_elmo_embs
@@ -75,6 +77,13 @@ reliability_data = convert_predictions_to_indices(mocap_elmo_con_out, mocap_elmo
                                                   mocap_elmo_mean_non_con_out, mocap_elmo_top_con_out, tags)
 k_alpha = alpha(reliability_data, level_of_measurement='nominal')
 print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
+
+final_list, noted_samples = kappa_data(reliability_data)
+
+print("Skipped items: {}%".format(
+    round((reliability_data.shape[1] - noted_samples) / reliability_data.shape[1]) * 100), 2)
+fleiss_kappa_score = fleissKappa(final_list, 5)
+# print("Fleiss' Kappa: {}".format(round(fleiss_kappa_score, 6)))
 
 print('Accuracy comparision between context and non-context predictions elmo: {}% elmo_mean: {}% '
       'context-context: {}% non-non-context: {}%'.format(
