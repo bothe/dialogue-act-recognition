@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def plot_eda_usage(labels, label_values, title, colors_emo,
@@ -48,4 +49,27 @@ def plot_normal_bars(labels, label_values, title, test_show_plot=False):
         plt.show()
         return
     plt.savefig('figures/meld/fig_' + title.split('\n')[0])
+    plt.close()
+
+
+def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
+                   test_show_plot=False, data='meld', type_of='emotion'):
+    from scr.plot_bars import StackedBarGrapher
+    stack_emo_names = {}
+    das_stacked = np.array(stack_emotions_values).transpose()
+    for i in range(len(emotions)):
+        stack_emo_names[emotions[i]] = das_stacked[i]
+    totals = das_stacked.sum(axis=0)
+    stack_emo_bars = []
+    for key in stack_emo_names.keys():
+        stack_emo_bars.append([i / j * 100 for i, j in zip(stack_emo_names[key], totals)])
+    bars = np.array(stack_emo_bars[0:9]).transpose()
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    SBG = StackedBarGrapher()
+    SBG.stackedBarPlot(ax, bars, colors_emo, xLabels=tags)
+    if test_show_plot:
+        plt.show()
+        return
+    plt.savefig('figures/' + data + '_bars_' + type_of+ '.eps', format='eps')
     plt.close()

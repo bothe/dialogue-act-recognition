@@ -59,30 +59,7 @@ for tag in tags:
     # plot_eda_usage(emotions, pass_values, title, colors_emo, sentiments, sentiments,
     #             colors_sent, data_name='iemocap_bars', plot_pie=False)
 
-stack_emo_names = {}
-das_stacked = np.array(stack_emotions_values).transpose()
-for i in range(len(emotions)):
-    stack_emo_names[emotions[i]] = das_stacked[i]
-totals = das_stacked.sum(axis=0)
+plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
+                   test_show_plot=False, data='iemocap', type_of='emotion')
 
-stack_emo_bars = []
-for key in stack_emo_names.keys():
-    stack_emo_bars.append([i / j * 100 for i, j in zip(stack_emo_names[key], totals)])
-
-r = np.arange(len(stack_da_names))
-
-edas_stack = np.array(stack_eda).transpose()
-edas_stack_sum = edas_stack.sum(axis=0)
-for i in range(edas_stack_sum.shape[0]):
-    if edas_stack_sum[i] == 0:
-        edas_stack_sum[i] = 1
-
-bars = np.array(stack_emo_bars[0:9]).transpose()
-from scr.plot_bars import StackedBarGrapher
-
-fig = plt.figure()
-ax = fig.add_subplot(111)
-SBG = StackedBarGrapher()
-SBG.stackedBarPlot(ax, bars, colors_emo, xLabels=tags)
-plt.show()
 print('ran read_annotated_iemocap_data.py')
