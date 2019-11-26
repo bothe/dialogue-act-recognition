@@ -1,13 +1,19 @@
-from MELD.utils.read_meld import read_data_file
 from collections import Counter
 from diswiz.utils_server import EDAs
 from plot_utils import *
+from read_annotated_data_utils import read_data
+# from MELD.utils.read_meld import *
 
-utt, utt_id, utt_Emotion, utt_EDAs, utt_Speaker = read_data_file('results/eda_meld_dataset_bk.csv',
-                                                                 annotated_meld=True)
+
+# utt, utt_id, utt_Emotion, utt_EDAs, utt_Speaker = read_data_file('annotated_data/eda_meld_emotion_dataset.csv',
+#                                                                   annotated_meld=True)
+utt_Speaker, utt, utt_Emotion, utt_EDAs, utt_Sentiment = read_data('annotated_data/eda_meld_emotion_dataset.csv',
+                                                                   meld_data=True)
+
+
 train_data = 'MELD/data/MELD/train_sent_emo.csv'
-utt_train_data, dia_id_train_data, utt_id_train_data, \
-utt_Emotion_train_data, utt_Sentiment_train_data, utt_Speaker_train = read_data_file(train_data)
+# utt_train_data, dia_id_train_data, utt_id_train_data, \
+# utt_Emotion_train_data, utt_Sentiment_train_data, utt_Speaker_train = read_data_file(train_data)
 colors_emo = ['Green', 'Blue',       'Olive',    'Black',   'Mediumvioletred', 'Orangered', 'Red', 'White']
 emotions = ['joy',     'sadness',     'fear',    'neutral',    'surprise',      'disgust', 'anger', 'White']
 colors_sent = ['Limegreen', 'Black', 'Darkorange', 'White']
@@ -28,7 +34,7 @@ for tag in tags:
     for i in range(len(utt)):
         if str(utt_EDAs[i]) == str(tag):
             temp_emotion.append(utt_Emotion[i])
-            temp_sentiment.append(utt_Sentiment_train_data[i])
+            temp_sentiment.append(utt_Sentiment[i])
     data_emotion = Counter(temp_emotion)
     data_sentiment = Counter(temp_sentiment)
     values_emotion, values_sentiment = [], []
@@ -49,6 +55,6 @@ for tag in tags:
     pass_values_sent = values_sentiment
     pass_values_sent.extend([sum(values_sentiment)])
     # plot_normal_bars(emotions, values, title)
-    # plot_eda_usage(emotions, pass_values, title, colors_emo, sentiments, pass_values_sent, colors_sent)
+    plot_eda_usage(emotions, pass_values, title, colors_emo, sentiments, pass_values_sent, colors_sent, plot_pie=True)
     stack_da_emotions[title] = values_emotion
     stack_da_sentiments[title] = values_sentiment
