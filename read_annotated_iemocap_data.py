@@ -5,12 +5,12 @@ from plot_utils import *
 from read_annotated_data_utils import read_data
 import numpy as np
 
-utterances, emotion, emo_evo, v, a, d, speaker_id = get_mocap_data()
+utterances, emotion, emo_evo, v, a, d, speaker_id = get_mocap_data(read_from_csv=True)
 
-utt_Speaker, utt, utt_Emotion, utt_EDAs, utt_EDAs_corrected = read_data('results/eda_iemocap_dataset.csv')
+utt_Speaker, utt, utt_Emotion, utt_EDAs = read_data('annotated_data/eda_iemocap_dataset.csv')
 
 colors_emo = ['Green', 'Cyan', 'Blue', 'Olive', 'Black', 'Gray', 'Mediumvioletred',  'Orangered', 'Red', 'White']
-emotions = ['hap',      'exc',   'sad',  'fea',  'neu',   'xxx',    'sur',           'fru',       'ang', 'White']
+emotions = ['hap',     'exc',  'sur',  'fea',    'neu',   'xxx',     'sad',            'fru',     'ang', 'White']
 # emotions = list(Counter(utt_Emotion).keys())
 colors_sent = ['Limegreen', 'Black', 'Darkorange', 'White']
 sentiments =['positive', 'neutral', 'negative', 'White']
@@ -35,20 +35,26 @@ for tag in tags:
         pass
     temp_emotion = []
     for i in range(len(utt)):
-        if str(utt_EDAs_corrected[i]) == str(tag):
+        if str(utt_EDAs[i]) == str(tag):
             temp_emotion.append(utt_Emotion[i])
     data_emotion = Counter(temp_emotion)
     values_emotion = []
-    for emotion in emotions:
-        if emotion == 'White':
-            pass
-        else:
-            values_emotion.append(data_emotion[emotion])
+    # for emotion in emotions[0:9]:
+    #     if emotion == 'White':
+    #         pass
+    #     else:
+    #         values_emotion.append(data_emotion[emotion])
     for emotion in emotions[0:9]:
         values_emotion.append(data_emotion[emotion])
 
     try:
-        title = tag + '\n' + EDAs[tag]
+        if tag == 'xx':
+            title = tag + '\n' + "Unknown EDA"
+        elif tag == 'fo_o_fw_"_by_bc':
+            tag = 'fo'
+            title = tag + '\n' + EDAs[tag]
+        else:
+            title = tag + '\n' + EDAs[tag]
     except TypeError:
         title = str(tag)
 
@@ -62,8 +68,9 @@ for tag in tags:
     stack_eda.append(values_emotion)
     # pass_values.extend([sum(values_emotion)])
     # plot_normal_bars(emotions, values, title)
-    # plot_eda_usage(emotions, pass_values, title, colors_emo, sentiments, sentiments,
-                 #   colors_sent, data_name='iemocap')
+    plot_eda_usage(emotions, pass_values, title, colors_emo, sentiments, sentiments,
+                   colors_sent, data_name='iemocap', plot_pie=True)
+
 
 stack_emo_names = {}
 das_stacked = np.array(stack_emotions_values).transpose()
