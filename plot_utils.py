@@ -53,7 +53,7 @@ def plot_normal_bars(labels, label_values, title, test_show_plot=False):
 
 
 def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
-                   test_show_plot=False, data='meld', type_of='emotion'):
+                   test_show_plot=False, data='meld', type_of='emotion', save_eps=False):
     from scr.plot_bars import StackedBarGrapher
     stack_emo_names = {}
     das_stacked = np.array(stack_emotions_values).transpose()
@@ -62,14 +62,17 @@ def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
     totals = das_stacked.sum(axis=0)
     stack_emo_bars = []
     for key in stack_emo_names.keys():
-        stack_emo_bars.append([i / j * 100 for i, j in zip(stack_emo_names[key], totals)])
+        stack_emo_bars.append([round(i / j * 100, 3) for i, j in zip(stack_emo_names[key], totals)])
     bars = np.array(stack_emo_bars[0:9]).transpose()
     fig = plt.figure()
     ax = fig.add_subplot(111)
     SBG = StackedBarGrapher()
-    SBG.stackedBarPlot(ax, bars, colors_emo, xLabels=tags)
+    SBG.stackedBarPlot(ax, bars, colors_emo, xLabels=tags, gap=1.5, widths=[6.]*len(tags))
     if test_show_plot:
         plt.show()
         return
-    plt.savefig('figures/' + data + '_bars_' + type_of+ '.eps', format='eps')
+    if save_eps:
+        plt.savefig('figures/' + data + '_bars_' + type_of+ '.eps', format='eps', bbox_inches='tight', transparent=True)
+    else:
+        plt.savefig('figures/' + data + '_bars_' + type_of, bbox_inches='tight', transparent=True)
     plt.close()
