@@ -3,16 +3,17 @@ from diswiz.utils_server import EDAs
 from plot_utils import *
 from read_annotated_data_utils import read_data
 import numpy as np
+import os
 
 
 utt_Speaker, utt, utt_Emotion, utt_EDAs = read_data('annotated_data/eda_iemocap_dataset.csv')
-
-colors_emo = ['Green', 'Cyan', 'Blue', 'Olive', 'Black', 'Gray', 'Mediumvioletred',  'Orangered', 'Red', 'White']
-emotions = ['hap',     'exc',  'sur',  'fea',    'neu',   'xxx',     'sad',            'fru',     'ang', 'White']
+colors_emo = ['Green', 'Cyan', 'Blue', 'Black', 'Gray', 'Olive', 'Mediumvioletred', 'Orange', 'Red', 'White']
+emotions = ['hap',     'exc',   'sur', 'neu',   'xxx',  'fea',        'sad',         'fru',   'ang', 'White']
 colors_sent = ['Limegreen', 'Black', 'Darkorange', 'White']
-sentiments =['positive', 'neutral', 'negative', 'White']
+sentiments = ['positive', 'neutral', 'negative', 'White']
 
-tags = list(Counter(utt_EDAs).keys())
+tags = sorted(list(Counter(utt_EDAs).keys()))
+
 c = Counter(utt_EDAs)
 x = [(i, c[i] / len(utt_EDAs) * 100.0) for i, count in c.most_common()]
 for item in x:
@@ -55,8 +56,8 @@ for tag in tags:
     stack_eda.append(values_emotion)
     # pass_values.extend([sum(values_emotion)])
     # plot_normal_bars(emotions, values, title)
-    plot_eda_usage(emotions, pass_values, title, colors_emo, sentiments, sentiments,
-                   colors_sent, data_name='iemocap_bars', plot_pie=False)
+    # plot_eda_usage(emotions, pass_values, title, colors_emo, sentiments, sentiments,
+    #             colors_sent, data_name='iemocap_bars', plot_pie=False)
 
 stack_emo_names = {}
 das_stacked = np.array(stack_emotions_values).transpose()
@@ -76,4 +77,12 @@ for i in range(edas_stack_sum.shape[0]):
     if edas_stack_sum[i] == 0:
         edas_stack_sum[i] = 1
 
+bars = np.array(stack_emo_bars[0:9]).transpose()
+from scr.plot_bars import StackedBarGrapher
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+SBG = StackedBarGrapher()
+SBG.stackedBarPlot(ax, bars, colors_emo, xLabels=tags)
+plt.show()
 print('ran read_annotated_iemocap_data.py')
