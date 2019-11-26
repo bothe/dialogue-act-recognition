@@ -60,6 +60,6 @@ for tag in tags:
     #             colors_sent, data_name='iemocap_bars', plot_pie=False)
 
 plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
-                   test_show_plot=False, data='iemocap', type_of='emotion')
+                   test_show_plot=False, data='iemocap', type_of='emotion', save_eps=True)
 
 print('ran read_annotated_iemocap_data.py')
