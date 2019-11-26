@@ -1,17 +1,14 @@
 import matplotlib.pyplot as plt
-import numpy as np
 
 
 def plot_eda_usage(labels, label_values, title, colors_emo,
                    sentiments, sentiments_values, colors_sent,
                    test_show_plot=False, data_name='meld', plot_pie=True):
-    # Create a pieplot
-    # label_values.append(sum(label_values))
-    # labels.append('White')
     print(len(labels), labels)
     data = label_values[0:len(labels)-1] + [label_values[-1]]
     print(len(data), data)
 
+    # Create a pieplot
     if plot_pie:
         n_emo = plt.pie(data, colors=colors_emo, counterclock=False, startangle=180, radius=1.2)
         for i in range(len(n_emo[0])):
@@ -20,18 +17,15 @@ def plot_eda_usage(labels, label_values, title, colors_emo,
         if data_name == 'meld':
             data_sent = sentiments_values[0:3] + [sentiments_values[-1]]
             plt.pie(data_sent, colors=colors_sent, counterclock=False, startangle=180, radius=0.8)
-
         # add a circle at the center
         my_circle = plt.Circle((0, 0), 0.5, color='white')
         p = plt.gcf()
         p.gca().add_artist(my_circle)
-
         # plt.title(title, y=1)
         plt.text(0, -0.15, title, fontdict={'size': 15.0, 'horizontalalignment': 'center'})
     else:
         for i in range(len(labels)):
-            plt.bar(labels[i], data[i]) #, colors=colors_emo)
-
+            plt.bar(labels[i]+labels[i+1], data[i]) #, colors=colors_emo)
 
     if test_show_plot:
         plt.show()
@@ -55,15 +49,3 @@ def plot_normal_bars(labels, label_values, title, test_show_plot=False):
         return
     plt.savefig('figures/meld/fig_' + title.split('\n')[0])
     plt.close()
-
-# create data
-# emotions = ['12', '11', '3', '30', '0', '23', '4']
-# values = [12, 11, 3, 30, 0, 23, 4]
-# colors_emo = ['Green', 'Red', 'Orange', 'Blue', 'Magenta', 'Black', 'Gray', 'White']
-# sentiments = ['12', '11', '3']
-# sentiments_values = [12, 11, 3]
-# colors_sent = ['Green', 'Red', 'Orange', 'Blue', 'Magenta', 'Black', 'Gray', 'White']
-# title = 'tag\nHello World'
-# plot_eda_usage(emotions, values, title, colors_emo,
-#                sentiments, sentiments_values, colors_sent, test_show_plot=True, plot_pie=False)
-# plot_normal_bars(emotions, values, title, test_show_plot=True)

@@ -2,20 +2,13 @@ from collections import Counter
 from diswiz.utils_server import EDAs
 from plot_utils import *
 from read_annotated_data_utils import read_data
-# from MELD.utils.read_meld import *
 
 
-# utt, utt_id, utt_Emotion, utt_EDAs, utt_Speaker = read_data_file('annotated_data/eda_meld_emotion_dataset.csv',
-#                                                                   annotated_meld=True)
 utt_Speaker, utt, utt_Emotion, utt_EDAs, utt_Sentiment = read_data('annotated_data/eda_meld_emotion_dataset.csv',
                                                                    meld_data=True)
 
-
-train_data = 'MELD/data/MELD/train_sent_emo.csv'
-# utt_train_data, dia_id_train_data, utt_id_train_data, \
-# utt_Emotion_train_data, utt_Sentiment_train_data, utt_Speaker_train = read_data_file(train_data)
-colors_emo = ['Green', 'Blue',       'Olive',    'Black',   'Mediumvioletred', 'Orangered', 'Red', 'White']
-emotions = ['joy',     'sadness',     'fear',    'neutral',    'surprise',      'disgust', 'anger', 'White']
+colors_emo = ['Green', 'Blue',        'Black',   'Olive',   'Mediumvioletred', 'Orangered', 'Red', 'White']
+emotions = ['joy',    'surprise',     'neutral',  'fear',     'sadness',        'disgust', 'anger', 'White']
 colors_sent = ['Limegreen', 'Black', 'Darkorange', 'White']
 sentiments =['positive', 'neutral', 'negative', 'White']
 
@@ -44,7 +37,13 @@ for tag in tags:
         values_sentiment.append(data_sentiment[sentiment])
 
     try:
-        title = tag + '\n' + EDAs[tag]
+        if tag == 'xx':
+            title = tag + '\n' + "Unknown EDA"
+        elif tag == 'fo_o_fw_"_by_bc':
+            tag = 'fo'
+            title = tag + '\n' + EDAs[tag]
+        else:
+            title = tag + '\n' + EDAs[tag]
     except TypeError:
         title = str(tag)
 

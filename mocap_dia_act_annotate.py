@@ -5,8 +5,7 @@ from krippendorff import alpha
 from scipy.stats import stats
 from sklearn.metrics import classification
 
-from final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation, \
-    fleissKappa
+from final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation, fleissKappa
 from mocap_data_reader import get_mocap_data
 
 elmo_feature_retrieval = False
@@ -49,10 +48,9 @@ else:
 
 # Predict with normal elmo mean features
 if predict_with_elmo_mean:
-    iemocap_elmo_features_mean = np.array([item.mean(axis=0) for item in iemocap_elmo_features])
-
     from main_swda_elmo_mean import *
 
+    iemocap_elmo_features_mean = np.array([item.mean(axis=0) for item in iemocap_elmo_features])
     mocap_elmo_mean_non_con_out, mocap_elmo_mean_con_out, mocap_elmo_mean_non_con_out_confs, \
         mocap_elmo_mean_con_out_confs = predict_classes_for_elmo_mean(iemocap_elmo_features_mean)
 

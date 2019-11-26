@@ -6,7 +6,7 @@ from scipy.stats import stats
 from sklearn.metrics import classification
 
 from MELD.utils.read_meld import *
-from final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation, fleissKappa, kappa_data
+from final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation, fleissKappa
 
 elmo_feature_retrieval = False
 predict_with_elmo = False
@@ -53,12 +53,11 @@ else:
     meld_elmo_top_con_out_confs = np.load('model_output_labels/meld_elmo_top_con_out_confs.npy')
 
 if predict_with_elmo_mean:
+    from main_swda_elmo_mean import *
+
     meld_elmo_features_test_mean = np.array([item.mean(axis=0) for item in meld_elmo_features_test])
     meld_elmo_features_dev_mean = np.array([item.mean(axis=0) for item in meld_elmo_features_dev])
     meld_elmo_features_train_mean = np.array([item.mean(axis=0) for item in meld_elmo_features_train])
-
-    from main_swda_elmo_mean import *
-
     concatenated_mean_vectors = np.concatenate((meld_elmo_features_train_mean, meld_elmo_features_dev_mean,
                                                 meld_elmo_features_test_mean))
     meld_elmo_mean_non_con_out, meld_elmo_mean_con_out, meld_elmo_mean_non_con_out_confs, \
