@@ -104,11 +104,7 @@ reliability_data = convert_predictions_to_indices(meld_elmo_con_out, meld_elmo_n
 k_alpha = alpha(reliability_data, level_of_measurement='nominal')
 print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
 
-final_list, noted_samples = kappa_data(reliability_data)
-
-print("Skipped items: {}%".format(
-    round(((reliability_data.shape[1] - noted_samples) / reliability_data.shape[1]) * 100, 4)))
-fleiss_kappa_score = fleissKappa(final_list, 5)
+fleiss_kappa_score = fleissKappa(reliability_data, 5)
 
 # Generate final file of annotations; contains "xx" label for unknown/corrections of EDAs
 row = ensemble_eda_annotation(meld_elmo_non_con_out, meld_elmo_mean_non_con_out,

@@ -1,12 +1,13 @@
 import os
+
 import numpy as np
 from krippendorff import alpha
 from scipy.stats import stats
 from sklearn.metrics import classification
-from final_annotator_utils import ensemble_annotation, convert_predictions_to_indices, ensemble_eda_annotation, \
-    fleiss_kappa, fleissKappa, kappa_data
+
+from final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation, \
+    fleissKappa
 from mocap_data_reader import get_mocap_data
-from collections import Counter
 
 elmo_feature_retrieval = False
 predict_with_elmo = False
@@ -31,7 +32,7 @@ if predict_with_elmo:
     from main_swda_elmo_predictor import predict_classes_for_elmo
 
     mocap_elmo_non_con_out, mocap_elmo_con_out, mocap_elmo_non_con_out_confs, mocap_elmo_con_out_confs, \
-    mocap_elmo_top_con_out, mocap_elmo_top_con_out_confs = predict_classes_for_elmo(iemocap_elmo_features)
+        mocap_elmo_top_con_out, mocap_elmo_top_con_out_confs = predict_classes_for_elmo(iemocap_elmo_features)
     np.save('model_output_labels/mocap_elmo_con_out', mocap_elmo_con_out)
     np.save('model_output_labels/mocap_elmo_non_con_out', mocap_elmo_non_con_out)
     np.save('model_output_labels/mocap_elmo_con_out_confs', mocap_elmo_con_out_confs)
@@ -53,7 +54,7 @@ if predict_with_elmo_mean:
     from main_swda_elmo_mean import *
 
     mocap_elmo_mean_non_con_out, mocap_elmo_mean_con_out, mocap_elmo_mean_non_con_out_confs, \
-    mocap_elmo_mean_con_out_confs = predict_classes_for_elmo_mean(iemocap_elmo_features_mean)
+        mocap_elmo_mean_con_out_confs = predict_classes_for_elmo_mean(iemocap_elmo_features_mean)
 
     np.save('model_output_labels/mocap_elmo_mean_con_out', mocap_elmo_mean_con_out)
     np.save('model_output_labels/mocap_elmo_mean_non_con_out', mocap_elmo_mean_non_con_out)
@@ -78,19 +79,14 @@ reliability_data = convert_predictions_to_indices(mocap_elmo_con_out, mocap_elmo
 k_alpha = alpha(reliability_data, level_of_measurement='nominal')
 print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
 
-final_list, noted_samples = kappa_data(reliability_data)
-
-print("Skipped items: {}%".format(
-    round((reliability_data.shape[1] - noted_samples) / reliability_data.shape[1]) * 100), 2)
-fleiss_kappa_score = fleissKappa(final_list, 5)
-# print("Fleiss' Kappa: {}".format(round(fleiss_kappa_score, 6)))
+fleiss_kappa_score = fleissKappa(reliability_data, 5)
 
 print('Accuracy comparision between context and non-context predictions elmo: {}% elmo_mean: {}% '
       'context-context: {}% non-non-context: {}%'.format(
-    classification.accuracy_score(mocap_elmo_con_out, mocap_elmo_non_con_out),
-    classification.accuracy_score(mocap_elmo_mean_con_out, mocap_elmo_mean_non_con_out),
-    classification.accuracy_score(mocap_elmo_mean_con_out, mocap_elmo_con_out),
-    classification.accuracy_score(mocap_elmo_mean_non_con_out, mocap_elmo_non_con_out)))
+        classification.accuracy_score(mocap_elmo_con_out, mocap_elmo_non_con_out),
+        classification.accuracy_score(mocap_elmo_mean_con_out, mocap_elmo_mean_non_con_out),
+        classification.accuracy_score(mocap_elmo_mean_con_out, mocap_elmo_con_out),
+        classification.accuracy_score(mocap_elmo_mean_non_con_out, mocap_elmo_non_con_out)))
 
 # Generate final file of annotations; contains "xx" label for unknown/corrections of EDAs
 row = ensemble_eda_annotation(mocap_elmo_non_con_out, mocap_elmo_mean_non_con_out,
@@ -101,4 +97,4 @@ row = ensemble_eda_annotation(mocap_elmo_non_con_out, mocap_elmo_mean_non_con_ou
                               sentiment_labels=[], meld_data=False,
                               file_name='iemocap', write_final_csv=True)
 
-print('ran mocap_dia_act_annotate.py')
+print('ran mocap_dia_act_annotate.py, with total {} number of utterances'.format(len(utterances)))
