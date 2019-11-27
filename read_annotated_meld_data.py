@@ -62,9 +62,9 @@ for tag in tags:
     stack_emotions_values.append(values_emotion)
 
 plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
-               test_show_plot=False, data='meld', type_of='emotion', save_svg=True)
+               test_show_plot=False, data='meld', type_of='emotion')  # , save_eps=True)
 
 plot_bars_plot(stack_da_sentiments, sentiments, colors_sent, tags,
-               test_show_plot=False, data='meld', type_of='sentiment', save_svg=True)
+               test_show_plot=False, data='meld', type_of='sentiment')  # , save_eps=True)
 
 print('ran read_annotated_meld_data.py')

@@ -2,6 +2,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+tags_to_plot = ['xx', 'sd', 'sv', '^q', 'aa', 'ad', 'b', 'ba', 'bh',
+                'qh', 'qw', 'qy', 'qy^d', 'nn', 'ny', 'fa', 'fc', 'ft']
+
+
 def plot_eda_usage(labels, label_values, title, colors_emo,
                    sentiments, sentiments_values, colors_sent,
                    test_show_plot=False, data_name='meld', plot_pie=True):
@@ -54,32 +58,54 @@ def plot_normal_bars(labels, label_values, title, test_show_plot=False):
 
 def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
                    test_show_plot=False, data='meld', type_of='emotion',
-                   save_eps=False, save_svg=False):
+                   save_eps=False, save_svg=False, plot_selected_das=True):
     from scr.plot_bars import StackedBarGrapher
-    stack_emo_names = {}
-    das_stacked = np.array(stack_emotions_values).transpose()
-    for i in range(len(emotions)):
-        stack_emo_names[emotions[i]] = das_stacked[i]
-    totals = das_stacked.sum(axis=0)
-    stack_emo_bars = []
-    for key in stack_emo_names.keys():
-        stack_emo_bars.append([round(i / j * 100, 3) for i, j in zip(stack_emo_names[key], totals)])
-    bars = np.array(stack_emo_bars[0:9]).transpose()
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    SBG = StackedBarGrapher()
-    SBG.stackedBarPlot(ax, bars, colors_emo, xLabels=tags, gap=1.5, widths=[6.] * len(tags))
+    gap, width = 8.0, 10.0
+    if 'fo_o_fw_"_by_bc' in tags:
+        tags[tags.index('fo_o_fw_"_by_bc')] = 'fo'
+    if not plot_selected_das:
+        stack_emo_names = {}
+        das_stacked = np.array(stack_emotions_values).transpose()
+        for i in range(len(emotions)):
+            stack_emo_names[emotions[i]] = das_stacked[i]
+        totals = das_stacked.sum(axis=0)
+        stack_emo_bars = []
+        for key in stack_emo_names.keys():
+            stack_emo_bars.append([round(i / j * 100, 3) for i, j in zip(stack_emo_names[key], totals)])
+        bars = np.array(stack_emo_bars[0:9]).transpose()
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        SBG = StackedBarGrapher()
+        SBG.stackedBarPlot(ax, bars, colors_emo, xLabels=tags,
+                           gap=gap, widths=[width] * len(tags))
+    else:
+        stack_emo_lists = []
+        das_stacked = np.array(stack_emotions_values).transpose()
+        for i in range(len(emotions)):
+            stack_emo_lists.append(das_stacked[i])
+        totals = das_stacked.sum(axis=0)
+        bars = ((stack_emo_lists/totals)*100).transpose()
+        selected_bars = []
+        for tag in tags_to_plot:
+            selected_bars.append(bars[tags.index(tag)])
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        SBG = StackedBarGrapher()
+        SBG.stackedBarPlot(ax, selected_bars, colors_emo, xLabels=tags_to_plot,
+                           gap=gap, widths=[width] * len(tags_to_plot))
+
     if test_show_plot:
         plt.show()
         return
+    dpi = 500
     if save_eps:
         file_name = 'figures/' + data + '_bars_' + type_of + '.eps'
-        plt.savefig(file_name, format='eps', bbox_inches='tight', transparent=True)
+        plt.savefig(file_name, format='eps', bbox_inches='tight', transparent=True, dpi=dpi)
     elif save_svg:
         file_name = 'figures/' + data + '_bars_' + type_of + '.svg'
-        plt.savefig(file_name, format='svg', bbox_inches='tight', transparent=True)
+        plt.savefig(file_name, format='svg', bbox_inches='tight', transparent=True, dpi=dpi)
     else:
         file_name = 'figures/' + data + '_bars_' + type_of + '.png'
-        plt.savefig(file_name, bbox_inches='tight', transparent=True)
+        plt.savefig(file_name, bbox_inches='tight', transparent=True, dpi=dpi)
     print('Figure saved as: {}'.format(file_name))
     plt.close()
