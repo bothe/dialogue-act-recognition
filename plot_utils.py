@@ -6,7 +6,7 @@ def plot_eda_usage(labels, label_values, title, colors_emo,
                    sentiments, sentiments_values, colors_sent,
                    test_show_plot=False, data_name='meld', plot_pie=True):
     print(len(labels), labels)
-    data = label_values[0:len(labels)-1] + [label_values[-1]]
+    data = label_values[0:len(labels) - 1] + [label_values[-1]]
     print(len(data), data)
 
     # Create a pieplot
@@ -26,7 +26,7 @@ def plot_eda_usage(labels, label_values, title, colors_emo,
         plt.text(0, -0.15, title, fontdict={'size': 15.0, 'horizontalalignment': 'center'})
     else:
         for i in range(len(labels)):
-            plt.bar(labels[i]+labels[i+1], data[i]) #, colors=colors_emo)
+            plt.bar(labels[i] + labels[i + 1], data[i])  # , colors=colors_emo)
 
     if test_show_plot:
         plt.show()
@@ -53,7 +53,8 @@ def plot_normal_bars(labels, label_values, title, test_show_plot=False):
 
 
 def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
-                   test_show_plot=False, data='meld', type_of='emotion', save_eps=False):
+                   test_show_plot=False, data='meld', type_of='emotion',
+                   save_eps=False, save_svg=False):
     from scr.plot_bars import StackedBarGrapher
     stack_emo_names = {}
     das_stacked = np.array(stack_emotions_values).transpose()
@@ -67,12 +68,18 @@ def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
     fig = plt.figure()
     ax = fig.add_subplot(111)
     SBG = StackedBarGrapher()
-    SBG.stackedBarPlot(ax, bars, colors_emo, xLabels=tags, gap=1.5, widths=[6.]*len(tags))
+    SBG.stackedBarPlot(ax, bars, colors_emo, xLabels=tags, gap=1.5, widths=[6.] * len(tags))
     if test_show_plot:
         plt.show()
         return
     if save_eps:
-        plt.savefig('figures/' + data + '_bars_' + type_of+ '.eps', format='eps', bbox_inches='tight', transparent=True)
+        file_name = 'figures/' + data + '_bars_' + type_of + '.eps'
+        plt.savefig(file_name, format='eps', bbox_inches='tight', transparent=True)
+    elif save_svg:
+        file_name = 'figures/' + data + '_bars_' + type_of + '.svg'
+        plt.savefig(file_name, format='svg', bbox_inches='tight', transparent=True)
     else:
-        plt.savefig('figures/' + data + '_bars_' + type_of, bbox_inches='tight', transparent=True)
+        file_name = 'figures/' + data + '_bars_' + type_of + '.png'
+        plt.savefig(file_name, bbox_inches='tight', transparent=True)
+    print('Figure saved as: {}'.format(file_name))
     plt.close()
