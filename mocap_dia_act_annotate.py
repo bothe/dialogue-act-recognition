@@ -15,7 +15,7 @@ predict_with_elmo_mean = False
 if os.path.exists('results/tags.npy'):
     tags = np.load('results/tags.npy')
 
-utterances, emotion, emo_evo, v, a, d, speaker_id = get_mocap_data(read_from_csv=True)
+utterances, emotion, emo_evo, v, a, d, speaker_id, session_id = get_mocap_data(read_from_csv=True, write=True)
 
 if elmo_feature_retrieval:
     from elmo_features import get_elmo_embs
@@ -86,13 +86,14 @@ print('Accuracy comparision between context and non-context predictions elmo: {}
         classification.accuracy_score(mocap_elmo_mean_con_out, mocap_elmo_con_out),
         classification.accuracy_score(mocap_elmo_mean_non_con_out, mocap_elmo_non_con_out)))
 
+
 # Generate final file of annotations; contains "xx" label for unknown/corrections of EDAs
 row = ensemble_eda_annotation(mocap_elmo_non_con_out, mocap_elmo_mean_non_con_out,
                               mocap_elmo_con_out, mocap_elmo_mean_con_out, mocap_elmo_top_con_out,
                               mocap_elmo_non_con_out_confs, mocap_elmo_mean_non_con_out_confs,
                               mocap_elmo_con_out_confs, mocap_elmo_mean_con_out_confs, mocap_elmo_top_con_out_confs,
-                              speaker_id, utterances, speaker_id, emotion,
+                              session_id, utterances, speaker_id, emotion,
                               sentiment_labels=[], meld_data=False,
-                              file_name='iemocap', write_final_csv=True)
+                              file_name='iemocap_no_utts', write_final_csv=True, write_utterances=False)
 
 print('ran mocap_dia_act_annotate.py, with total {} number of utterances'.format(len(utterances)))
