@@ -1,7 +1,7 @@
 from elmo_features import *
 from flask import Flask, request, jsonify
 
-from utils_float_string import float_to_string
+from src.utils_float_string import float_to_string
 
 app = Flask(__name__)
 

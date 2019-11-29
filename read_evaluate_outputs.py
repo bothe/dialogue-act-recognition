@@ -1,7 +1,7 @@
 from sklearn.metrics import classification
 from collections import Counter
-from mocap_data_reader import get_mocap_data
-from read_annotated_data_utils import read_data
+from src.mocap_data_reader import get_mocap_data
+from src.read_annotated_data_utils import read_data
 from results.read_predictions_utils import labels_to_indices, read_all_predictions
 import matplotlib.pyplot as plt
 import numpy as np

@@ -2,9 +2,9 @@ import time
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras import Model
 from keras.utils import to_categorical
-import pickle, os
+import os
 from models import model_attention_applied_after_bilstm, context_model_att
-from utils import *
+from src.utils import *
 
 get_inter_reps_from_model = False
 train_con_model = True

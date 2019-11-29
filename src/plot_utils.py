@@ -59,7 +59,7 @@ def plot_normal_bars(labels, label_values, title, test_show_plot=False):
 def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
                    test_show_plot=False, data='meld', type_of='emotion',
                    save_eps=False, save_svg=False, plot_selected_das=True):
-    from scr.plot_bars import StackedBarGrapher
+    from src.plot_bars import StackedBarGrapher
     gap, width = 8.0, 10.0
     if 'fo_o_fw_"_by_bc' in tags:
         tags[tags.index('fo_o_fw_"_by_bc')] = 'fo'

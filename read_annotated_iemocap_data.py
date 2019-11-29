@@ -1,9 +1,7 @@
 from collections import Counter
 from diswiz.utils_server import EDAs
-from plot_utils import *
-from read_annotated_data_utils import read_data
-import numpy as np
-import os
+from src.plot_utils import *
+from src.read_annotated_data_utils import read_data
 
 utt_Speaker, utt, utt_Emotion, utt_EDAs = read_data('annotated_data/eda_iemocap_dataset.csv')
 colors_emo = ['Green', 'Cyan', 'Blue', 'Black', 'Gray', 'Olive', 'Mediumvioletred', 'Orange', 'Red', 'White']

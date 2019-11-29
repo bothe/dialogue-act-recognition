@@ -2,9 +2,9 @@ import requests
 from keras.utils import to_categorical
 import pickle, os, time
 from models import model_attention_applied_after_bilstm, non_context_model_for_utterance_level
-from training_utils import keras_callbacks
-from utils import *
-from utils_float_string import string_to_floats
+from src.training_utils import keras_callbacks
+from src.utils import *
+from src.utils_float_string import string_to_floats
 
 # TODO: SwDA feature retrieval
 

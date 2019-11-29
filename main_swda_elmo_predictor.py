@@ -5,8 +5,8 @@ import requests
 # TODO: need statements "if train" similar to main_swda_elmo_mean.py
 
 from models import model_attention_applied_after_bilstm, context_model_att
-from utils import *
-from utils_float_string import *
+from src.utils import *
+from src.utils_float_string import *
 
 max_seq_len = 20
 trainFile = 'data/swda-actags_train_speaker.csv'

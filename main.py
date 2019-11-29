@@ -3,8 +3,8 @@ from keras.utils import to_categorical
 import pickle, os
 from data_generator import DataGenerator
 from models import model_attention_applied_after_bilstm, \
-    model_attention_applied_after_bisrnn, context_model
-from utils import *
+    context_model
+from src.utils import *
 
 max_seq_len = 20
 

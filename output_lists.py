@@ -1,5 +1,4 @@
-from collections import Counter
-from utils import *
+from src.utils import *
 
 SidTest, Xtest, Ytest, Ztest = read_files('data/swda-actags_test_speaker.csv')
 

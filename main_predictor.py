@@ -1,11 +1,10 @@
 from keras.utils import to_categorical
-import pickle, os
-import requests
+import pickle
 # requests.post('http://0:4004/elmo_embed_words', json={"text":'is it?'}).json()
 # requests.post('https://55898a32.eu.ngrok.io/elmo_embed_words', json={"text":'is it?\r\nokay got it.'}).json()
 
 from models import model_attention_applied_after_bilstm, context_model_att
-from utils import *
+from src.utils import *
 
 
 def main():

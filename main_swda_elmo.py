@@ -2,7 +2,7 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.utils import to_categorical
 import pickle, os
 from models import model_attention_applied_after_bilstm, context_model_att
-from utils import *
+from src.utils import *
 
 max_seq_len = 20
 train_non_context_model = False

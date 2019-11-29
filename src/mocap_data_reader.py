@@ -1,4 +1,4 @@
-from mocap_utils import *
+from src.mocap_utils import *
 import csv
 import pandas as pd
 
@@ -58,21 +58,20 @@ def get_mocap_data(write=False, read_from_csv=False, csv_file_name="IEMOCAP/moca
                     except KeyError:
                         pass
                 file_paths.append(file_path_utt)
-        session_id, speaker_id = get_ids_from_keys(utt_keys)
+        utt_id, speaker_id = get_ids_from_keys(utt_keys)
     else:
         df = pd.read_csv(csv_file_name)
         utterances = df['utterance'].tolist()
         emo_dialogues = df['emotion'].tolist()
         v, a, d = df['v'].tolist(), df['a'].tolist(), df['d'].tolist()
         utt_keys = df['utt_keys'].tolist()
+        utt_id, speaker_id = get_ids_from_keys(utt_keys)
 
-        session_id, speaker_id = get_ids_from_keys(utt_keys)
-
-    return utterances, emo_dialogues, emo_evo, v, a, d, speaker_id, session_id
+    return utterances, emo_dialogues, emo_evo, v, a, d, speaker_id, utt_id
 
 
 def get_ids_from_keys(utt_keys):
-    session_id, speaker_id = [], []
+    utt_id, speaker_id = [], []
     for item in utt_keys:
         temp_id = item.split('_')[-1]
         xx = list(item)
@@ -81,8 +80,8 @@ def get_ids_from_keys(utt_keys):
         yy.reverse()
         temp_ses_id = ''.join(yy+[temp_id[0]])
         speaker_id.append(temp_id[1:])
-        session_id.append(temp_ses_id)
-    return session_id, speaker_id
+        utt_id.append(temp_ses_id)
+    return utt_id, speaker_id
 
 # utterances, emo_dialogues, emo_evo, v, a, d, speaker_id = get_mocap_data(wirte=False)
 # print('debug')

@@ -1,7 +1,7 @@
 from collections import Counter
 from diswiz.utils_server import EDAs
-from plot_utils import plot_bars_plot
-from read_annotated_data_utils import read_data
+from src.plot_utils import plot_bars_plot
+from src.read_annotated_data_utils import read_data
 
 utt_Speaker, utt, utt_Emotion, utt_EDAs, utt_Sentiment = read_data('annotated_data/eda_meld_emotion_dataset.csv',
                                                                    meld_data=True)

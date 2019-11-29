@@ -6,7 +6,8 @@ from scipy.stats import stats
 from sklearn.metrics import classification
 
 from MELD.utils.read_meld import *
-from final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation, fleissKappa
+from src.final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation
+from src.relieability_kappa import fleissKappa
 
 elmo_feature_retrieval = False
 predict_with_elmo = False

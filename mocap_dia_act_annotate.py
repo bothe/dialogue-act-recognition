@@ -5,8 +5,9 @@ from krippendorff import alpha
 from scipy.stats import stats
 from sklearn.metrics import classification
 
-from final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation, fleissKappa
-from mocap_data_reader import get_mocap_data
+from src.final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation
+from src.relieability_kappa import fleissKappa
+from src.mocap_data_reader import get_mocap_data
 
 elmo_feature_retrieval = False
 predict_with_elmo = False
@@ -15,7 +16,7 @@ predict_with_elmo_mean = False
 if os.path.exists('results/tags.npy'):
     tags = np.load('results/tags.npy')
 
-utterances, emotion, emo_evo, v, a, d, speaker_id, session_id = get_mocap_data(read_from_csv=True, write=True)
+utterances, emotion, emo_evo, v, a, d, speaker_id, utt_id = get_mocap_data(read_from_csv=True, write=True)
 
 if elmo_feature_retrieval:
     from elmo_features import get_elmo_embs
@@ -92,7 +93,7 @@ row = ensemble_eda_annotation(mocap_elmo_non_con_out, mocap_elmo_mean_non_con_ou
                               mocap_elmo_con_out, mocap_elmo_mean_con_out, mocap_elmo_top_con_out,
                               mocap_elmo_non_con_out_confs, mocap_elmo_mean_non_con_out_confs,
                               mocap_elmo_con_out_confs, mocap_elmo_mean_con_out_confs, mocap_elmo_top_con_out_confs,
-                              session_id, utterances, speaker_id, emotion,
+                              utt_id, utterances, speaker_id, emotion,
                               sentiment_labels=[], meld_data=False,
                               file_name='iemocap_no_utts', write_final_csv=True, write_utterances=False)
 

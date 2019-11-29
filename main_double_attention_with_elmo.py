@@ -1,12 +1,12 @@
 from keras.utils import to_categorical
-import pickle, os
+import pickle
 import requests
 # requests.post('http://0:4004/elmo_embed_words', json={"text":'is it?'}).json()
 # requests.post('https://136c22af.eu.ngrok.io/elmo_embed_words', json={"text":'is it?\r\nokay got it.'}).json()
 # from elmo_features import get_elmo_fea
 from models import model_attention_applied_after_bilstm, context_model_att
-from utils import *
-from utils_float_string import *
+from src.utils import *
+from src.utils_float_string import *
 
 max_seq_len = 20
 trainFile = 'data/swda-actags_train_speaker.csv'
