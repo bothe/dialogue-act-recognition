@@ -49,7 +49,7 @@ else:
 
 # Predict with normal elmo mean features
 if predict_with_elmo_mean:
-    from main_swda_elmo_mean import *
+    from main_swda_elmo_mean import predict_classes_for_elmo_mean
 
     iemocap_elmo_features_mean = np.array([item.mean(axis=0) for item in iemocap_elmo_features])
     mocap_elmo_mean_non_con_out, mocap_elmo_mean_con_out, mocap_elmo_mean_non_con_out_confs, \
