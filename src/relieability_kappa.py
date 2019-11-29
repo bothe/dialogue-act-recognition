@@ -22,7 +22,7 @@ def kappa_data(reliability_data):
     return final_list, noted_samples
 
 
-def fleissKappa(reliability_data, n):
+def fleiss_kappa(reliability_data, n):
     rate, noted_samples = kappa_data(reliability_data)
     print("Skipped subjects: {}%".format(
         round(((reliability_data.shape[1] - noted_samples) / reliability_data.shape[1]) * 100, 4)))

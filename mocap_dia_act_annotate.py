@@ -6,7 +6,7 @@ from scipy.stats import stats
 from sklearn.metrics import classification
 
 from src.final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation
-from src.relieability_kappa import fleissKappa
+from src.relieability_kappa import fleiss_kappa
 from src.mocap_data_reader import get_mocap_data
 
 elmo_feature_retrieval = False
@@ -32,7 +32,7 @@ if predict_with_elmo:
     from main_swda_elmo_predictor import predict_classes_for_elmo
 
     mocap_elmo_non_con_out, mocap_elmo_con_out, mocap_elmo_non_con_out_confs, mocap_elmo_con_out_confs, \
-        mocap_elmo_top_con_out, mocap_elmo_top_con_out_confs = predict_classes_for_elmo(iemocap_elmo_features)
+    mocap_elmo_top_con_out, mocap_elmo_top_con_out_confs = predict_classes_for_elmo(iemocap_elmo_features)
     np.save('model_output_labels/mocap_elmo_con_out', mocap_elmo_con_out)
     np.save('model_output_labels/mocap_elmo_non_con_out', mocap_elmo_non_con_out)
     np.save('model_output_labels/mocap_elmo_con_out_confs', mocap_elmo_con_out_confs)
@@ -53,7 +53,7 @@ if predict_with_elmo_mean:
 
     iemocap_elmo_features_mean = np.array([item.mean(axis=0) for item in iemocap_elmo_features])
     mocap_elmo_mean_non_con_out, mocap_elmo_mean_con_out, mocap_elmo_mean_non_con_out_confs, \
-        mocap_elmo_mean_con_out_confs = predict_classes_for_elmo_mean(iemocap_elmo_features_mean)
+    mocap_elmo_mean_con_out_confs = predict_classes_for_elmo_mean(iemocap_elmo_features_mean)
 
     np.save('model_output_labels/mocap_elmo_mean_con_out', mocap_elmo_mean_con_out)
     np.save('model_output_labels/mocap_elmo_mean_non_con_out', mocap_elmo_mean_non_con_out)
@@ -78,15 +78,14 @@ reliability_data = convert_predictions_to_indices(mocap_elmo_con_out, mocap_elmo
 k_alpha = alpha(reliability_data, level_of_measurement='nominal')
 print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
 
-fleiss_kappa_score = fleissKappa(reliability_data, 5)
+fleiss_kappa_score = fleiss_kappa(reliability_data, 5)
 
 print('Accuracy comparision between context and non-context predictions elmo: {}% elmo_mean: {}% '
       'context-context: {}% non-non-context: {}%'.format(
-        classification.accuracy_score(mocap_elmo_con_out, mocap_elmo_non_con_out),
-        classification.accuracy_score(mocap_elmo_mean_con_out, mocap_elmo_mean_non_con_out),
-        classification.accuracy_score(mocap_elmo_mean_con_out, mocap_elmo_con_out),
-        classification.accuracy_score(mocap_elmo_mean_non_con_out, mocap_elmo_non_con_out)))
-
+    classification.accuracy_score(mocap_elmo_con_out, mocap_elmo_non_con_out),
+    classification.accuracy_score(mocap_elmo_mean_con_out, mocap_elmo_mean_non_con_out),
+    classification.accuracy_score(mocap_elmo_mean_con_out, mocap_elmo_con_out),
+    classification.accuracy_score(mocap_elmo_mean_non_con_out, mocap_elmo_non_con_out)))
 
 # Generate final file of annotations; contains "xx" label for unknown/corrections of EDAs
 row = ensemble_eda_annotation(mocap_elmo_non_con_out, mocap_elmo_mean_non_con_out,
