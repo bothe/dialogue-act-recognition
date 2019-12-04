@@ -72,7 +72,7 @@ def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
         stack_emo_bars = []
         for key in stack_emo_names.keys():
             stack_emo_bars.append([round(i / j * 100, 3) for i, j in zip(stack_emo_names[key], totals)])
-        bars = np.array(stack_emo_bars[0:9]).transpose()
+        bars = np.array(stack_emo_bars).transpose()
         fig = plt.figure()
         ax = fig.add_subplot(111)
         SBG = StackedBarGrapher()
@@ -88,6 +88,10 @@ def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
         selected_bars = []
         for tag in tags_to_plot:
             selected_bars.append(bars[tags.index(tag)])
+
+        for i in range(len(tags)):
+            selected_bars[i]
+
         fig = plt.figure()
         ax = fig.add_subplot(111)
         SBG = StackedBarGrapher()
@@ -109,3 +113,21 @@ def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
         plt.savefig(file_name, bbox_inches='tight', transparent=True, dpi=dpi)
     print('Figure saved as: {}'.format(file_name))
     plt.close()
+
+
+def plot_sankey(label, color, source, target, value, color_links):
+    import plotly.graph_objects as go
+    fig = go.Figure(data=[go.Sankey(
+        node = dict(pad = 15, thickness = 20, line = dict(color = "green", width = 0.), label = label, color = color),
+        link = dict(source = source, target = target, value = value, color = color_links))])
+    fig.update_layout(title_text="Basic Sankey Diagram", font_size=10)
+    fig.show()
+
+
+# label = ["A1", "A2", "A3", "B1", "B2", "B3"]
+# color = ["red", "green", "aliceblue", "antiquewhite", "aqua", "aquamarine"]
+# source = [0, 0, 0, 1, 1, 1, 2, 2, 2]
+# target = [3, 4, 5, 3, 4, 5, 3, 4, 5]
+# value = [8, 8, 12, 8, 8, 6, 8, 8, 6]
+# color_links = ["#F27420", "#F27420", "#F27420", "green", "green", "green", "red", "red", "red"]
+# plot_sankey(label, color, source, target, value, color_links)
