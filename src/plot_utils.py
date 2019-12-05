@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 tags_to_plot = ['xx', 'sd', 'sv', '^q', 'aa', 'ad', 'b', 'ba', 'bh',
                 'qh', 'qw', 'qy', 'qy^d', 'nn', 'ny', 'fa', 'fc', 'ft']
 
@@ -84,7 +83,7 @@ def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
         for i in range(len(emotions)):
             stack_emo_lists.append(das_stacked[i])
         totals = das_stacked.sum(axis=0)
-        bars = ((stack_emo_lists/totals)*100).transpose()
+        bars = ((stack_emo_lists / totals) * 100).transpose()
         selected_bars_normalized, selected_bars = [], []
         for tag in tags_to_plot:
             selected_bars_normalized.append(bars[tags.index(tag)])
@@ -120,7 +119,7 @@ def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
 def plotting_sankeys(colors_emo, emotions, selected_bars, selected_bars_normalized, data):
     label, color, source, target, value, value_norms, color_links = [], [], [], [], [], [], []
     label = emotions + tags_to_plot
-    color = colors_emo[0:len(emotions)] + [colors_emo[-1]]*len(tags_to_plot)
+    color = colors_emo[0:len(emotions)] + [colors_emo[-1]] * len(tags_to_plot)
     for i in range(len(tags_to_plot)):
         for j in range(len(emotions)):
             source.append(j)
@@ -135,11 +134,10 @@ def plotting_sankeys(colors_emo, emotions, selected_bars, selected_bars_normaliz
 def plotter_sankey(label, color, source, target, value, color_links, title):
     import plotly.graph_objects as go
     fig = go.Figure(data=[go.Sankey(
-        node = dict(pad = 15, thickness = 20, line = dict(color = "green", width = 0.), label = label, color = color),
-        link = dict(source = source, target = target, value = value, color = color_links))])
+        node=dict(pad=15, thickness=20, line=dict(color="green", width=0.), label=label, color=color),
+        link=dict(source=source, target=target, value=value, color=color_links))])
     fig.update_layout(title_text=title, font_size=10)
     fig.show()
-
 
 # label = ["A1", "A2", "A3", "B1", "B2", "B3"]
 # color = ["red", "green", "aliceblue", "antiquewhite", "aqua", "aquamarine"]
