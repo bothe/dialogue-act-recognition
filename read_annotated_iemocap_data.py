@@ -3,7 +3,7 @@ from src.plot_utils import *
 from src.read_annotated_data_utils import read_data
 
 utt_Speaker, utt, utt_Emotion, utt_EDAs = read_data('annotated_data/eda_iemocap_dataset.csv')
-colors_emo = ['Green', 'Cyan', 'Blue', 'Black', 'Gray', 'Olive', 'Mediumvioletred', 'Orange', 'Red', 'White']
+colors_emo = ['Green', 'Cyan', 'Blue', 'Black', 'Gray', 'Olive', 'Mediumvioletred', 'Orange', 'Red', 'Brown']
 emotions = ['hap', 'exc', 'sur', 'neu', 'xxx', 'fea', 'sad', 'fru', 'ang']
 
 tags = sorted(list(Counter(utt_EDAs).keys()))
@@ -33,6 +33,6 @@ for tag in tags:
 
 
 plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
-               test_show_plot=False, data='iemocap', type_of='emotion')  # , save_eps=True)
+               test_show_plot=False, data='iemocap', type_of='emotion', plot_sankeys=True)  # , save_eps=True)
 
 print('ran read_annotated_iemocap_data.py')

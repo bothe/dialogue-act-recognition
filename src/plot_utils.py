@@ -58,7 +58,7 @@ def plot_normal_bars(labels, label_values, title, test_show_plot=False):
 
 def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
                    test_show_plot=False, data='meld', type_of='emotion',
-                   save_eps=False, save_svg=False, plot_selected_das=True):
+                   save_eps=False, save_svg=False, plot_selected_das=True, plot_sankeys=False):
     from src.plot_bars import StackedBarGrapher
     gap, width = 8.0, 10.0
     if 'fo_o_fw_"_by_bc' in tags:
@@ -85,17 +85,19 @@ def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
             stack_emo_lists.append(das_stacked[i])
         totals = das_stacked.sum(axis=0)
         bars = ((stack_emo_lists/totals)*100).transpose()
-        selected_bars = []
+        selected_bars_normalized, selected_bars = [], []
         for tag in tags_to_plot:
-            selected_bars.append(bars[tags.index(tag)])
+            selected_bars_normalized.append(bars[tags.index(tag)])
+            selected_bars.append(das_stacked.transpose()[tags.index(tag)])
 
-        for i in range(len(tags)):
-            selected_bars[i]
+        if plot_sankeys:
+            # This will open in browser
+            plotting_sankeys(colors_emo, emotions, selected_bars, selected_bars_normalized, data)
 
         fig = plt.figure()
         ax = fig.add_subplot(111)
         SBG = StackedBarGrapher()
-        SBG.stackedBarPlot(ax, selected_bars, colors_emo, xLabels=tags_to_plot,
+        SBG.stackedBarPlot(ax, selected_bars_normalized, colors_emo, xLabels=tags_to_plot,
                            gap=gap, widths=[width] * len(tags_to_plot))
 
     if test_show_plot:
@@ -115,12 +117,27 @@ def plot_bars_plot(stack_emotions_values, emotions, colors_emo, tags,
     plt.close()
 
 
-def plot_sankey(label, color, source, target, value, color_links):
+def plotting_sankeys(colors_emo, emotions, selected_bars, selected_bars_normalized, data):
+    label, color, source, target, value, value_norms, color_links = [], [], [], [], [], [], []
+    label = emotions + tags_to_plot
+    color = colors_emo[0:len(emotions)] + [colors_emo[-1]]*len(tags_to_plot)
+    for i in range(len(tags_to_plot)):
+        for j in range(len(emotions)):
+            source.append(j)
+            target.append(i + len(emotions))
+            value.append(selected_bars[i][j])
+            value_norms.append(selected_bars_normalized[i][j])
+            color_links.append(colors_emo[j])
+    plotter_sankey(label, color, source, target, value, color_links, data + " - With real values")
+    plotter_sankey(label, color, source, target, value_norms, color_links, data + " - With normalized values")
+
+
+def plotter_sankey(label, color, source, target, value, color_links, title):
     import plotly.graph_objects as go
     fig = go.Figure(data=[go.Sankey(
         node = dict(pad = 15, thickness = 20, line = dict(color = "green", width = 0.), label = label, color = color),
         link = dict(source = source, target = target, value = value, color = color_links))])
-    fig.update_layout(title_text="Basic Sankey Diagram", font_size=10)
+    fig.update_layout(title_text=title, font_size=10)
     fig.show()
 
 
@@ -130,4 +147,4 @@ def plot_sankey(label, color, source, target, value, color_links):
 # target = [3, 4, 5, 3, 4, 5, 3, 4, 5]
 # value = [8, 8, 12, 8, 8, 6, 8, 8, 6]
 # color_links = ["#F27420", "#F27420", "#F27420", "green", "green", "green", "red", "red", "red"]
-# plot_sankey(label, color, source, target, value, color_links)
+# plotter_sankey(label, color, source, target, value, color_links)
