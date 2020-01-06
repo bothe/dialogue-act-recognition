@@ -21,3 +21,5 @@ features/iemocap_elmo_mean_features.npy
 /features/meld_elmo_features_dev.npy
 /features/meld_elmo_features_train.npy
 /logs/
+/features/iemocap_elmo_features.npy
+/features/iemocap_elmo_features.npy.zip
