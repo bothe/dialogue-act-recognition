@@ -78,3 +78,7 @@ def predict_da_classes(speaker_id, utterances, utt_id, emotion, link_online=Fals
     print(assessment)
     print('ran swda_dia_act_annotate.py, with total {} number of utterances'.format(len(rows)))
     return rows, assessment, k_alpha, fleiss_kappa
+
+
+utterances = ["I don't know, ","Where did you go?", "What?"," Where did you go?","I went to University.", "Uh-huh."]
+predict_da_classes(range(len(utterances)), utterances, range(len(utterances)), range(len(utterances)), link_online=False)
