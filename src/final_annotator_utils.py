@@ -1,4 +1,5 @@
 import csv
+
 import numpy as np
 
 
@@ -27,13 +28,14 @@ def ensemble_eda_annotation(eda1, eda2, eda3, eda4, eda5,
                             eda1_conf, eda2_conf, eda3_conf, eda4_conf, eda5_conf,
                             utt_speaker, utterances, utt_id, utt_emotion,
                             sentiment_labels=[], meld_data=True,
-                            file_name='meld_emotion', write_final_csv=True, write_utterances=True):
+                            file_name='meld_emotion', write_final_csv=True, write_utterances=True,
+                            return_assessment=False):
     if write_final_csv:
         fieldnames = ['speaker', 'utt_id', 'utterance', 'emotion', 'sentiment',
                       'eda1', 'eda2', 'eda3', 'eda4', 'eda5', 'EDA',
                       'all_match', 'con_match', 'match']
 
-        store_meld_in_csv = open('annotated_data/eda_' + file_name + '_dataset.csv', mode='w', newline='')
+        store_meld_in_csv = open('annotated_data/others/' + file_name + '_dataset.csv', mode='w', newline='')
         writer = csv.DictWriter(store_meld_in_csv, fieldnames=fieldnames)
         writer.writeheader()
 
@@ -129,8 +131,11 @@ def ensemble_eda_annotation(eda1, eda2, eda3, eda4, eda5,
             none_matches += 1
         utt_info_rows.append(utt_info_row)
 
-    print(
-        "Matches in all: {}%, in context: {}%, based on confidence rank: {}%, and none matched: {}%".format(
-            round((total_match / len(eda1)) * 100, 2), round((con_matches / len(eda1)) * 100, 2),
-            round((based_on_confs / len(eda1)) * 100, 2), round((none_matches / len(eda1)) * 100, 2)))
-    return utt_info_rows
+    assessment = "Matches in all: {}%, in context: {}%, based on confidence rank: {}%, and none matched: {}%".format(
+        round((total_match / len(eda1)) * 100, 2), round((con_matches / len(eda1)) * 100, 2),
+        round((based_on_confs / len(eda1)) * 100, 2), round((none_matches / len(eda1)) * 100, 2))
+    print(assessment)
+    if return_assessment:
+        return utt_info_rows, assessment
+    else:
+        return utt_info_rows

@@ -23,3 +23,4 @@ features/iemocap_elmo_mean_features.npy
 /logs/
 /features/iemocap_elmo_features.npy
 /features/iemocap_elmo_features.npy.zip
+/annotated_data/others/
