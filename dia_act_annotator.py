@@ -28,7 +28,9 @@ def predict_da_classes(speaker_id, utterances, utt_id, emotion, link_online=Fals
         link = "https://d55da20d.eu.ngrok.io/"
     else:
         link = "http://0.0.0.0:4004/"
-    x_features = string_to_floats(requests.post(link + 'elmo_embed_words', json={"text": utterances}).json()['result'])
+    utterances_post = '\r\n'.join(utterances)
+    x_features = string_to_floats(requests.post(link + 'elmo_embed_words',
+                                                json={"text": utterances_post}).json()['result'])
 
     # Predict with normal elmo features
     swda_elmo_non_con_out, swda_elmo_con_out, swda_elmo_non_con_out_confs, swda_elmo_con_out_confs, \
@@ -52,9 +54,13 @@ def predict_da_classes(speaker_id, utterances, utt_id, emotion, link_online=Fals
     k_alpha = alpha(reliability_data, level_of_measurement='nominal')
     print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
 
-    from src.relieability_kappa import fleiss_kappa
-    fleiss_kappa = fleiss_kappa(reliability_data, 5)
-    print("Fleiss' Kappa: {}".format(fleiss_kappa))
+    try:
+        from src.relieability_kappa import fleiss_kappa
+        fleiss_kappa_score = fleiss_kappa(reliability_data, 5)
+        print("Fleiss' Kappa: {}".format(fleiss_kappa_score))
+    except IndexError:
+        print("Could not compute Fleiss' Kappa score, due to insufficient categories in the final annotations!")
+        fleiss_kappa_score = None
 
     print('Accuracy comparision between context and non-context predictions elmo: {}% elmo_mean: {}% '
           'context-context: {}% non-non-context: {}%'.format(
@@ -72,13 +78,15 @@ def predict_da_classes(speaker_id, utterances, utt_id, emotion, link_online=Fals
                                                swda_elmo_top_con_out_confs,
                                                speaker_id, utterances, utt_id, emotion,
                                                sentiment_labels=[], meld_data=False,
-                                               file_name='_final_annotation' + str(timestamp),
+                                               file_name='annotations_' + str(timestamp),
                                                write_final_csv=True, write_utterances=True, return_assessment=True)
 
-    print(assessment)
     print('ran swda_dia_act_annotate.py, with total {} number of utterances'.format(len(rows)))
-    return rows, assessment, k_alpha, fleiss_kappa
+    return rows, assessment, k_alpha, fleiss_kappa_score
 
 
-utterances = ["I don't know, ","Where did you go?", "What?"," Where did you go?","I went to University.", "Uh-huh."]
-predict_da_classes(range(len(utterances)), utterances, range(len(utterances)), range(len(utterances)), link_online=False)
+speaker_id = ["A", "B", "A", "B", "A", "A"]
+utterances = ["I don't know, ", "Where did you go?", "What?", " Where did you go?", "I went to University.", "Uh-huh."]
+utt_id = ["1", "2", " 3", "4", "5", "6"]
+emotions = ["neutral", "surprise", "surprise", "angry", "frustration", "neutral"]
+predict_da_classes(speaker_id, utterances, utt_id, emotions, link_online=True)
