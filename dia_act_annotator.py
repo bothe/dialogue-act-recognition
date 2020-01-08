@@ -16,26 +16,37 @@ from src.utils_float_string import string_to_floats
 app = Flask(__name__)
 
 
-def utils():
-    pass
+def utils(text="", speaker_id=[], utterances=[], utt_id=[], emotion=[], mode='encode'):
+    if mode=='encode':
+        text = "$$".join(speaker_id) + "$$$" + "$$".join(utterances) + "$$$" + \
+               "$$".join(utt_id) + "$$$" + "$$".join(emotion)
+        return text
+    else:
+        encoded_text = text.split("$$$")
+        speaker_id = encoded_text[0].split("$$")
+        utterances = encoded_text[1].split("$$")
+        utt_id = encoded_text[2].split("$$")
+        emotion = encoded_text[3].split("$$")
+        return speaker_id, utterances, utt_id, emotion
 
 
-@app.route("/elmo_embed_words", methods=['GET', 'POST'])
-def index(speaker_id, utterances, utt_id, emotion, link_online=False):
+@app.route("/predict_das", methods=['GET', 'POST'])
+def index():
     """ Predicting from text takes 'x' as a list of utterances and
     will require to have ELMo emb server running at port 4004 or online hosting service. """
 
     value = request.json['text']
+    speaker_id, utterances, utt_id, emotion = utils(text=value, mode='decode')
     if os.path.exists('results/tags.npy'):
         tags = np.load('results/tags.npy')
-
+    link_online = False
     if link_online:
         link = "https://d55da20d.eu.ngrok.io/"
     else:
         link = "http://0.0.0.0:4004/"
-    utterances_post = '\r\n'.join(utterances)
+    # utterances_post = '\r\n'.join(utterances)
     x_features = string_to_floats(requests.post(link + 'elmo_embed_words',
-                                                json={"text": utterances_post}).json()['result'])
+                                                json={"text": utterances}).json()['result'])
 
     # Predict with normal elmo features
     swda_elmo_non_con_out, swda_elmo_con_out, swda_elmo_non_con_out_confs, swda_elmo_con_out_confs, \
@@ -95,9 +106,9 @@ def index(speaker_id, utterances, utt_id, emotion, link_online=False):
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=4004)
 
-speaker_id = ["A", "B", "A", "B", "A", "A"]
-utterances = ["I don't know, ", "Where did you go?", "What?", " Where did you go?", "I went to University.", "Uh-huh."]
-utt_id = ["1", "2", " 3", "4", "5", "6"]
+speaker_ids = ["A", "B", "A", "B", "A", "A"]
+utterancess = ["I don't know, ", "Where did you go?", "What?", " Where did you go?", "I went to University.", "Uh-huh."]
+utt_ids = ["1", "2", " 3", "4", "5", "6"]
 emotions = ["neutral", "surprise", "surprise", "angry", "frustration", "neutral"]
 
-index(speaker_id, utterances, utt_id, emotions, link_online=True)
+index()
