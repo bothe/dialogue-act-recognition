@@ -16,6 +16,10 @@ from src.utils_float_string import string_to_floats
 app = Flask(__name__)
 
 
+def utils():
+    pass
+
+
 @app.route("/elmo_embed_words", methods=['GET', 'POST'])
 def index(speaker_id, utterances, utt_id, emotion, link_online=False):
     """ Predicting from text takes 'x' as a list of utterances and
@@ -87,6 +91,9 @@ def index(speaker_id, utterances, utt_id, emotion, link_online=False):
     return jsonify({'result': rows, 'assessment': assessment, 'k_alpha': k_alpha,
                     'fleiss_kappa_score': fleiss_kappa_score})
 
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=4004)
 
 speaker_id = ["A", "B", "A", "B", "A", "A"]
 utterances = ["I don't know, ", "Where did you go?", "What?", " Where did you go?", "I went to University.", "Uh-huh."]
