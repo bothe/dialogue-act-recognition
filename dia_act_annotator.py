@@ -8,35 +8,18 @@ from krippendorff import alpha
 from scipy.stats import stats
 from sklearn.metrics import classification
 
-from main_swda_elmo_mean import predict_classes_for_elmo_mean
-from main_swda_elmo_predictor import predict_classes_for_elmo
 from src.final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation
-from src.utils_float_string import string_to_floats
+from src.utils_float_string import string_to_floats, str_utils
 
 app = Flask(__name__)
-
-
-def utils(text="", speaker_id=[], utterances=[], utt_id=[], emotion=[], mode='encode'):
-    if mode=='encode':
-        text = "$$".join(speaker_id) + "$$$" + "$$".join(utterances) + "$$$" + \
-               "$$".join(utt_id) + "$$$" + "$$".join(emotion)
-        return text
-    else:
-        encoded_text = text.split("$$$")
-        speaker_id = encoded_text[0].split("$$")
-        utterances = encoded_text[1].split("$$")
-        utt_id = encoded_text[2].split("$$")
-        emotion = encoded_text[3].split("$$")
-        return speaker_id, utterances, utt_id, emotion
 
 
 @app.route("/predict_das", methods=['GET', 'POST'])
 def index():
     """ Predicting from text takes 'x' as a list of utterances and
     will require to have ELMo emb server running at port 4004 or online hosting service. """
-
     value = request.json['text']
-    speaker_id, utterances, utt_id, emotion = utils(text=value, mode='decode')
+    speaker_id, utterances, utt_id, emotion = str_utils(text=value, mode='decode')
     if os.path.exists('results/tags.npy'):
         tags = np.load('results/tags.npy')
     link_online = False
@@ -44,15 +27,17 @@ def index():
         link = "https://d55da20d.eu.ngrok.io/"
     else:
         link = "http://0.0.0.0:4004/"
-    # utterances_post = '\r\n'.join(utterances)
-    x_features = string_to_floats(requests.post(link + 'elmo_embed_words',
-                                                json={"text": utterances}).json()['result'])
+    utterances_post = '\r\n'.join(utterances)
+    x_features = string_to_floats(requests.post(link + "elmo_embed_words",
+                                                json={"text": utterances_post}).json()["result"])
 
     # Predict with normal elmo features
+    from main_swda_elmo_predictor import predict_classes_for_elmo
     swda_elmo_non_con_out, swda_elmo_con_out, swda_elmo_non_con_out_confs, swda_elmo_con_out_confs, \
     swda_elmo_top_con_out, swda_elmo_top_con_out_confs = predict_classes_for_elmo(x_features)
 
     # Predict with normal elmo mean features
+    from main_swda_elmo_mean import predict_classes_for_elmo_mean
     swda_elmo_features_mean = np.array([item.mean(axis=0) for item in x_features])
     swda_elmo_mean_non_con_out, swda_elmo_mean_con_out, swda_elmo_mean_non_con_out_confs, \
     swda_elmo_mean_con_out_confs = predict_classes_for_elmo_mean(swda_elmo_features_mean)
@@ -99,16 +84,20 @@ def index():
 
     print('ran swda_dia_act_annotate.py, with total {} number of utterances'.format(len(rows)))
     # return rows, assessment, k_alpha, fleiss_kappa_score
-    return jsonify({'result': rows, 'assessment': assessment, 'k_alpha': k_alpha,
-                    'fleiss_kappa_score': fleiss_kappa_score})
+    # return jsonify({'result': rows, 'assessment': assessment, 'k_alpha': k_alpha,
+    #                'fleiss_kappa_score': fleiss_kappa_score})
+    res = str_utils(speaker_id=speaker_id, utterances=utterances, utt_id=utt_id, emotion=emotion, mode='encode')
+    #    return jsonify({'result': res})
+
+    result_text = []
+    for item in rows:
+        result_text.append(item['eda1'] + '$$' + item['eda2'] + '$$' + item['eda3'] + '$$' +
+                           item['eda4'] + '$$' + item['eda5'] + '$$' + item['EDA'] + '$$' +
+                           item['all_match'] + '$$' + item['con_match'] + '$$' + item['match'])
+
+    result_text = '???'.join(result_text)
+    return jsonify({'result': result_text})
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=4004)
-
-speaker_ids = ["A", "B", "A", "B", "A", "A"]
-utterancess = ["I don't know, ", "Where did you go?", "What?", " Where did you go?", "I went to University.", "Uh-huh."]
-utt_ids = ["1", "2", " 3", "4", "5", "6"]
-emotions = ["neutral", "surprise", "surprise", "angry", "frustration", "neutral"]
-
-index()

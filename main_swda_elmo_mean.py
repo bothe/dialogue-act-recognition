@@ -72,15 +72,15 @@ else:
         non_context_model_elmo_mean.load_weights(non_con_model_name)
     else:
         print('Model parameters does not exists.')
-    evaluation = non_context_model_elmo_mean.evaluate(X_test, target_category_test, verbose=2)
-    print("Test results for non-context model: {}".format(evaluation[1]))
+    # evaluation = non_context_model_elmo_mean.evaluate(X_test, target_category_test, verbose=2)
+    # print("Test results for non-context model: {}".format(evaluation[1]))
 
     if os.path.exists(con_model_name):
         context_model_elmo_mean.load_weights(con_model_name)
     else:
         print('Model parameters does not exists.')
-    evaluation = context_model_elmo_mean.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
-    print('Test results for context model: {}'.format(evaluation[1]))
+    # evaluation = context_model_elmo_mean.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
+    # print('Test results for context model: {}'.format(evaluation[1]))
 
 
 def predict_classes_elmo_mean_features(x):

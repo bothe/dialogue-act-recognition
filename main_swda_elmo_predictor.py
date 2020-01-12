@@ -26,8 +26,8 @@ target_category_test = to_categorical(Y_test, len(tags))
 # NON-CONTEXT MODEL
 model = model_attention_applied_after_bilstm(max_seq_len, X_Test.shape[2], len(tags))
 model.load_weights('params/weight_parameters')
-evaluation = model.evaluate(X_Test, target_category_test, verbose=2)
-print("Test results for non-context model accuracy: {}".format(evaluation[1]))
+# evaluation = model.evaluate(X_Test, target_category_test, verbose=2)
+# print("Test results for non-context model accuracy: {}".format(evaluation[1]))
 
 # Preparing test data for contextual training with Seq_length
 seq_length = 3
@@ -37,21 +37,21 @@ X_test_con, Y_test_con = prepare_data(X_Test, target_category_test, seq_length)
 context_model_elmo = context_model_att(seq_length, max_seq_len, X_test_con.shape[3], len(tags))
 con_model_name = 'params/context_model_att_{}'.format(seq_length)
 context_model_elmo.load_weights(con_model_name)
-loss, old_acc = context_model_elmo.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
-print('Context Score result:', old_acc)
+# loss, old_acc = context_model_elmo.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
+# print('Context Score result:', old_acc)
 
 # TOP CONTEXT MODEL
 top_context_model = context_model_att(seq_length, max_seq_len, X_test_con.shape[3], len(tags), train_with_mean=True)
 top_con_model_name = 'params/top_context_model_att_{}'.format(seq_length)
 if os.path.exists(top_con_model_name):
     top_context_model.load_weights(top_con_model_name)
-    loss, old_acc = top_context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
-    print('Top Context Score result:', old_acc)
+    # loss, old_acc = top_context_model.evaluate(X_test_con, Y_test_con, verbose=2, batch_size=32)
+    # print('Top Context Score result:', old_acc)
 
 
 def predict_classes_for_elmo(x, predict_from_text=False, link_online=False):
-    ''' Predicting from text takes 'x' as a list of utterances and
-    will require to have ELMo emb server running at port 4004 or online hosting service. '''
+    """ Predicting from text takes 'x' as a list of utterances and
+    will require to have ELMo emb server running at port 4004 or online hosting service. """
     if predict_from_text:
         if link_online:
             link = "https://d55da20d.eu.ngrok.io/"
