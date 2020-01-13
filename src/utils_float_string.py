@@ -39,13 +39,13 @@ def str_utils(text="", speaker_id=None, utterances=None, utt_id=None, emotion=No
     if speaker_id is None:
         speaker_id = []
     if mode == 'encode':
-        text = "$$".join(speaker_id) + "???" + "$$".join(utterances) + "???" + \
-               "$$".join(utt_id) + "???" + "$$".join(emotion)
+        text = "$$$$".join(speaker_id) + "?????" + "$$$$".join(utterances) + "?????" + \
+               "$$$$".join(utt_id) + "?????" + "$$$$".join(emotion)
         return text
     else:
-        encoded_text = text.split("???")
-        speaker_id = encoded_text[0].split("$$")
-        utterances = encoded_text[1].split("$$")
-        utt_id = encoded_text[2].split("$$")
-        emotion = encoded_text[3].split("$$")
+        encoded_text = text.split("?????")
+        speaker_id = encoded_text[0].split("$$$$")
+        utterances = encoded_text[1].split("$$$$")
+        utt_id = encoded_text[2].split("$$$$")
+        emotion = encoded_text[3].split("$$$$")
         return speaker_id, utterances, utt_id, emotion

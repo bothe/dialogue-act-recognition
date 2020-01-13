@@ -53,15 +53,18 @@ def index():
     reliability_data = convert_predictions_to_indices(swda_elmo_con_out, swda_elmo_non_con_out, swda_elmo_mean_con_out,
                                                       swda_elmo_mean_non_con_out, swda_elmo_top_con_out, tags)
     k_alpha = alpha(reliability_data, level_of_measurement='nominal')
-    print("Krippendorff's alpha: {}".format(round(k_alpha, 6)))
+    k_alpha_score_text = "Krippendorff's alpha: {}".format(round(k_alpha, 6))
+    print(k_alpha_score_text)
 
     try:
         from src.relieability_kappa import fleiss_kappa
         fleiss_kappa_score = fleiss_kappa(reliability_data, 5)
-        print("Fleiss' Kappa: {}".format(fleiss_kappa_score))
+        f_kappa_score_text = "Fleiss' Kappa: {}".format(fleiss_kappa_score)
+        print(f_kappa_score_text)
     except IndexError:
         print("Could not compute Fleiss' Kappa score, due to insufficient categories in the final annotations!")
         fleiss_kappa_score = None
+        f_kappa_score_text = "Could not compute Fleiss' Kappa score, due to insufficient categories"
 
     print('Accuracy comparision between context and non-context predictions elmo: {}% elmo_mean: {}% '
           'context-context: {}% non-non-context: {}%'.format(
@@ -83,19 +86,20 @@ def index():
                                                write_final_csv=True, write_utterances=True, return_assessment=True)
 
     print('ran swda_dia_act_annotate.py, with total {} number of utterances'.format(len(rows)))
-    # return rows, assessment, k_alpha, fleiss_kappa_score
-    # return jsonify({'result': rows, 'assessment': assessment, 'k_alpha': k_alpha,
-    #                'fleiss_kappa_score': fleiss_kappa_score})
-    res = str_utils(speaker_id=speaker_id, utterances=utterances, utt_id=utt_id, emotion=emotion, mode='encode')
-    #    return jsonify({'result': res})
 
     result_text = []
-    for item in rows:
-        result_text.append(item['eda1'] + '$$' + item['eda2'] + '$$' + item['eda3'] + '$$' +
-                           item['eda4'] + '$$' + item['eda5'] + '$$' + item['EDA'] + '$$' +
-                           item['all_match'] + '$$' + item['con_match'] + '$$' + item['match'])
+    result_text.append(f_kappa_score_text)  # 0th element f_kappa_score_text
+    result_text.append(k_alpha_score_text)  # 1st element k_alpha_score_text
+    result_text.append(assessment)  # 3rd element overall_data_assessment
 
-    result_text = '???'.join(result_text)
+    for item in rows:
+        result_text.append(item['speaker'] + '$$$$' + item['utt_id'] + '$$$$' + item['utterance'] + '$$$$' +
+                           item['emotion'] + '$$$$' +
+                           item['eda1'] + '$$$$' + item['eda2'] + '$$$$' + item['eda3'] + '$$$$' +
+                           item['eda4'] + '$$$$' + item['eda5'] + '$$$$' + item['EDA'] + '$$$$' +
+                           item['all_match'] + '$$$$' + item['con_match'] + '$$$$' + item['match'])
+
+    result_text = '?????'.join(result_text)
     return jsonify({'result': result_text})
 
 
