@@ -26,7 +26,7 @@ def index():
     if link_online:
         link = "https://d55da20d.eu.ngrok.io/"
     else:
-        link = "http://0.0.0.0:4004/"
+        link = "http://0.0.0.0:4005/"
     utterances_post = '\r\n'.join(utterances)
     x_features = string_to_floats(requests.post(link + "elmo_embed_words",
                                                 json={"text": utterances_post}).json()["result"])
