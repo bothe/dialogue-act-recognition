@@ -8,6 +8,7 @@ emotions = ["neutral", "surprise", "surprise", "angry", "frustration", "neutral"
 text = "$$".join(speaker_ids) + "???" + "$$".join(utterances) + "???" + "$$".join(utt_ids) + "???" + "$$".join(emotions)
 
 link = "http://0.0.0.0:4004/"
+link = "http://d55da20d.eu.ngrok.io/"
 results = requests.post(link + 'predict_das', json={"text": text}).json()
 
 print(results)
