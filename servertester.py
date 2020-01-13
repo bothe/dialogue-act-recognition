@@ -11,7 +11,7 @@ link = "http://0.0.0.0:4004/"
 link = "http://d55da20d.eu.ngrok.io/"
 results = requests.post(link + 'predict_das', json={"text": text}).json()['result']
 
-result_items = results.split('??????')
+result_items = results.split('?????')
 f_kappa_score_text = result_items[0]
 k_alpha_score_text = result_items[1]
 overall_data_assessment = result_items[2]
@@ -26,4 +26,5 @@ for item in result_items[3:]:
     eda1.append(elements[4]), eda2.append(elements[5]), eda3.append(elements[6]), eda4.append(elements[7])
     eda5.append(elements[8]), EDA.append(elements[9])
     all_match.append(elements[10]), con_match.append(elements[11]), match.append(elements[12])
-# print(results)
+
+print(speaker_id, utt_id, utterance, emotion, eda1, eda2, eda3, eda4, eda5, EDA, all_match, con_match, match)

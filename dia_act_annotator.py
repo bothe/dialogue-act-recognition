@@ -93,10 +93,10 @@ def index():
     result_text.append(assessment)  # 3rd element overall_data_assessment
 
     for item in rows:
-        result_text.append(item['speaker'] + '$$$$' + item['utt_id'] + '$$$$' + item['utterance'] + '$$$$' +
-                           item['emotion'] + '$$$$' +
-                           item['eda1'] + '$$$$' + item['eda2'] + '$$$$' + item['eda3'] + '$$$$' +
-                           item['eda4'] + '$$$$' + item['eda5'] + '$$$$' + item['EDA'] + '$$$$' +
+        result_text.append(item['speaker'].decode("utf-8") + '$$$$' + item['utt_id'] + '$$$$' + \
+                           item['utterance'].decode("utf-8") + '$$$$' + item['emotion'] + '$$$$' + \
+                           item['eda1'] + '$$$$' + item['eda2'] + '$$$$' + item['eda3'] + '$$$$' + \
+                           item['eda4'] + '$$$$' + item['eda5'] + '$$$$' + item['EDA'] + '$$$$' + \
                            item['all_match'] + '$$$$' + item['con_match'] + '$$$$' + item['match'])
 
     result_text = '?????'.join(result_text)
