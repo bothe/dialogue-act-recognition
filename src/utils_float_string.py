@@ -39,8 +39,8 @@ def str_utils(text="", speaker_id=None, utterances=None, utt_id=None, emotion=No
     if speaker_id is None:
         speaker_id = []
     if mode == 'encode':
-        text = "$$$$".join(speaker_id) + "??????" + "$$$$".join(utterances) + "??????" + \
-               "$$$$".join(utt_id) + "??????" + "$$$$".join(emotion)
+        text = "$$$$".join(speaker_id) + "?????" + "$$$$".join(utterances) + "?????" + \
+               "$$$$".join(utt_id) + "?????" + "$$$$".join(emotion)
         return text
     else:
         encoded_text = text.split("?????")
