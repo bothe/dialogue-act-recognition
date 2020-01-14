@@ -37,6 +37,8 @@ for item in result_items[3:]:
     swda_elmo_mean_con_out.append(elements[10]), swda_elmo_mean_con_out_confs.append(float(elements[11]))
     swda_elmo_top_con_out.append(elements[12]), swda_elmo_top_con_out_confs.append(float(elements[13]))
 
+print(f_kappa_score_text, k_alpha_score_text, overall_data_assessment)
+
 print(speaker_id, utt_id, utterance, emotion, swda_elmo_non_con_out, swda_elmo_non_con_out_confs,
       swda_elmo_mean_non_con_out, swda_elmo_mean_non_con_out_confs,
       swda_elmo_con_out, swda_elmo_con_out_confs,
