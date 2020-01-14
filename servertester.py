@@ -5,7 +5,8 @@ utterances = ["I don't know, ", "Where did you go?", "What?", " Where did you go
 utt_ids = ["1", "2", " 3", "4", "5", "6"]
 emotions = ["neutral", "surprise", "surprise", "angry", "frustration", "neutral"]
 
-text = "$$$$".join(speaker_ids) + "?????" + "$$$$".join(utterances) + "?????" + "$$$$".join(utt_ids) + "?????" + "$$$$".join(emotions)
+text = "$$$$".join(speaker_ids) + "?????" + "$$$$".join(utterances) + "?????" + "$$$$".join(
+    utt_ids) + "?????" + "$$$$".join(emotions)
 
 link = "http://0.0.0.0:4004/"
 link = "http://d55da20d.eu.ngrok.io/"
@@ -19,6 +20,7 @@ overall_data_assessment = result_items[2]
 speaker_id, utt_id, utterance, emotion = [], [], [], []
 eda1, eda2, eda3, eda4, eda5, EDA = [], [], [], [], [], []
 all_match, con_match, match = [], [], []
+
 swda_elmo_non_con_out, swda_elmo_non_con_out_confs = [], []
 swda_elmo_mean_non_con_out, swda_elmo_mean_non_con_out_confs = [], []
 swda_elmo_con_out, swda_elmo_con_out_confs = [], []
@@ -27,9 +29,16 @@ swda_elmo_top_con_out, swda_elmo_top_con_out_confs = [], []
 
 for item in result_items[3:]:
     elements = item.split('$$$$')
-    speaker_id.append(elements[0]), utt_id.append(elements[1]), utterance.append(elements[2]), emotion.append(elements[3])
-    eda1.append(elements[4]), eda2.append(elements[5]), eda3.append(elements[6]), eda4.append(elements[7])
-    eda5.append(elements[8]), EDA.append(elements[9])
-    all_match.append(elements[10]), con_match.append(elements[11]), match.append(elements[12])
+    speaker_id.append(elements[0]), utt_id.append(elements[1]), utterance.append(elements[2]), emotion.append(
+        elements[3])
+    swda_elmo_non_con_out.append(elements[4]), swda_elmo_non_con_out_confs.append(float(elements[5]))
+    swda_elmo_mean_non_con_out.append(elements[6]), swda_elmo_mean_non_con_out_confs.append(float(elements[7]))
+    swda_elmo_con_out.append(elements[8]), swda_elmo_con_out_confs.append(float(elements[9]))
+    swda_elmo_mean_con_out.append(elements[10]), swda_elmo_mean_con_out_confs.append(float(elements[11]))
+    swda_elmo_top_con_out.append(elements[12]), swda_elmo_top_con_out_confs.append(float(elements[13]))
 
-print(speaker_id, utt_id, utterance, emotion, eda1, eda2, eda3, eda4, eda5, EDA, all_match, con_match, match)
+print(speaker_id, utt_id, utterance, emotion, swda_elmo_non_con_out, swda_elmo_non_con_out_confs,
+      swda_elmo_mean_non_con_out, swda_elmo_mean_non_con_out_confs,
+      swda_elmo_con_out, swda_elmo_con_out_confs,
+      swda_elmo_mean_con_out, swda_elmo_mean_con_out_confs,
+      swda_elmo_top_con_out, swda_elmo_top_con_out_confs)
