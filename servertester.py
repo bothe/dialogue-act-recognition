@@ -5,7 +5,7 @@ utterances = ["I don't know, ", "Where did you go?", "What?", " Where did you go
 utt_ids = ["1", "2", " 3", "4", "5", "6"]
 emotions = ["neutral", "surprise", "surprise", "angry", "frustration", "neutral"]
 
-text = "$$$$".join(speaker_ids) + "??????" + "$$$$".join(utterances) + "??????" + "$$$$".join(utt_ids) + "??????" + "$$$$".join(emotions)
+text = "$$$$".join(speaker_ids) + "?????" + "$$$$".join(utterances) + "?????" + "$$$$".join(utt_ids) + "?????" + "$$$$".join(emotions)
 
 link = "http://0.0.0.0:4004/"
 link = "http://d55da20d.eu.ngrok.io/"
