@@ -92,12 +92,22 @@ def index():
     result_text.append(k_alpha_score_text)  # 1st element k_alpha_score_text
     result_text.append(assessment)  # 3rd element overall_data_assessment
 
-    for item in rows:
-        result_text.append(item['speaker'].decode("utf-8") + '$$$$' + item['utt_id'] + '$$$$' + \
-                           item['utterance'].decode("utf-8") + '$$$$' + item['emotion'] + '$$$$' + \
-                           item['eda1'] + '$$$$' + item['eda2'] + '$$$$' + item['eda3'] + '$$$$' + \
-                           item['eda4'] + '$$$$' + item['eda5'] + '$$$$' + item['EDA'] + '$$$$' + \
-                           item['all_match'] + '$$$$' + item['con_match'] + '$$$$' + item['match'])
+    for i in range(len(utterances)):
+        text = str(speaker_id[i]) + '$$$$' + str(utt_id[i]) + '$$$$' + \
+               str(utterances[i]) + '$$$$' + str(emotion[i]) + '$$$$' + \
+               str(swda_elmo_non_con_out[i]) + '$$$$' + str(swda_elmo_non_con_out_confs[i]) + '$$$$' + \
+               str(swda_elmo_mean_non_con_out[i]) + '$$$$' + str(swda_elmo_mean_non_con_out_confs[i]) + '$$$$' + \
+               str(swda_elmo_con_out[i]) + '$$$$' + str(swda_elmo_con_out_confs[i]) + '$$$$' + \
+               str(swda_elmo_mean_con_out[i]) + '$$$$' + str(swda_elmo_mean_con_out_confs[i]) + '$$$$' + \
+               str(swda_elmo_top_con_out[i]) + '$$$$' + str(swda_elmo_top_con_out_confs[i])
+        result_text.append(text)
+
+    # for item in rows:
+    #     result_text.append(item['speaker'].decode("utf-8") + '$$$$' + item['utt_id'] + '$$$$' + \
+    #                        item['utterance'].decode("utf-8") + '$$$$' + item['emotion'] + '$$$$' + \
+    #                        item['eda1'] + '$$$$' + item['eda2'] + '$$$$' + item['eda3'] + '$$$$' + \
+    #                        item['eda4'] + '$$$$' + item['eda5'] + '$$$$' + item['EDA'] + '$$$$' + \
+    #                        item['all_match'] + '$$$$' + item['con_match'] + '$$$$' + item['match'])
 
     result_text = '?????'.join(result_text)
     return jsonify({'result': result_text})

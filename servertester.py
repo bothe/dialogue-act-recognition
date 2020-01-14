@@ -19,6 +19,11 @@ overall_data_assessment = result_items[2]
 speaker_id, utt_id, utterance, emotion = [], [], [], []
 eda1, eda2, eda3, eda4, eda5, EDA = [], [], [], [], [], []
 all_match, con_match, match = [], [], []
+swda_elmo_non_con_out, swda_elmo_non_con_out_confs = [], []
+swda_elmo_mean_non_con_out, swda_elmo_mean_non_con_out_confs = [], []
+swda_elmo_con_out, swda_elmo_con_out_confs = [], []
+swda_elmo_mean_con_out, swda_elmo_mean_con_out_confs = [], []
+swda_elmo_top_con_out, swda_elmo_top_con_out_confs = [], []
 
 for item in result_items[3:]:
     elements = item.split('$$$$')
