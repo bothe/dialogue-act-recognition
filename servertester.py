@@ -9,7 +9,7 @@ text = "$$$$".join(speaker_ids) + "?????" + "$$$$".join(utterances) + "?????" + 
     utt_ids) + "?????" + "$$$$".join(emotions)
 
 link = "http://0.0.0.0:4004/"
-link = "http://d55da20d.eu.ngrok.io/"
+link = "http://eb22add1.eu.ngrok.io/"
 results = requests.post(link + 'predict_das', json={"text": text}).json()['result']
 
 result_items = results.split('?????')
