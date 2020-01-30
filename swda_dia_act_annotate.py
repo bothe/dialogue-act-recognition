@@ -111,4 +111,8 @@ row = ensemble_eda_annotation(swda_elmo_non_con_out, swda_elmo_mean_non_con_out,
                               sentiment_labels=[], meld_data=False,
                               file_name='like_swda_final_annotation', write_final_csv=True, write_utterances=True)
 
+final_DA = [item['EDA'] for item in row]
+accuracy = classification.accuracy_score(final_DA, Ztest)
+print("Accuracy compared to ground truth: {}".format(round(accuracy, 4)))
+
 print('ran swda_dia_act_annotate.py, with total {} number of utterances'.format(len(utterances)))
