@@ -113,6 +113,6 @@ row = ensemble_eda_annotation(meld_elmo_non_con_out, meld_elmo_mean_non_con_out,
                               meld_elmo_con_out_confs, meld_elmo_mean_con_out_confs, meld_elmo_top_con_out_confs,
                               utt_speaker, utt_data, utt_id_data, utt_emotion_data,
                               sentiment_labels=utt_sentiment_data, meld_data=True,
-                              file_name='meld_emotion', write_final_csv=True)
+                              file_name='meld_emotion', write_final_csv=False)
 
 print('ran meld_dia_act_annotate.py, with total {} number of utterances'.format(len(utt_data)))

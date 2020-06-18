@@ -78,11 +78,28 @@ else:
     swda_elmo_mean_con_out_confs = np.load('model_output_swda_labels/swda_elmo_mean_con_out_confs.npy')
     swda_elmo_mean_non_con_out_confs = np.load('model_output_swda_labels/swda_elmo_mean_non_con_out_confs.npy')
 
+
+def acc_corr(predicted, real):
+    acc = classification.accuracy_score(predicted, real)
+    corr = stats.spearmanr(predicted, real)
+    return acc, corr
+
+
 # Evaluation of context model predictions
 print('Accuracy comparision between context-based predictions: {}'.format(
     classification.accuracy_score(swda_elmo_con_out, swda_elmo_mean_con_out)))
-print('Accuracy with ground truths: {}'.format(
-    classification.accuracy_score(swda_elmo_con_out, Ztest)))
+
+print('Accuracy with swda_elmo_con_out - ground truths: {}'.format(
+    acc_corr(swda_elmo_con_out, Ztest)))
+print('Accuracy with swda_elmo_mean_con_out - ground truths: {}'.format(
+    acc_corr(swda_elmo_mean_con_out, Ztest)))
+print('Accuracy with swda_elmo_top_con_out - ground truths: {}'.format(
+    acc_corr(swda_elmo_top_con_out, Ztest)))
+print('Accuracy with swda_elmo_mean_non_con_out - ground truths: {}'.format(
+    acc_corr(swda_elmo_mean_non_con_out, Ztest)))
+print('Accuracy with swda_elmo_non_con_out - ground truths: {}'.format(
+    acc_corr(swda_elmo_non_con_out, Ztest)))
+
 print('Kappa (Cohen) score between context-based predictions: {}'.format(
     classification.cohen_kappa_score(swda_elmo_con_out, swda_elmo_mean_con_out)))
 print(classification.classification_report(swda_elmo_con_out, swda_elmo_mean_con_out))
@@ -109,10 +126,10 @@ row = ensemble_eda_annotation(swda_elmo_non_con_out, swda_elmo_mean_non_con_out,
                               swda_elmo_con_out_confs, swda_elmo_mean_con_out_confs, swda_elmo_top_con_out_confs,
                               speaker_id, utterances, speaker_id, emotion,
                               sentiment_labels=[], meld_data=False,
-                              file_name='like_swda_final_annotation', write_final_csv=True, write_utterances=True)
+                              file_name='like_swda_final_annotation', write_final_csv=False, write_utterances=True)
 
 final_DA = [item['EDA'] for item in row]
 accuracy = classification.accuracy_score(final_DA, Ztest)
-print("Accuracy compared to ground truth: {}".format(round(accuracy, 4)))
+print("Accuracy compared to ground truth: {}".format(acc_corr(final_DA, Ztest)))
 
 print('ran swda_dia_act_annotate.py, with total {} number of utterances'.format(len(utterances)))

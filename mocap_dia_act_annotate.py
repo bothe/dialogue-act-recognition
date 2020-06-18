@@ -94,6 +94,6 @@ row = ensemble_eda_annotation(mocap_elmo_non_con_out, mocap_elmo_mean_non_con_ou
                               mocap_elmo_con_out_confs, mocap_elmo_mean_con_out_confs, mocap_elmo_top_con_out_confs,
                               utt_id, utterances, speaker_id, emotion,
                               sentiment_labels=[], meld_data=False,
-                              file_name='iemocap_no_utts', write_final_csv=True, write_utterances=False)
+                              file_name='iemocap_no_utts', write_final_csv=False, write_utterances=False)
 
 print('ran mocap_dia_act_annotate.py, with total {} number of utterances'.format(len(utterances)))
