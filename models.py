@@ -166,3 +166,24 @@ def non_context_model_for_utterance_level(emb_dim, num_classes):
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     print(model.summary())
     return model
+
+
+def context_model_att_with_pt_encoder(seq_len, max_seq_length, emb_dim, classes, encoded_model,
+                                      nodes=128, dropout=0.2, single_attention_vector=False):
+
+    # Model contextual time steps
+    sequence_input = Input(shape=(seq_len, max_seq_length, emb_dim))
+    seq_encoded = TimeDistributed(encoded_model)(sequence_input)
+    seq_encoded = Dropout(dropout)(seq_encoded)
+    # Encode entire sentence
+    seq_encoded = LSTM(nodes, return_sequences=True)(seq_encoded)
+    # Apply attention layer
+    attention_mul = attention_3d_block(seq_encoded, seq_len, single_attention_vector)
+    attention_mul = Flatten(name='flatten_attention')(attention_mul)
+    # Prediction
+    prediction = Dense(classes, activation='softmax')(attention_mul)
+
+    model = Model(sequence_input, prediction)
+    model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+    print(model.summary())
+    return model

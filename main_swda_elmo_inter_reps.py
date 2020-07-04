@@ -93,7 +93,7 @@ if train_con_model:
     for i in range(8):
         i += 1
         file_name = 'features/X_train_elmo_features_{}.npy'.format(i)
-        print('Reding ', file_name)
+        print('Loading ', file_name)
         # X_Train.extend(np.load('X_train_elmo_features_{}.npy'.format(i)))
         X_Train = np.load(file_name, allow_pickle=True)[0:5000]
         print(X_Train.shape)
