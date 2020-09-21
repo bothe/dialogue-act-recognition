@@ -2,8 +2,8 @@ import json
 
 import requests
 
-from utils.da_annotator_helper import lists_to_text, results_from_text_to_lists
-from utils.ensemble_annotator import ensemble_eda_annotation
+from src.da_annotator_helper import lists_to_text, results_from_text_to_lists
+from src.ensemble_annotator import ensemble_eda_annotation
 
 your_data_name = "your_data_name"
 
