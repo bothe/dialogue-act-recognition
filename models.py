@@ -1,10 +1,15 @@
-from keras.layers import Dense, SimpleRNN, LSTM, Input, Flatten, Bidirectional, GRU, \
-    TimeDistributed, Embedding, Conv1D, ConvLSTM2D, MaxPooling1D, Average, Concatenate, merge, average
-from keras.layers.merge import multiply, concatenate
-from keras.layers.core import *
-from keras.optimizers import Adam
-from keras.engine import Model
-from keras import backend as K
+# from keras.layers import Dense, SimpleRNN, LSTM, Input, Flatten, Bidirectional, GRU, \
+#     TimeDistributed, Embedding, Conv1D, ConvLSTM2D, MaxPooling1D, Average, Concatenate, merge, average
+# from keras.layers.merge import multiply, concatenate
+# from keras.layers.core import *
+# from keras.optimizers import Adam
+# from keras.engine import Model
+# from keras import backend as K
+
+import tensorflow.keras.backend as K
+from tensorflow.python.keras.engine.training import Model
+from tensorflow.keras.layers import SimpleRNN, LSTM, Input, Bidirectional, TimeDistributed, Conv1D, MaxPooling1D, \
+    Concatenate, Permute, Reshape, Dense, Lambda, RepeatVector, multiply, Flatten, Dropout
 
 
 def attention_3d_block(inputs, seq_length, single_attention_vector):

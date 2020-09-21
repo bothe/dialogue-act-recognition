@@ -11,6 +11,8 @@ from sklearn.metrics import classification
 from src.final_annotator_utils import convert_predictions_to_indices, ensemble_eda_annotation
 from src.utils_float_string import string_to_floats, str_utils
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 app = Flask(__name__)
 
 
@@ -114,4 +116,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=4004)
+    app.run(host='0.0.0.0', port=4000)

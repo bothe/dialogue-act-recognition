@@ -1,5 +1,5 @@
 import requests
-from keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 import pickle, os, time
 from models import model_attention_applied_after_bilstm, non_context_model_for_utterance_level
 from src.training_utils import keras_callbacks
