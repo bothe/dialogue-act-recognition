@@ -1,5 +1,6 @@
 
 ### Steps to reproduce the results
+
 #### Training and usege of the variant models 
 Run ```main_swda_elmo_mean.py``` for training (set ```train = True```)
  the models, else it will return the context and non-context models 
@@ -24,3 +25,13 @@ run ```meld_dia_act_annotate.py``` to get context and non-context
 annotations and save as numpy arrays,
 and generate final annotation (csv) file.
 
+
+#### Annotating custom utterances directly
+1. Run the ELMO embedding server:
+running ```elmo_emb_server.py``` will start the embedding server.
+
+2. Run DA annotator server:
+running ```dia_act_annotator.py``` will start the annotator server.
+
+3. To annotate your data:
+run ```example_api.py``` script to annotate your own utterances.
