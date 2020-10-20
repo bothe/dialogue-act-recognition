@@ -24,9 +24,11 @@ def index():
     speaker_id, utterances, utt_id, emotion = str_utils(text=value, mode='decode')
     if os.path.exists('results/tags.npy'):
         tags = np.load('results/tags.npy')
+
+    # ElMO Embedding server link ran using elmo_emb_sever.py
     link_online = False
     if link_online:
-        link = "https://d55da20d.eu.ngrok.io/"
+        link = "https://custom.your.forwarded-link-or-tunnel.domain/"
     else:
         link = "http://0.0.0.0:4005/"
     utterances_post = '\r\n'.join(utterances)
